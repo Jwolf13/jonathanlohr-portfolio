@@ -2,14 +2,13 @@
   "name": "jonathanlohr-portfolio",
   "version": "0.1.0",
   "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "eslint",
-    "export": "next export",
-    "build:static": "next build && next export"
-  },
+ "scripts": {
+  "dev": "next dev",
+  "build": "next build",
+  "start": "next start",
+  "lint": "eslint",
+  "build:static": "next build"
+},
   "dependencies": {
     "next": "16.2.1",
     "react": "19.2.4",
