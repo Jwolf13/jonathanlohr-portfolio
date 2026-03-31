@@ -3,7 +3,9 @@
 import { useState } from "react";
 
 export default function ConsultingPage() {
-  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">(
+    "idle"
+  );
   const [error, setError] = useState<string | null>(null);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -21,17 +23,34 @@ export default function ConsultingPage() {
     };
 
     try {
-      const res = await fetch("https://1n76g8v617.execute-api.us-east-1.amazonaws.com/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(body),
-      });
+      // 1) Save to DynamoDB via existing Lambda
+      const saveRes = await fetch(
+        "https://1n76g8v617.execute-api.us-east-1.amazonaws.com/contact",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(body),
+        }
+      );
 
-      if (!res.ok) {
-        throw new Error("Request failed");
+      if (!saveRes.ok) {
+        throw new Error("Save failed");
       }
 
-      await res.json(); // you could read message/id here if you want
+      // 2) Send confirmation email via SES Lambda
+      const emailRes = await fetch(
+        "https://1n76g8v617.execute-api.us-east-1.amazonaws.com/consulting-contact",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(body),
+        }
+      );
+
+      if (!emailRes.ok) {
+        throw new Error("Email failed");
+      }
+
       setStatus("success");
       form.reset();
     } catch (err) {
@@ -45,7 +64,8 @@ export default function ConsultingPage() {
     <main className="max-w-xl mx-auto py-12">
       <h1 className="text-3xl font-semibold mb-6">Consulting</h1>
       <p className="mb-6">
-        Tell me a bit about your project and how I can help. I&apos;ll get back to you by email.
+        Tell me a bit about your project and how I&apos;ll help. I&apos;ll get
+        back to you by email.
       </p>
 
       <form onSubmit={handleSubmit} className="space-y-4">
@@ -97,9 +117,13 @@ export default function ConsultingPage() {
         </button>
 
         {status === "success" && (
-          <p className="text-green-600 mt-2">Thanks! Your message has been sent.</p>
+          <p className="text-green-600 mt-2">
+            Thanks! Your message has been sent.
+          </p>
         )}
-        {status === "error" && <p className="text-red-600 mt-2">{error}</p>}
+        {status === "error" && (
+          <p className="text-red-600 mt-2">{error}</p>
+        )}
       </form>
     </main>
   );
