@@ -374,7 +374,7 @@ APP_ENV=development
 ```
 
 **Rule**: If it's a password, a secret key, or a token — it goes in `.env`. Never in code. Never in Git.
-
+test
 ---
 
 ## 1.8 Quick Reference Card
