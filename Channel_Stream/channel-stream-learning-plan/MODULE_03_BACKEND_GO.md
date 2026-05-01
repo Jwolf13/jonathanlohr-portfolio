@@ -50,7 +50,7 @@ fmt.Println(result)      // now we know result is valid
 ```
 
 You will see `if err != nil` hundreds of times in Go code. This is intentional — Go forces you to think about errors at every step instead of letting them bubble up invisibly.
-
+test
 ---
 
 ## 3.2 Project Structure (How Go Code Is Organized)
