@@ -73,32 +73,41 @@ jobs:
 
   deploy-backend:
     runs-on: ubuntu-latest
+    env:
+      AWS_ACCESS_KEY_ID:     ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      AWS_REGION:            us-east-1
     steps:
       - uses: actions/checkout@v4
 
-      - name: Log in to Amazon ECR and push image
-        env:
-          AWS_ACCESS_KEY_ID:     ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_DEFAULT_REGION:    us-east-1
-          REGISTRY:              435204302991.dkr.ecr.us-east-1.amazonaws.com
-          REPOSITORY:            channel-stream-backend
-          SHA_TAG:               ${{ github.sha }}
+      - name: Verify AWS identity
+        run: aws sts get-caller-identity
+
+      - name: Get ECR login password
+        id: ecr-password
         run: |
-          aws ecr get-login-password --region us-east-1 | \
-            docker login --username AWS --password-stdin "${REGISTRY}"
+          PASSWORD=$(aws ecr get-login-password --region us-east-1)
+          echo "password=$PASSWORD" >> $GITHUB_OUTPUT
+
+      - name: Docker login to ECR
+        run: |
+          echo "${{ steps.ecr-password.outputs.password }}" | \
+            docker login --username AWS --password-stdin \
+            435204302991.dkr.ecr.us-east-1.amazonaws.com
+
+      - name: Build Docker image
+        run: |
           docker build \
-            -t "${REGISTRY}/${REPOSITORY}:${SHA_TAG}" \
-            -t "${REGISTRY}/${REPOSITORY}:latest" \
+            -t 435204302991.dkr.ecr.us-east-1.amazonaws.com/channel-stream-backend:${{ github.sha }} \
+            -t 435204302991.dkr.ecr.us-east-1.amazonaws.com/channel-stream-backend:latest \
             Channel_Stream/
-          docker push "${REGISTRY}/${REPOSITORY}:${SHA_TAG}"
-          docker push "${REGISTRY}/${REPOSITORY}:latest"
+
+      - name: Push Docker image
+        run: |
+          docker push 435204302991.dkr.ecr.us-east-1.amazonaws.com/channel-stream-backend:${{ github.sha }}
+          docker push 435204302991.dkr.ecr.us-east-1.amazonaws.com/channel-stream-backend:latest
 
       - name: Force ECS service redeploy
-        env:
-          AWS_ACCESS_KEY_ID:     ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_DEFAULT_REGION:    us-east-1
         run: |
           aws ecs update-service \
             --cluster channel-stream \
