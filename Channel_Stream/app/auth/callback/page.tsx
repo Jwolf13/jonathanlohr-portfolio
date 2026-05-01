@@ -22,7 +22,8 @@ export default function AuthCallbackPage() {
       .then((tokens) => {
         if (!tokens) { setError(true); return }
         storeTokens(tokens)
-        router.replace("/")
+        // Full reload so AuthProvider re-initialises from sessionStorage
+        window.location.href = "/"
       })
       .catch(() => setError(true))
   }, [router])

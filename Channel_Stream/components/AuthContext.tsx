@@ -105,7 +105,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const signIn  = () => { startLogin() }
   const signOut = () => {
     clearTokens()
+    sessionStorage.removeItem(SESSION_LEAGUES_KEY)
+    sessionStorage.removeItem(SESSION_TEAMS_KEY)
     setUser(null)
+    setLeaguesState([])
+    setTeamsState([])
   }
 
   return (
