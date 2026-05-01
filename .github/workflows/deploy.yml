@@ -82,11 +82,11 @@ jobs:
 
       - name: Verify AWS identity
         run: |
-          IDENTITY=$(aws sts get-caller-identity)
-          echo "## AWS Identity" >> $GITHUB_STEP_SUMMARY
-          echo '```' >> $GITHUB_STEP_SUMMARY
-          echo "$IDENTITY" >> $GITHUB_STEP_SUMMARY
-          echo '```' >> $GITHUB_STEP_SUMMARY
+          echo "Key ID prefix (first 12 chars): ${AWS_ACCESS_KEY_ID:0:12}"
+          aws sts get-caller-identity
+
+      - name: Test ECR describe (diagnostic)
+        run: aws ecr describe-repositories --region us-east-1
 
       - name: Get ECR login password
         id: ecr-password
