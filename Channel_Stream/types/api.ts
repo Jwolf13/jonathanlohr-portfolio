@@ -48,7 +48,7 @@ export interface SportEvent {
   status_detail?: string
   score?: GameScore
   venue?: string
-  watch_on: WatchOption[]
+  watch_on: WatchOption[] | null
 }
 
 export interface SportsResponse {

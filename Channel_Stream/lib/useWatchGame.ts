@@ -50,7 +50,7 @@ export function useWatchGame() {
 
   function watch(event: SportEvent) {
     // Already have a linked provider for this game — open deep link immediately
-    const linked = event.watch_on.find(
+    const linked = (event.watch_on ?? []).find(
       (opt) => !opt.requires_cable && opt.app && store.providerLinks[opt.app]?.linked,
     )
     if (linked?.app) {
@@ -59,7 +59,7 @@ export function useWatchGame() {
     }
 
     // No linked provider — find first streamable option and prompt sign-in
-    const streamable = event.watch_on.find((opt) => !opt.requires_cable && opt.app)
+    const streamable = (event.watch_on ?? []).find((opt) => !opt.requires_cable && opt.app)
     if (streamable?.app) {
       const provider = PROVIDERS.find((p) => p.id === streamable.app)
       if (provider) {

@@ -61,8 +61,8 @@ export default function SportsPage() {
 }
 
 function EventCard({ event, onWatch }: { event: SportEvent; onWatch: () => void }) {
-  const streamable = event.watch_on.filter((o) => !o.requires_cable)
-  const cableOnly  = event.watch_on.filter((o) => o.requires_cable)
+  const streamable = (event.watch_on ?? []).filter((o) => !o.requires_cable)
+  const cableOnly  = (event.watch_on ?? []).filter((o) => o.requires_cable)
 
   return (
     <div
@@ -105,7 +105,7 @@ function EventCard({ event, onWatch }: { event: SportEvent; onWatch: () => void 
       </div>
 
       {/* Where to watch — prominent */}
-      {event.watch_on.length > 0 && (
+      {(event.watch_on?.length ?? 0) > 0 && (
         <div className="mt-1">
           <p className="text-xs text-gray-600 mb-1.5 uppercase tracking-wider">Where to watch</p>
           <div className="flex gap-2 flex-wrap">

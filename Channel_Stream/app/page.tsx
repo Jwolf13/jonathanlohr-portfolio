@@ -137,8 +137,8 @@ export default function DashboardPage() {
 }
 
 function LiveEventCard({ event, onWatch }: { event: SportEvent; onWatch: () => void }) {
-  const streamable = event.watch_on.filter((o) => !o.requires_cable)
-  const cableOnly  = event.watch_on.filter((o) => o.requires_cable)
+  const streamable = (event.watch_on ?? []).filter((o) => !o.requires_cable)
+  const cableOnly  = (event.watch_on ?? []).filter((o) => o.requires_cable)
 
   return (
     <div
@@ -166,7 +166,7 @@ function LiveEventCard({ event, onWatch }: { event: SportEvent; onWatch: () => v
           <p className="font-bold tabular-nums text-lg">{event.score.home} – {event.score.away}</p>
         )}
       </div>
-      {event.watch_on.length > 0 && (
+      {(event.watch_on?.length ?? 0) > 0 && (
         <div className="flex gap-1.5 mt-1 flex-wrap">
           {streamable.map((opt) => (
             <span key={opt.network} className="text-xs font-medium px-2.5 py-1 rounded-lg bg-blue-900/70 text-blue-300 border border-blue-800">
@@ -188,8 +188,8 @@ function ScheduledEventCard({ event, onWatch }: { event: SportEvent; onWatch: ()
   const timeStr = new Date(event.start_time).toLocaleTimeString("en-US", {
     hour: "numeric", minute: "2-digit",
   })
-  const streamable = event.watch_on.filter((o) => !o.requires_cable)
-  const cableOnly  = event.watch_on.filter((o) => o.requires_cable)
+  const streamable = (event.watch_on ?? []).filter((o) => !o.requires_cable)
+  const cableOnly  = (event.watch_on ?? []).filter((o) => o.requires_cable)
 
   return (
     <div
@@ -211,7 +211,7 @@ function ScheduledEventCard({ event, onWatch }: { event: SportEvent; onWatch: ()
         </div>
         <p className="text-sm font-medium text-gray-300 shrink-0">{timeStr}</p>
       </div>
-      {event.watch_on.length > 0 && (
+      {(event.watch_on?.length ?? 0) > 0 && (
         <div className="flex gap-1.5 mt-1 flex-wrap">
           {streamable.map((opt) => (
             <span key={opt.network} className="text-xs font-medium px-2.5 py-1 rounded-lg bg-blue-900/70 text-blue-300 border border-blue-800">
