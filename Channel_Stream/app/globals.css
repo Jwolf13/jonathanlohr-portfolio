@@ -1,0 +1,17 @@
+@import "tailwindcss";
+
+:root {
+  color-scheme: dark;
+}
+
+body {
+  background-color: #09090b;
+  color: #fafafa;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Smooth focus rings inherit provider color via inline CSS var */
+input:focus {
+  box-shadow: 0 0 0 2px var(--tw-ring-color, #3b82f6);
+}

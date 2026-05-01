@@ -1,0 +1,80 @@
+name: Deploy Channel Stream
+
+on:
+  push:
+    branches: [main]
+
+env:
+  AWS_REGION: us-east-1
+
+jobs:
+  deploy:
+    name: Deploy to AWS
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      # ── AWS credentials ──────────────────────────────────────────────────────
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id:     ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region:            ${{ env.AWS_REGION }}
+
+      # ── Backend: build Docker image → push to ECR → deploy to ECS ───────────
+      - name: Login to ECR
+        id: ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Build and push Docker image
+        env:
+          IMAGE: ${{ steps.ecr.outputs.registry }}/channel-stream-backend
+          TAG:   ${{ github.sha }}
+        run: |
+          docker build -t $IMAGE:$TAG -t $IMAGE:latest .
+          docker push $IMAGE:$TAG
+          docker push $IMAGE:latest
+
+      - name: Deploy to ECS
+        run: |
+          aws ecs update-service \
+            --cluster channel-stream \
+            --service channel-stream-backend \
+            --force-new-deployment
+
+      # ── Frontend: build Next.js → upload to S3 → invalidate CloudFront ──────
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - run: npm ci
+
+      - name: Build Next.js static export
+        env:
+          NEXT_PUBLIC_BASE_PATH: /channel-stream
+          NEXT_PUBLIC_API_URL:   https://api.jonathanlohr.com
+        run: npm run build
+        # Produces /out directory — all links prefixed with /channel-stream
+
+      - name: Upload static files to S3
+        run: |
+          # Long-lived cache for hashed assets (_next/static/...)
+          aws s3 sync out/ s3://${{ secrets.PORTFOLIO_S3_BUCKET }}/channel-stream/ \
+            --delete \
+            --exclude "*.html" \
+            --cache-control "public,max-age=31536000,immutable"
+
+          # No cache for HTML — must update immediately on every deploy
+          aws s3 sync out/ s3://${{ secrets.PORTFOLIO_S3_BUCKET }}/channel-stream/ \
+            --delete \
+            --exclude "*" --include "*.html" \
+            --cache-control "public,max-age=0,must-revalidate"
+
+      - name: Invalidate CloudFront cache
+        run: |
+          aws cloudfront create-invalidation \
+            --distribution-id ${{ secrets.PORTFOLIO_CF_ID }} \
+            --paths "/channel-stream/*"

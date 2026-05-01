@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Channel Stream — API Preview</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #09090b;
+    color: #e4e4e7;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    padding: 32px 24px;
+    min-height: 100vh;
+  }
+
+  header {
+    margin-bottom: 40px;
+  }
+
+  header h1 {
+    font-size: 22px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: -0.3px;
+  }
+
+  header p {
+    font-size: 13px;
+    color: #71717a;
+    margin-top: 4px;
+  }
+
+  .status-bar {
+    display: flex;
+    gap: 12px;
+    margin-top: 16px;
+    flex-wrap: wrap;
+  }
+
+  .status-pill {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    background: #18181b;
+    border: 1px solid #27272a;
+    border-radius: 20px;
+    padding: 4px 12px;
+    color: #a1a1aa;
+  }
+
+  .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #52525b;
+  }
+
+  .dot.green { background: #22c55e; }
+  .dot.red   { background: #ef4444; }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 24px;
+  }
+
+  section {
+    background: #18181b;
+    border: 1px solid #27272a;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .section-header {
+    padding: 16px 20px;
+    border-bottom: 1px solid #27272a;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .section-header h2 {
+    font-size: 14px;
+    font-weight: 600;
+    color: #fff;
+  }
+
+  .count-badge {
+    font-size: 11px;
+    background: #27272a;
+    color: #a1a1aa;
+    border-radius: 10px;
+    padding: 2px 8px;
+  }
+
+  .card-list {
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .card {
+    background: #09090b;
+    border: 1px solid #27272a;
+    border-radius: 8px;
+    padding: 12px 14px;
+  }
+
+  .card-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: #f4f4f5;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .card-meta {
+    display: flex;
+    gap: 8px;
+    margin-top: 6px;
+    flex-wrap: wrap;
+  }
+
+  .tag {
+    font-size: 11px;
+    padding: 2px 7px;
+    border-radius: 4px;
+    background: #27272a;
+    color: #a1a1aa;
+    white-space: nowrap;
+  }
+
+  .tag.provider { background: #1e3a5f; color: #93c5fd; }
+  .tag.progress { background: #1a2e1a; color: #86efac; }
+  .tag.live     { background: #3b0f0f; color: #fca5a5; }
+  .tag.sched    { background: #1e293b; color: #94a3b8; }
+  .tag.valid    { background: #1a2e1a; color: #86efac; }
+  .tag.rating   { background: #2d1f00; color: #fbbf24; }
+
+  .progress-bar-wrap {
+    margin-top: 8px;
+    height: 3px;
+    background: #27272a;
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .progress-bar-fill {
+    height: 100%;
+    background: #3b82f6;
+    border-radius: 2px;
+  }
+
+  .score-row {
+    font-size: 12px;
+    color: #71717a;
+    margin-top: 4px;
+  }
+
+  .providers-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    padding: 12px;
+  }
+
+  .provider-card {
+    background: #09090b;
+    border: 1px solid #27272a;
+    border-radius: 8px;
+    padding: 12px 14px;
+  }
+
+  .provider-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: #f4f4f5;
+    text-transform: capitalize;
+  }
+
+  .error-msg {
+    padding: 20px;
+    font-size: 13px;
+    color: #f87171;
+  }
+
+  .loading-msg {
+    padding: 20px;
+    font-size: 13px;
+    color: #52525b;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Channel Stream</h1>
+  <p>Live feed preview — data served from your Go API at localhost:8080</p>
+  <div class="status-bar" id="statusBar">
+    <div class="status-pill"><span class="dot" id="apiDot"></span><span id="apiStatus">Connecting...</span></div>
+    <div class="status-pill"><span class="dot" id="dbDot"></span><span id="dbStatus">Database</span></div>
+  </div>
+</header>
+
+<div class="grid">
+  <section>
+    <div class="section-header">
+      <h2>Up Next</h2>
+      <span class="count-badge" id="upNextCount">—</span>
+    </div>
+    <div class="card-list" id="upNext"><p class="loading-msg">Loading...</p></div>
+  </section>
+
+  <section>
+    <div class="section-header">
+      <h2>Watch Now</h2>
+      <span class="count-badge" id="watchNowCount">—</span>
+    </div>
+    <div class="card-list" id="watchNow"><p class="loading-msg">Loading...</p></div>
+  </section>
+
+  <section>
+    <div class="section-header">
+      <h2>Sports Live</h2>
+      <span class="count-badge" id="sportsCount">—</span>
+    </div>
+    <div class="card-list" id="sports"><p class="loading-msg">Loading...</p></div>
+  </section>
+
+  <section>
+    <div class="section-header">
+      <h2>Linked Providers</h2>
+      <span class="count-badge" id="providersCount">—</span>
+    </div>
+    <div class="providers-grid" id="providers"><p class="loading-msg">Loading...</p></div>
+  </section>
+</div>
+
+<script>
+const API = 'http://localhost:8080';
+
+async function load() {
+  try {
+    const health = await fetch(`${API}/v1/health`).then(r => r.json());
+    document.getElementById('apiDot').className = 'dot green';
+    document.getElementById('apiStatus').textContent = `API ${health.version} — online`;
+    document.getElementById('dbDot').className = 'dot green';
+    document.getElementById('dbStatus').textContent = 'PostgreSQL connected';
+  } catch {
+    document.getElementById('apiDot').className = 'dot red';
+    document.getElementById('apiStatus').textContent = 'API offline — run: go run ./cmd/server';
+    document.getElementById('dbDot').className = 'dot red';
+    document.getElementById('dbStatus').textContent = 'Not reachable';
+    ['upNext','watchNow','sports','providers'].forEach(id => {
+      document.getElementById(id).innerHTML = '<p class="error-msg">Start the Go server first: go run ./cmd/server</p>';
+    });
+    return;
+  }
+
+  // Up Next
+  try {
+    const { items, count } = await fetch(`${API}/v1/feed/up-next`).then(r => r.json());
+    document.getElementById('upNextCount').textContent = `${count} items`;
+    document.getElementById('upNext').innerHTML = items.map(item => `
+      <div class="card">
+        <div class="card-title">${item.title}</div>
+        <div class="card-meta">
+          <span class="tag provider">${item.provider.replace(/_/g,' ')}</span>
+          <span class="tag progress">${item.progress_pct}%</span>
+          <span class="tag">${item.type}</span>
+        </div>
+        <div class="progress-bar-wrap">
+          <div class="progress-bar-fill" style="width:${item.progress_pct}%"></div>
+        </div>
+      </div>
+    `).join('');
+  } catch { document.getElementById('upNext').innerHTML = '<p class="error-msg">Failed to load</p>'; }
+
+  // Watch Now
+  try {
+    const { items, count } = await fetch(`${API}/v1/feed/watch-now`).then(r => r.json());
+    document.getElementById('watchNowCount').textContent = `${count} items`;
+    document.getElementById('watchNow').innerHTML = items.map(item => `
+      <div class="card">
+        <div class="card-title">${item.title}</div>
+        <div class="card-meta">
+          <span class="tag provider">${item.provider.replace(/_/g,' ')}</span>
+          ${item.rating ? `<span class="tag rating">★ ${item.rating}</span>` : ''}
+          <span class="tag">${item.type}</span>
+        </div>
+      </div>
+    `).join('');
+  } catch { document.getElementById('watchNow').innerHTML = '<p class="error-msg">Failed to load</p>'; }
+
+  // Sports
+  try {
+    const { events, count } = await fetch(`${API}/v1/sports/live`).then(r => r.json());
+    document.getElementById('sportsCount').textContent = `${count} events`;
+    document.getElementById('sports').innerHTML = events.map(e => {
+      const score = e.score ? Object.entries(e.score).map(([k,v]) => `${k}: ${v}`).join(' · ') : '';
+      return `
+        <div class="card">
+          <div class="card-title">${e.matchup}</div>
+          <div class="card-meta">
+            <span class="tag ${e.status === 'live' ? 'live' : 'sched'}">${e.status.toUpperCase()}</span>
+            <span class="tag">${e.league}</span>
+          </div>
+          ${score ? `<div class="score-row">${score}</div>` : ''}
+        </div>
+      `;
+    }).join('');
+  } catch { document.getElementById('sports').innerHTML = '<p class="error-msg">Failed to load</p>'; }
+
+  // Providers
+  try {
+    const { providers, count } = await fetch(`${API}/v1/providers/linked`).then(r => r.json());
+    document.getElementById('providersCount').textContent = `${count} linked`;
+    document.getElementById('providers').innerHTML = providers.map(p => `
+      <div class="provider-card">
+        <div class="provider-name">${p.provider.replace(/_/g,' ')}</div>
+        <div class="card-meta" style="margin-top:8px">
+          <span class="tag ${p.status === 'valid' ? 'valid' : ''}">${p.status}</span>
+        </div>
+      </div>
+    `).join('');
+  } catch { document.getElementById('providers').innerHTML = '<p class="error-msg">Failed to load</p>'; }
+}
+
+load();
+</script>
+</body>
+</html>

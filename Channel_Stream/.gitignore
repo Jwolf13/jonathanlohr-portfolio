@@ -1,0 +1,42 @@
+# Go
+*.exe
+*.test
+/bin/
+
+# Environment variables (NEVER commit these — they contain secrets)
+.env
+.env.local
+.env.*.local
+
+# Supabase local config
+supabase/.branches
+supabase/.temp
+
+# Node/Next.js
+node_modules/
+.next/
+.vercel/
+out/
+
+# Test artifacts
+playwright-report/
+test-results/
+
+# AWS credentials / access key exports
+*.csv
+
+# Google OAuth downloaded JSON secrets
+client_secret_*.json
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Terraform secrets
+infrastructure/terraform.tfvars
+infrastructure/.terraform/
+infrastructure/*.tfstate
+infrastructure/*.tfstate.backup
+
+# IDE
+.vscode/settings.json
