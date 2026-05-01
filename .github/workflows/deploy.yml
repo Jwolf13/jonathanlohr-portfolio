@@ -92,9 +92,16 @@ jobs:
         id: ecr-password
         run: |
           echo "Calling ECR get-login-password..."
-          aws ecr get-login-password --region us-east-1 > /tmp/ecr_password
-          echo "ECR password length: $(wc -c < /tmp/ecr_password)"
-          echo "password=$(cat /tmp/ecr_password)" >> $GITHUB_OUTPUT
+          aws ecr get-login-password --region us-east-1 >/tmp/ecr_token 2>/tmp/ecr_error
+          EXIT=$?
+          if [ $EXIT -ne 0 ]; then
+            echo "::error::ECR get-login-password failed (exit $EXIT)"
+            echo "--- stderr ---"
+            cat /tmp/ecr_error
+            exit $EXIT
+          fi
+          echo "ECR token length: $(wc -c < /tmp/ecr_token)"
+          echo "password=$(cat /tmp/ecr_token)" >> $GITHUB_OUTPUT
 
       - name: Docker login to ECR
         run: |
