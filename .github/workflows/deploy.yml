@@ -20,7 +20,7 @@ jobs:
       - name: Build portfolio
         run: npm run build:static
 
-      - name: Deploy portfolio to S3
+      - name: Deploy to S3
         run: |
           aws s3 sync out/ s3://${{ secrets.AWS_S3_BUCKET }}/ \
             --delete \
@@ -30,38 +30,7 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_REGION: ${{ secrets.AWS_REGION }}
 
-  deploy-channel-stream:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-
-      - name: Install Channel Stream dependencies
-        working-directory: Channel_Stream
-        run: npm ci
-
-      - name: Build Channel Stream
-        working-directory: Channel_Stream
-        env:
-          NEXT_PUBLIC_API_URL: https://api.jonathanlohr.com
-          NEXT_PUBLIC_COGNITO_DOMAIN: https://channel-stream-jl.auth.us-east-1.amazoncognito.com
-          NEXT_PUBLIC_COGNITO_CLIENT_ID: 1bsck4p8ma568p0pj8rk4gkug9
-          NEXT_PUBLIC_REDIRECT_URI: https://jonathanlohr.com/channel-stream/auth/callback
-          NEXT_PUBLIC_BASE_PATH: /channel-stream
-        run: npm run build
-
-      - name: Deploy Channel Stream to S3
-        run: |
-          aws s3 sync Channel_Stream/out/ s3://${{ secrets.AWS_S3_BUCKET }}/channel-stream/ --delete
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_REGION: ${{ secrets.AWS_REGION }}
-
-      - name: Invalidate CloudFront
+      - name: Invalidate CloudFront cache
         run: |
           aws cloudfront create-invalidation \
             --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} \
@@ -70,63 +39,3 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_REGION: ${{ secrets.AWS_REGION }}
-
-  deploy-backend:
-    runs-on: ubuntu-latest
-    env:
-      AWS_ACCESS_KEY_ID:     ${{ secrets.AWS_ACCESS_KEY_ID }}
-      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      AWS_REGION:            us-east-1
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Verify AWS identity
-        run: |
-          echo "Key ID prefix (first 12 chars): ${AWS_ACCESS_KEY_ID:0:12}"
-          aws sts get-caller-identity
-
-      - name: Test ECR describe (diagnostic)
-        run: aws ecr describe-repositories --region us-east-1
-
-      - name: Get ECR login password
-        id: ecr-password
-        run: |
-          echo "Calling ECR get-login-password..."
-          aws ecr get-login-password --region us-east-1 >/tmp/ecr_token 2>/tmp/ecr_error
-          EXIT=$?
-          if [ $EXIT -ne 0 ]; then
-            echo "::error::ECR get-login-password failed (exit $EXIT)"
-            echo "--- stderr ---"
-            cat /tmp/ecr_error
-            exit $EXIT
-          fi
-          echo "ECR token length: $(wc -c < /tmp/ecr_token)"
-          echo "password=$(cat /tmp/ecr_token)" >> $GITHUB_OUTPUT
-
-      - name: Docker login to ECR
-        run: |
-          echo "${{ steps.ecr-password.outputs.password }}" | \
-            docker login --username AWS --password-stdin \
-            435204302991.dkr.ecr.us-east-1.amazonaws.com
-
-      - name: Build Docker image
-        run: |
-          docker build \
-            -t 435204302991.dkr.ecr.us-east-1.amazonaws.com/channel-stream-backend:${{ github.sha }} \
-            -t 435204302991.dkr.ecr.us-east-1.amazonaws.com/channel-stream-backend:latest \
-            Channel_Stream/
-
-      - name: Push Docker image
-        run: |
-          docker push 435204302991.dkr.ecr.us-east-1.amazonaws.com/channel-stream-backend:${{ github.sha }}
-          docker push 435204302991.dkr.ecr.us-east-1.amazonaws.com/channel-stream-backend:latest
-
-      - name: Force ECS service redeploy
-        run: |
-          aws ecs update-service \
-            --cluster channel-stream \
-            --service channel-stream-backend \
-            --force-new-deployment \
-            --region us-east-1 \
-            --query 'service.deployments[0].status' \
-            --output text
