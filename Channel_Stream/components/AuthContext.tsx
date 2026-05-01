@@ -11,24 +11,29 @@ export interface User {
 }
 
 interface AuthContextType {
-  user:             User | null
-  loading:          boolean
-  selectedTeams:    string[]
-  setSelectedTeams: (teams: string[]) => void
-  signIn:           () => void
-  signOut:          () => void
+  user:               User | null
+  loading:            boolean
+  selectedLeagues:    string[]
+  setSelectedLeagues: (leagues: string[]) => void
+  selectedTeams:      string[]
+  setSelectedTeams:   (teams: string[]) => void
+  signIn:             () => void
+  signOut:            () => void
 }
 
 const AuthContext = createContext<AuthContextType>({
-  user:             null,
-  loading:          true,
-  selectedTeams:    [],
-  setSelectedTeams: () => {},
-  signIn:           () => {},
-  signOut:          () => {},
+  user:               null,
+  loading:            true,
+  selectedLeagues:    [],
+  setSelectedLeagues: () => {},
+  selectedTeams:      [],
+  setSelectedTeams:   () => {},
+  signIn:             () => {},
+  signOut:            () => {},
 })
 
-const SESSION_TEAMS_KEY = "cs_selected_teams"
+const SESSION_LEAGUES_KEY = "cs_selected_leagues"
+const SESSION_TEAMS_KEY   = "cs_selected_teams"
 
 function initUser(): User | null {
   if (typeof window === "undefined") return null
@@ -40,11 +45,11 @@ function initUser(): User | null {
   return sub && email ? { sub, email, name: p.name as string | undefined } : null
 }
 
-function initTeams(): string[] {
+function initFromSession(key: string): string[] {
   if (typeof window === "undefined") return []
   if (getStoredToken()) return [] // will be overwritten from server preferences
   try {
-    const stored = sessionStorage.getItem(SESSION_TEAMS_KEY)
+    const stored = sessionStorage.getItem(key)
     return stored ? (JSON.parse(stored) as string[]) : []
   } catch {
     return []
@@ -52,9 +57,10 @@ function initTeams(): string[] {
 }
 
 export function AuthProvider({ children }: { children: ReactNode }) {
-  const [user, setUser]                  = useState<User | null>(initUser)
-  const [selectedTeams, setTeamsState]   = useState<string[]>(initTeams)
-  const [loading, setLoading]            = useState<boolean>(() => {
+  const [user, setUser]                    = useState<User | null>(initUser)
+  const [selectedLeagues, setLeaguesState] = useState<string[]>(() => initFromSession(SESSION_LEAGUES_KEY))
+  const [selectedTeams, setTeamsState]     = useState<string[]>(() => initFromSession(SESSION_TEAMS_KEY))
+  const [loading, setLoading]              = useState<boolean>(() => {
     if (typeof window === "undefined") return false
     return getStoredToken() !== null
   })
@@ -64,18 +70,35 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     if (!token) return
     getPreferences(token)
       .then((prefs) => {
+        if (prefs.leagues?.length > 0) setLeaguesState(prefs.leagues)
         if (prefs.teams?.length > 0) setTeamsState(prefs.teams)
       })
       .catch(() => {})
       .finally(() => setLoading(false))
   }, [])
 
+  const setSelectedLeagues = (leagues: string[]) => {
+    setLeaguesState(leagues)
+    sessionStorage.setItem(SESSION_LEAGUES_KEY, JSON.stringify(leagues))
+    const token = getStoredToken()
+    if (token && user) {
+      // Use functional read to get current teams without stale closure
+      setTeamsState((teams) => {
+        savePreferences({ leagues, teams }, token).catch(() => {})
+        return teams
+      })
+    }
+  }
+
   const setSelectedTeams = (teams: string[]) => {
     setTeamsState(teams)
     sessionStorage.setItem(SESSION_TEAMS_KEY, JSON.stringify(teams))
     const token = getStoredToken()
     if (token && user) {
-      savePreferences({ teams }, token).catch(() => {})
+      setLeaguesState((leagues) => {
+        savePreferences({ leagues, teams }, token).catch(() => {})
+        return leagues
+      })
     }
   }
 
@@ -86,7 +109,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }
 
   return (
-    <AuthContext.Provider value={{ user, loading, selectedTeams, setSelectedTeams, signIn, signOut }}>
+    <AuthContext.Provider value={{
+      user, loading,
+      selectedLeagues, setSelectedLeagues,
+      selectedTeams,   setSelectedTeams,
+      signIn, signOut,
+    }}>
       {children}
     </AuthContext.Provider>
   )

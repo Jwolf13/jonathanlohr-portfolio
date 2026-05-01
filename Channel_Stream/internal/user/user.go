@@ -12,7 +12,8 @@ import (
 )
 
 type Preferences struct {
-	Teams []string `json:"teams"`
+	Leagues []string `json:"leagues"`
+	Teams   []string `json:"teams"`
 }
 
 func GetPreferences(w http.ResponseWriter, r *http.Request) {
@@ -61,6 +62,9 @@ func PutPreferences(w http.ResponseWriter, r *http.Request) {
 	if err := json.NewDecoder(r.Body).Decode(&prefs); err != nil {
 		http.Error(w, "invalid request body", http.StatusBadRequest)
 		return
+	}
+	if prefs.Leagues == nil {
+		prefs.Leagues = []string{}
 	}
 	if prefs.Teams == nil {
 		prefs.Teams = []string{}

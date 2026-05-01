@@ -14,15 +14,10 @@ import (
 )
 
 // GetSportsLive handles GET /v1/sports/live
-// Returns live games and today's upcoming games for the profile's followed teams.
+// Returns all live and today's upcoming games; filtering is done client-side.
 func GetSportsLive(w http.ResponseWriter, r *http.Request) {
-	profileID := r.URL.Query().Get("profile_id")
-	if profileID == "" {
-		profileID = "00000000-0000-0000-0000-000000000002"
-	}
-
 	// ── Cache check ───────────────────────────────────────────────────────────
-	cacheKey := cache.SportsKey(profileID)
+	cacheKey := cache.SportsKey("all")
 	if cached, found, _ := cache.Get(r.Context(), cacheKey); found {
 		w.Header().Set("Content-Type", "application/json")
 		w.Header().Set("X-Cache", "HIT")
@@ -30,9 +25,7 @@ func GetSportsLive(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	followedTeams, followedLeagues := profilePreferences(r.Context(), profileID)
-
-	events, err := querySportsEvents(r.Context(), followedTeams, followedLeagues, 0, 1)
+	events, err := querySportsEvents(r.Context(), nil, nil, 0, 1)
 	if err != nil {
 		http.Error(w, "database error", http.StatusInternalServerError)
 		return
@@ -55,14 +48,9 @@ func GetSportsLive(w http.ResponseWriter, r *http.Request) {
 }
 
 // GetSportsSchedule handles GET /v1/sports/schedule
-// Returns all non-final games for the next 7 days for the profile's followed teams.
+// Returns all non-final games for the next 7 days; filtering is done client-side.
 func GetSportsSchedule(w http.ResponseWriter, r *http.Request) {
-	profileID := r.URL.Query().Get("profile_id")
-	if profileID == "" {
-		profileID = "00000000-0000-0000-0000-000000000002"
-	}
-
-	cacheKey := cache.FeedKey(profileID, "sports_schedule")
+	cacheKey := cache.FeedKey("all", "sports_schedule")
 	if cached, found, _ := cache.Get(r.Context(), cacheKey); found {
 		w.Header().Set("Content-Type", "application/json")
 		w.Header().Set("X-Cache", "HIT")
@@ -70,9 +58,7 @@ func GetSportsSchedule(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	followedTeams, followedLeagues := profilePreferences(r.Context(), profileID)
-
-	events, err := querySportsEvents(r.Context(), followedTeams, followedLeagues, 0, 7)
+	events, err := querySportsEvents(r.Context(), nil, nil, 0, 7)
 	if err != nil {
 		http.Error(w, "database error", http.StatusInternalServerError)
 		return
@@ -233,34 +219,3 @@ func buildWatchOn(broadcastJSON []byte) []WatchOption {
 	return opts
 }
 
-// profilePreferences reads the profile's followed_teams and followed_leagues
-// from the preferences JSONB column. Returns empty slices if the profile
-// has no preferences — the query then returns all games.
-func profilePreferences(ctx context.Context, profileID string) (teams []string, leagues []string) {
-	var prefJSON []byte
-	err := db.Pool.QueryRow(ctx,
-		`SELECT COALESCE(preferences, '{}') FROM profiles WHERE id = $1`,
-		profileID,
-	).Scan(&prefJSON)
-	if err != nil {
-		return nil, nil
-	}
-
-	var prefs struct {
-		FollowedTeams   []string `json:"followed_teams"`
-		FollowedLeagues []string `json:"followed_leagues"`
-		// Legacy field name from initial seed data
-		Teams []string `json:"teams"`
-	}
-	if err := json.Unmarshal(prefJSON, &prefs); err != nil {
-		return nil, nil
-	}
-
-	// Support both "followed_teams" (new) and "teams" (legacy seed data)
-	teams = prefs.FollowedTeams
-	if len(teams) == 0 {
-		teams = prefs.Teams
-	}
-	leagues = prefs.FollowedLeagues
-	return teams, leagues
-}

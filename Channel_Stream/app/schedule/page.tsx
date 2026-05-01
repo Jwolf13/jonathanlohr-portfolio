@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import { getSportsSchedule } from "@/lib/api"
 import { useWatchGame } from "@/lib/useWatchGame"
 import { useAuth } from "@/components/AuthContext"
-import { TeamFilter, filterByTeams } from "@/components/TeamFilter"
+import { TeamPicker, filterEvents } from "@/components/TeamPicker"
 import { OAuthModal } from "@/components/OAuthModal"
 import type { SportsResponse, SportEvent } from "@/types/api"
 
@@ -12,14 +12,16 @@ export default function SchedulePage() {
   const [data, setData]       = useState<SportsResponse | null>(null)
   const [loading, setLoading] = useState(true)
   const { watch, modal, authorize, cancel } = useWatchGame()
-  const { selectedTeams, setSelectedTeams } = useAuth()
+  const { selectedLeagues, setSelectedLeagues, selectedTeams, setSelectedTeams } = useAuth()
 
   useEffect(() => {
     getSportsSchedule().then(setData).finally(() => setLoading(false))
   }, [])
 
-  const scheduled = data?.events.filter((e) => e.status === "scheduled") ?? []
-  const filtered  = filterByTeams(scheduled, selectedTeams)
+  const allEvents       = data?.events ?? []
+  const scheduled       = allEvents.filter((e) => e.status === "scheduled")
+  const filtered        = filterEvents(scheduled, selectedLeagues, selectedTeams)
+  const nothingSelected = selectedLeagues.length === 0 && selectedTeams.length === 0
 
   const grouped = groupByDay(filtered)
   const days    = Object.keys(grouped).sort()
@@ -31,7 +33,14 @@ export default function SchedulePage() {
           <h1 className="text-3xl font-bold">Schedule</h1>
           <p className="text-gray-400 mt-1 text-sm">Upcoming games — click to watch</p>
         </div>
-        <TeamFilter events={scheduled} selectedTeams={selectedTeams} onChange={setSelectedTeams} />
+        <TeamPicker
+          mode="compact"
+          events={allEvents}
+          selectedLeagues={selectedLeagues}
+          selectedTeams={selectedTeams}
+          onLeaguesChange={setSelectedLeagues}
+          onTeamsChange={setSelectedTeams}
+        />
       </div>
 
       {loading ? (
@@ -46,6 +55,10 @@ export default function SchedulePage() {
           <h3 className="text-xl font-medium mb-2">Nothing scheduled</h3>
           <p className="text-sm">Games will appear here once they&apos;re on the schedule.</p>
         </div>
+      ) : nothingSelected ? (
+        <p className="text-gray-500 text-sm py-8 text-center">
+          Use the filter above to pick your leagues or teams.
+        </p>
       ) : days.length === 0 ? (
         <p className="text-gray-500 text-sm py-8 text-center">
           No upcoming games for your selected teams.
@@ -115,7 +128,7 @@ function ScheduleCard({ event, onWatch }: { event: SportEvent; onWatch: () => vo
         <p className="text-sm font-medium text-gray-300 shrink-0">{timeStr}</p>
       </div>
 
-      {/* Where to watch — prominent */}
+      {/* Where to watch */}
       {(event.watch_on?.length ?? 0) > 0 && (
         <div className="mt-1">
           <p className="text-xs text-gray-600 mb-1.5 uppercase tracking-wider">Where to watch</p>

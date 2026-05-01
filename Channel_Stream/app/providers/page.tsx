@@ -5,7 +5,6 @@ import { PROVIDERS } from "@/lib/providers"
 import { useAppStore } from "@/lib/store"
 import { ProviderCard } from "@/components/ProviderCard"
 import { OAuthModal } from "@/components/OAuthModal"
-import { ProfileSelector } from "@/components/ProfileSelector"
 
 export default function ProvidersPage() {
   const {
@@ -13,9 +12,6 @@ export default function ProvidersPage() {
     hydrated,
     linkProvider,
     unlinkProvider,
-    addProfile,
-    removeProfile,
-    switchProfile,
   } = useAppStore()
 
   const [linkingId, setLinkingId]     = useState<string | null>(null)
@@ -39,13 +35,6 @@ export default function ProvidersPage() {
     <div>
       <div className="flex items-center justify-between mb-1">
         <h1 className="text-3xl font-bold">Streaming Accounts</h1>
-        <ProfileSelector
-          profiles={store.profiles}
-          activeProfileId={store.activeProfileId}
-          onSwitch={switchProfile}
-          onAdd={addProfile}
-          onRemove={removeProfile}
-        />
       </div>
 
       <p className="text-gray-400 mt-1.5 text-sm mb-8">

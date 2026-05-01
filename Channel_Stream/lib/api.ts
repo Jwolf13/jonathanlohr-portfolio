@@ -32,12 +32,12 @@ export async function getWatchNowFeed(
   return get<FeedResponse>(`/v1/feed/watch-now?profile_id=${profileId}&account_id=${accountId}`)
 }
 
-export async function getSportsLive(profileId = DEFAULT_PROFILE_ID): Promise<SportsResponse> {
-  return get<SportsResponse>(`/v1/sports/live?profile_id=${profileId}`)
+export async function getSportsLive(): Promise<SportsResponse> {
+  return get<SportsResponse>(`/v1/sports/live`)
 }
 
-export async function getSportsSchedule(profileId = DEFAULT_PROFILE_ID): Promise<SportsResponse> {
-  return get<SportsResponse>(`/v1/sports/schedule?profile_id=${profileId}`)
+export async function getSportsSchedule(): Promise<SportsResponse> {
+  return get<SportsResponse>(`/v1/sports/schedule`)
 }
 
 export async function getLinkedProviders(accountId = DEFAULT_ACCOUNT_ID): Promise<ProvidersResponse> {
@@ -51,7 +51,8 @@ export async function getHealth(): Promise<{ status: string; version: string }> 
 // ── User preferences (requires Cognito access token) ─────────────────────────
 
 export interface Preferences {
-  teams: string[]
+  leagues: string[]
+  teams:   string[]
 }
 
 async function authedGet<T>(path: string, token: string): Promise<T> {

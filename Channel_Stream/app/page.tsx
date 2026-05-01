@@ -1,13 +1,11 @@
 "use client"
 
-//test
-
 import { useEffect, useState } from "react"
 import Link from "next/link"
 import { getSportsLive, getSportsSchedule, getHealth } from "@/lib/api"
 import { useWatchGame } from "@/lib/useWatchGame"
 import { useAuth } from "@/components/AuthContext"
-import { TeamFilter, filterByTeams } from "@/components/TeamFilter"
+import { TeamPicker, filterEvents } from "@/components/TeamPicker"
 import { OAuthModal } from "@/components/OAuthModal"
 import type { SportsResponse, SportEvent } from "@/types/api"
 
@@ -16,7 +14,7 @@ export default function DashboardPage() {
   const [schedule, setSchedule]   = useState<SportsResponse | null>(null)
   const [apiStatus, setApiStatus] = useState<"loading" | "ok" | "error">("loading")
   const { watch, modal, authorize, cancel } = useWatchGame()
-  const { selectedTeams, setSelectedTeams, user } = useAuth()
+  const { selectedLeagues, setSelectedLeagues, selectedTeams, setSelectedTeams, user } = useAuth()
 
   useEffect(() => {
     getHealth()
@@ -31,17 +29,33 @@ export default function DashboardPage() {
       .catch(() => setApiStatus("error"))
   }, [])
 
-  // Merge all events for the team picker
   const allEvents     = [...(live?.events ?? []), ...(schedule?.events ?? [])]
-  const liveEvents    = filterByTeams(live?.events.filter((e) => e.status === "live") ?? [], selectedTeams)
-  const upcomingToday = filterByTeams(schedule?.events.filter((e) => e.status === "scheduled") ?? [], selectedTeams)
+  const liveEvents    = filterEvents(live?.events.filter((e) => e.status === "live") ?? [], selectedLeagues, selectedTeams)
+  const upcomingToday = filterEvents(schedule?.events.filter((e) => e.status === "scheduled") ?? [], selectedLeagues, selectedTeams)
+  const nothingSelected = selectedLeagues.length === 0 && selectedTeams.length === 0
 
-  const subtitle =
-    selectedTeams.length === 0
-      ? "Showing all teams and sports"
-      : user
-        ? `${selectedTeams.length} team${selectedTeams.length !== 1 ? "s" : ""} selected`
-        : `${selectedTeams.length} team${selectedTeams.length !== 1 ? "s" : ""} selected — sign in to save`
+  if (nothingSelected) {
+    return (
+      <>
+        <TeamPicker
+          mode="hero"
+          events={allEvents}
+          selectedLeagues={selectedLeagues}
+          selectedTeams={selectedTeams}
+          onLeaguesChange={setSelectedLeagues}
+          onTeamsChange={setSelectedTeams}
+        />
+        {modal && (
+          <OAuthModal provider={modal.provider} onAuthorize={authorize} onCancel={cancel} />
+        )}
+      </>
+    )
+  }
+
+  const totalSelected = selectedLeagues.length + selectedTeams.length
+  const subtitle = user
+    ? `${totalSelected} filter${totalSelected !== 1 ? "s" : ""} active`
+    : `${totalSelected} filter${totalSelected !== 1 ? "s" : ""} active — sign in to save`
 
   return (
     <div>
@@ -51,7 +65,14 @@ export default function DashboardPage() {
           <p className="text-gray-400 mt-1 text-sm">{subtitle}</p>
         </div>
         <div className="flex items-center gap-3">
-          <TeamFilter events={allEvents} selectedTeams={selectedTeams} onChange={setSelectedTeams} />
+          <TeamPicker
+            mode="compact"
+            events={allEvents}
+            selectedLeagues={selectedLeagues}
+            selectedTeams={selectedTeams}
+            onLeaguesChange={setSelectedLeagues}
+            onTeamsChange={setSelectedTeams}
+          />
           <div className="flex items-center gap-2">
             <div className={`w-2 h-2 rounded-full ${
               apiStatus === "ok"    ? "bg-green-400" :
@@ -101,7 +122,7 @@ export default function DashboardPage() {
               <LoadingSkeleton count={2} />
             ) : liveEvents.length === 0 ? (
               <p className="text-gray-500 text-sm py-6 text-center">
-                {selectedTeams.length > 0 ? "No live games for your teams." : "No games live right now."}
+                No live games for your teams.
               </p>
             ) : (
               liveEvents.slice(0, 3).map((event) => (
@@ -119,7 +140,7 @@ export default function DashboardPage() {
               <LoadingSkeleton count={3} />
             ) : upcomingToday.length === 0 ? (
               <p className="text-gray-500 text-sm py-6 text-center">
-                {selectedTeams.length > 0 ? "No upcoming games for your teams." : "No upcoming games today."}
+                No upcoming games for your teams.
               </p>
             ) : (
               upcomingToday.slice(0, 4).map((event) => (

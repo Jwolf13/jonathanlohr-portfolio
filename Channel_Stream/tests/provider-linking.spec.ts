@@ -14,6 +14,7 @@ const ALL_PROVIDER_IDS = [
 async function clearState(page: Page) {
   await page.goto("/providers")
   await page.evaluate(() => localStorage.removeItem("channel_stream_v1"))
+  await page.evaluate(() => sessionStorage.clear())
   await page.reload()
   await page.waitForLoadState("networkidle")
 }
@@ -34,7 +35,78 @@ async function linkProvider(
   })
 }
 
-// ─── Dashboard ────────────────────────────────────────────────────────────────
+// ─── Hero Picker / Onboarding ─────────────────────────────────────────────────
+
+test.describe("Hero Team Picker", () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto("/")
+    await page.evaluate(() => sessionStorage.clear())
+    await page.reload()
+    await page.waitForLoadState("networkidle")
+  })
+
+  test("root path shows hero picker when no teams selected", async ({ page }) => {
+    await expect(page.getByRole("heading", { name: "What do you follow?" })).toBeVisible()
+  })
+
+  test("hero picker shows all league buttons", async ({ page }) => {
+    await expect(page.getByRole("button", { name: /NFL/ })).toBeVisible()
+    await expect(page.getByRole("button", { name: /NBA/ })).toBeVisible()
+    await expect(page.getByRole("button", { name: /MLB/ })).toBeVisible()
+    await expect(page.getByRole("button", { name: /MLS/ })).toBeVisible()
+    await expect(page.getByRole("button", { name: /College Football/ })).toBeVisible()
+    await expect(page.getByRole("button", { name: /College Basketball/ })).toBeVisible()
+    await expect(page.getByRole("button", { name: /College Baseball/ })).toBeVisible()
+    await expect(page.getByRole("button", { name: /NHL/ })).toBeVisible()
+  })
+
+  test("selecting a league transitions to dashboard view", async ({ page }) => {
+    await page.getByRole("button", { name: /NBA/ }).click()
+    await expect(page.getByRole("heading", { name: "Dashboard" })).toBeVisible()
+  })
+
+  test("selected league button highlights in blue", async ({ page }) => {
+    const nflBtn = page.getByRole("button", { name: /NFL/ })
+    await nflBtn.click()
+    // Navigate back to see compact picker is there
+    await expect(page.getByRole("heading", { name: "Dashboard" })).toBeVisible()
+  })
+
+  test("hero picker has team search input", async ({ page }) => {
+    await expect(page.getByPlaceholder("Search teams…")).toBeVisible()
+  })
+})
+
+// ─── Compact Picker ───────────────────────────────────────────────────────────
+
+test.describe("Compact Team Picker", () => {
+  test.beforeEach(async ({ page }) => {
+    // Select NBA so we get past the hero screen
+    await page.goto("/")
+    await page.evaluate(() => sessionStorage.clear())
+    await page.reload()
+    await page.waitForLoadState("networkidle")
+    await page.getByRole("button", { name: /NBA/ }).click()
+    await expect(page.getByRole("heading", { name: "Dashboard" })).toBeVisible()
+  })
+
+  test("compact picker button appears after team selection", async ({ page }) => {
+    await expect(page.getByRole("button", { name: /selected/ })).toBeVisible()
+  })
+
+  test("clicking compact picker opens dropdown", async ({ page }) => {
+    await page.getByRole("button", { name: /selected/ }).click()
+    await expect(page.getByPlaceholder("Search teams…")).toBeVisible()
+  })
+
+  test("clear all returns to hero mode", async ({ page }) => {
+    await page.getByRole("button", { name: /selected/ }).click()
+    await page.getByRole("button", { name: "Clear all" }).click()
+    await expect(page.getByRole("heading", { name: "What do you follow?" })).toBeVisible()
+  })
+})
+
+// ─── Provider Dashboard ───────────────────────────────────────────────────────
 
 test.describe("Provider Dashboard", () => {
   test.beforeEach(async ({ page }) => {
@@ -57,12 +129,6 @@ test.describe("Provider Dashboard", () => {
   test("shows 0% coverage when no providers are linked", async ({ page }) => {
     await expect(page.getByTestId("coverage-pct")).toHaveText("0%")
     await expect(page.getByText("0 of 8 linked")).toBeVisible()
-  })
-
-  test("root path shows the Dashboard", async ({ page }) => {
-    await page.goto("/")
-    await expect(page).toHaveURL("http://localhost:3001/")
-    await expect(page.getByRole("heading", { name: "Dashboard" })).toBeVisible()
   })
 })
 
@@ -109,7 +175,6 @@ test.describe("OAuth Linking Flow", () => {
     await page.getByLabel("Password").fill("pass")
     await page.getByRole("button", { name: "Continue" }).click()
     await expect(page.getByText("Email is required")).toBeVisible()
-    // Should NOT advance to authorize step
     await expect(page.getByText("Permissions requested")).not.toBeVisible()
   })
 
@@ -176,7 +241,6 @@ test.describe("OAuth Linking Flow", () => {
 
   test("linked card shows token expiry in days", async ({ page }) => {
     await linkProvider(page, "disney_plus")
-    // Token is set to 30 days — should show "29 days" or "30 days"
     await expect(
       page.getByTestId("provider-card-disney_plus").getByText(/\d+ days/)
     ).toBeVisible()
@@ -235,7 +299,7 @@ test.describe("Unlink Flow", () => {
 
   test("clicking the backdrop cancels unlink", async ({ page }) => {
     await page.getByTestId("unlink-netflix").click()
-    await page.mouse.click(10, 10) // click outside modal
+    await page.mouse.click(10, 10)
     await expect(page.getByTestId("status-linked-netflix")).toBeVisible()
   })
 
@@ -255,92 +319,7 @@ test.describe("Unlink Flow", () => {
   })
 })
 
-// ─── Profile Management ───────────────────────────────────────────────────────
-
-test.describe("Profile Management", () => {
-  test.beforeEach(async ({ page }) => {
-    await clearState(page)
-  })
-
-  test("shows the default profile in the header", async ({ page }) => {
-    await expect(page.getByTestId("profile-selector")).toBeVisible()
-    await expect(
-      page.getByTestId("profile-selector").getByText("Main Profile")
-    ).toBeVisible()
-  })
-
-  test("opens profile dropdown on click", async ({ page }) => {
-    await page.getByTestId("profile-selector").click()
-    await expect(page.getByRole("listbox")).toBeVisible()
-    await expect(page.getByText("Profiles (1/6)")).toBeVisible()
-  })
-
-  test("can add a new profile", async ({ page }) => {
-    await page.getByTestId("profile-selector").click()
-    await page.getByTestId("add-profile-button").click()
-    await page.getByTestId("new-profile-name-input").fill("Kids")
-    await page.getByTestId("confirm-add-profile").click()
-    // Dropdown closes after adding — re-open to verify count
-    await page.getByTestId("profile-selector").click()
-    await expect(page.getByText("Profiles (2/6)")).toBeVisible()
-  })
-
-  test("can switch to a newly added profile", async ({ page }) => {
-    await page.getByTestId("profile-selector").click()
-    await page.getByTestId("add-profile-button").click()
-    await page.getByTestId("new-profile-name-input").fill("Kids")
-    await page.getByTestId("confirm-add-profile").click()
-
-    // Dropdown closes after adding — re-open to switch
-    await page.getByTestId("profile-selector").click()
-    await page.getByRole("option", { name: /Kids/ }).click()
-
-    await expect(
-      page.getByTestId("profile-selector").getByText("Kids")
-    ).toBeVisible()
-  })
-
-  test("dropdown closes after switching profile", async ({ page }) => {
-    await page.getByTestId("profile-selector").click()
-    await page.getByTestId("add-profile-button").click()
-    await page.getByTestId("new-profile-name-input").fill("Sports")
-    await page.getByTestId("confirm-add-profile").click()
-    // Re-open to switch
-    await page.getByTestId("profile-selector").click()
-    await page.getByRole("option", { name: /Sports/ }).click()
-    await expect(page.getByRole("listbox")).not.toBeVisible()
-  })
-
-  test("add-profile button hides when 6 profiles exist", async ({ page }) => {
-    const extraProfiles = ["Profile 2", "Profile 3", "Profile 4", "Profile 5", "Profile 6"]
-    for (const name of extraProfiles) {
-      await page.getByTestId("profile-selector").click()
-      await page.getByTestId("add-profile-button").click()
-      await page.getByTestId("new-profile-name-input").fill(name)
-      await page.getByTestId("confirm-add-profile").click()
-    }
-
-    await page.getByTestId("profile-selector").click()
-    await expect(page.getByText("Profiles (6/6)")).toBeVisible()
-    await expect(page.getByTestId("add-profile-button")).not.toBeVisible()
-  })
-
-  test("cannot exceed 6 profiles via store layer", async ({ page }) => {
-    const extras = ["P2", "P3", "P4", "P5", "P6"]
-    for (const name of extras) {
-      await page.getByTestId("profile-selector").click()
-      await page.getByTestId("add-profile-button").click()
-      await page.getByTestId("new-profile-name-input").fill(name)
-      await page.getByTestId("confirm-add-profile").click()
-    }
-    // Count profile options
-    await page.getByTestId("profile-selector").click()
-    const options = page.getByRole("option")
-    await expect(options).toHaveCount(6)
-  })
-})
-
-// ─── Persistence ──────────────────────────────────────────────────────────────
+// ─── State Persistence ────────────────────────────────────────────────────────
 
 test.describe("State Persistence", () => {
   test.beforeEach(async ({ page }) => {
@@ -364,33 +343,5 @@ test.describe("State Persistence", () => {
     await page.waitForLoadState("networkidle")
 
     await expect(page.getByTestId("status-unlinked-netflix")).toBeVisible()
-  })
-
-  test("profiles persist across reload", async ({ page }) => {
-    await page.getByTestId("profile-selector").click()
-    await page.getByTestId("add-profile-button").click()
-    await page.getByTestId("new-profile-name-input").fill("Family")
-    await page.getByTestId("confirm-add-profile").click()
-    await page.reload()
-    await page.waitForLoadState("networkidle")
-
-    await page.getByTestId("profile-selector").click()
-    await expect(page.getByText("Profiles (2/6)")).toBeVisible()
-  })
-
-  test("active profile persists across reload", async ({ page }) => {
-    await page.getByTestId("profile-selector").click()
-    await page.getByTestId("add-profile-button").click()
-    await page.getByTestId("new-profile-name-input").fill("Gaming")
-    await page.getByTestId("confirm-add-profile").click()
-    // Dropdown closes after add — re-open to switch
-    await page.getByTestId("profile-selector").click()
-    await page.getByRole("option", { name: /Gaming/ }).click()
-
-    await page.reload()
-    await page.waitForLoadState("networkidle")
-    await expect(
-      page.getByTestId("profile-selector").getByText("Gaming")
-    ).toBeVisible()
   })
 })

@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import { getSportsLive } from "@/lib/api"
 import { useWatchGame } from "@/lib/useWatchGame"
 import { useAuth } from "@/components/AuthContext"
-import { TeamFilter, filterByTeams } from "@/components/TeamFilter"
+import { TeamPicker, filterEvents } from "@/components/TeamPicker"
 import { OAuthModal } from "@/components/OAuthModal"
 import type { SportsResponse, SportEvent } from "@/types/api"
 
@@ -12,14 +12,16 @@ export default function SportsPage() {
   const [data, setData]       = useState<SportsResponse | null>(null)
   const [loading, setLoading] = useState(true)
   const { watch, modal, authorize, cancel } = useWatchGame()
-  const { selectedTeams, setSelectedTeams } = useAuth()
+  const { selectedLeagues, setSelectedLeagues, selectedTeams, setSelectedTeams } = useAuth()
 
   useEffect(() => {
     getSportsLive().then(setData).finally(() => setLoading(false))
   }, [])
 
-  const liveEvents = data?.events.filter((e) => e.status === "live") ?? []
-  const filtered   = filterByTeams(liveEvents, selectedTeams)
+  const allEvents      = data?.events ?? []
+  const liveEvents     = allEvents.filter((e) => e.status === "live")
+  const filtered       = filterEvents(liveEvents, selectedLeagues, selectedTeams)
+  const nothingSelected = selectedLeagues.length === 0 && selectedTeams.length === 0
 
   return (
     <div>
@@ -28,7 +30,14 @@ export default function SportsPage() {
           <h1 className="text-3xl font-bold">Sports Live</h1>
           <p className="text-gray-400 mt-1 text-sm">Games in progress — click any game to watch</p>
         </div>
-        <TeamFilter events={liveEvents} selectedTeams={selectedTeams} onChange={setSelectedTeams} />
+        <TeamPicker
+          mode="compact"
+          events={allEvents}
+          selectedLeagues={selectedLeagues}
+          selectedTeams={selectedTeams}
+          onLeaguesChange={setSelectedLeagues}
+          onTeamsChange={setSelectedTeams}
+        />
       </div>
 
       {loading ? (
@@ -41,6 +50,10 @@ export default function SportsPage() {
           <h3 className="text-xl font-medium mb-2">No games live right now</h3>
           <p className="text-sm">Check back during game time or browse the schedule.</p>
         </div>
+      ) : nothingSelected ? (
+        <p className="text-gray-500 text-sm py-8 text-center">
+          Use the filter above to pick your leagues or teams.
+        </p>
       ) : filtered.length === 0 ? (
         <p className="text-gray-500 text-sm py-8 text-center">
           No live games for your selected teams right now.
@@ -104,7 +117,7 @@ function EventCard({ event, onWatch }: { event: SportEvent; onWatch: () => void 
         )}
       </div>
 
-      {/* Where to watch — prominent */}
+      {/* Where to watch */}
       {(event.watch_on?.length ?? 0) > 0 && (
         <div className="mt-1">
           <p className="text-xs text-gray-600 mb-1.5 uppercase tracking-wider">Where to watch</p>
