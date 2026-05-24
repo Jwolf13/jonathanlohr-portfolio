@@ -1,36 +1,87 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# jonathanlohr-portfolio
 
-## Getting Started
+Personal portfolio site for Jonathan Lohr. Static-exported Next.js, deployed to S3 + CloudFront via GitHub Actions.
 
-First, run the development server:
+## Stack
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- Next.js 16 (App Router, static export)
+- React 19, TypeScript
+- Tailwind CSS v4
+- Python ETL scripts for labor-market data (BLS, Census ACS)
+- GitHub Actions deploy to S3 + CloudFront
+
+## Repo layout
+
+```
+app/                          App Router pages
+  page.tsx                    Landing (hero + featured projects)
+  projects/
+    page.tsx                  Project index, grouped by category
+    [slug]/page.tsx           Dynamic case-study route
+  about/page.tsx
+  gtm-calculator/page.tsx
+  consulting/page.tsx
+  architecture-cases/page.tsx
+
+components/                   Reusable UI
+  SiteNav.tsx
+  ProjectCard.tsx
+  CaseStudyLayout.tsx
+  NcLaborDashboard.tsx
+  PipelineTuneUp.tsx
+  SalesMotionPlaybook.tsx
+
+content/                      Source of truth for portfolio content
+  projects.ts                 Typed registry of every project
+  case-studies/               One TSX component per project
+    index.ts                  slug -> component map
+    channel-stream.tsx
+    aws-compliance-collector.tsx
+    ...
+
+data/
+  raw/                        Untouched JSON from BLS / Census APIs
+  processed/                  ETL output, imported by pages at build time
+
+scripts/                      Python ETL pipeline
+
+.github/workflows/
+  ci.yml                      Lint + typecheck + build on PRs
+  deploy.yml                  Push to main -> S3 sync + CloudFront invalidate
+
+# Sub-projects (each will eventually become its own GitHub repo)
+Channel_Stream/
+AWS Compliance collector/
+apex_benchmark/
+API Builder/
+data-science-projects/
+pipeline-tuneup-v3/
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Local development
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm install
+npm run dev          # http://localhost:3000
+npm run build        # static export -> out/
+npm run lint
+npx tsc --noEmit
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Adding a new project
 
-## Learn More
+1. Add an entry to `content/projects.ts`.
+2. Create `content/case-studies/<slug>.tsx`.
+3. Register it in `content/case-studies/index.ts`.
+4. PR -> CI runs -> merge -> deploy ships it.
 
-To learn more about Next.js, take a look at the following resources:
+## Deploy
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Pushing to `main` triggers `.github/workflows/deploy.yml`:
+1. `npm run build:static`
+2. `aws s3 sync out/ s3://$AWS_S3_BUCKET/`
+3. `aws cloudfront create-invalidation`
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Required secrets: `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_REGION`, `AWS_S3_BUCKET`, `CLOUDFRONT_DISTRIBUTION_ID`.
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+See `PORTFOLIO_AUDIT.md` for the full audit and the prioritized list of structural improvements.
