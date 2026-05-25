@@ -1,0 +1,2042 @@
+{
+  "state": "North Carolina",
+  "year": 2022,
+  "data_source": "U.S. Census Bureau American Community Survey (ACS)",
+  "occupations": [
+    {
+      "title": "Management, Business, Science & Arts",
+      "employment_count": 2553895,
+      "employment_percentage": 48.8,
+      "counties": [
+        {
+          "County": "Alamance County, North Carolina",
+          "employment": 42440
+        },
+        {
+          "County": "Alexander County, North Carolina",
+          "employment": 9066
+        },
+        {
+          "County": "Alleghany County, North Carolina",
+          "employment": 2292
+        },
+        {
+          "County": "Anson County, North Carolina",
+          "employment": 4594
+        },
+        {
+          "County": "Ashe County, North Carolina",
+          "employment": 6249
+        },
+        {
+          "County": "Avery County, North Carolina",
+          "employment": 3562
+        },
+        {
+          "County": "Beaufort County, North Carolina",
+          "employment": 10149
+        },
+        {
+          "County": "Bertie County, North Carolina",
+          "employment": 3000
+        },
+        {
+          "County": "Bladen County, North Carolina",
+          "employment": 5761
+        },
+        {
+          "County": "Brunswick County, North Carolina",
+          "employment": 29160
+        },
+        {
+          "County": "Buncombe County, North Carolina",
+          "employment": 67608
+        },
+        {
+          "County": "Burke County, North Carolina",
+          "employment": 21225
+        },
+        {
+          "County": "Cabarrus County, North Carolina",
+          "employment": 60095
+        },
+        {
+          "County": "Caldwell County, North Carolina",
+          "employment": 19198
+        },
+        {
+          "County": "Camden County, North Carolina",
+          "employment": 2374
+        },
+        {
+          "County": "Carteret County, North Carolina",
+          "employment": 15501
+        },
+        {
+          "County": "Caswell County, North Carolina",
+          "employment": 5095
+        },
+        {
+          "County": "Catawba County, North Carolina",
+          "employment": 41313
+        },
+        {
+          "County": "Chatham County, North Carolina",
+          "employment": 18586
+        },
+        {
+          "County": "Cherokee County, North Carolina",
+          "employment": 5898
+        },
+        {
+          "County": "Chowan County, North Carolina",
+          "employment": 3096
+        },
+        {
+          "County": "Clay County, North Carolina",
+          "employment": 2329
+        },
+        {
+          "County": "Cleveland County, North Carolina",
+          "employment": 22406
+        },
+        {
+          "County": "Columbus County, North Carolina",
+          "employment": 9417
+        },
+        {
+          "County": "Craven County, North Carolina",
+          "employment": 20216
+        },
+        {
+          "County": "Cumberland County, North Carolina",
+          "employment": 58549
+        },
+        {
+          "County": "Currituck County, North Carolina",
+          "employment": 7590
+        },
+        {
+          "County": "Dare County, North Carolina",
+          "employment": 9649
+        },
+        {
+          "County": "Davidson County, North Carolina",
+          "employment": 41919
+        },
+        {
+          "County": "Davie County, North Carolina",
+          "employment": 10370
+        },
+        {
+          "County": "Duplin County, North Carolina",
+          "employment": 12038
+        },
+        {
+          "County": "Durham County, North Carolina",
+          "employment": 83332
+        },
+        {
+          "County": "Edgecombe County, North Carolina",
+          "employment": 9465
+        },
+        {
+          "County": "Forsyth County, North Carolina",
+          "employment": 90460
+        },
+        {
+          "County": "Franklin County, North Carolina",
+          "employment": 17649
+        },
+        {
+          "County": "Gaston County, North Carolina",
+          "employment": 56933
+        },
+        {
+          "County": "Gates County, North Carolina",
+          "employment": 2204
+        },
+        {
+          "County": "Graham County, North Carolina",
+          "employment": 1700
+        },
+        {
+          "County": "Granville County, North Carolina",
+          "employment": 13479
+        },
+        {
+          "County": "Greene County, North Carolina",
+          "employment": 4564
+        },
+        {
+          "County": "Guilford County, North Carolina",
+          "employment": 132614
+        },
+        {
+          "County": "Halifax County, North Carolina",
+          "employment": 9457
+        },
+        {
+          "County": "Harnett County, North Carolina",
+          "employment": 28372
+        },
+        {
+          "County": "Haywood County, North Carolina",
+          "employment": 14197
+        },
+        {
+          "County": "Henderson County, North Carolina",
+          "employment": 28357
+        },
+        {
+          "County": "Hertford County, North Carolina",
+          "employment": 4394
+        },
+        {
+          "County": "Hoke County, North Carolina",
+          "employment": 9066
+        },
+        {
+          "County": "Hyde County, North Carolina",
+          "employment": 730
+        },
+        {
+          "County": "Iredell County, North Carolina",
+          "employment": 50728
+        },
+        {
+          "County": "Jackson County, North Carolina",
+          "employment": 9745
+        },
+        {
+          "County": "Johnston County, North Carolina",
+          "employment": 57731
+        },
+        {
+          "County": "Jones County, North Carolina",
+          "employment": 2006
+        },
+        {
+          "County": "Lee County, North Carolina",
+          "employment": 15348
+        },
+        {
+          "County": "Lenoir County, North Carolina",
+          "employment": 11643
+        },
+        {
+          "County": "Lincoln County, North Carolina",
+          "employment": 23377
+        },
+        {
+          "County": "McDowell County, North Carolina",
+          "employment": 9714
+        },
+        {
+          "County": "Macon County, North Carolina",
+          "employment": 8522
+        },
+        {
+          "County": "Madison County, North Carolina",
+          "employment": 5280
+        },
+        {
+          "County": "Martin County, North Carolina",
+          "employment": 4332
+        },
+        {
+          "County": "Mecklenburg County, North Carolina",
+          "employment": 312161
+        },
+        {
+          "County": "Mitchell County, North Carolina",
+          "employment": 3444
+        },
+        {
+          "County": "Montgomery County, North Carolina",
+          "employment": 5372
+        },
+        {
+          "County": "Moore County, North Carolina",
+          "employment": 21078
+        },
+        {
+          "County": "Nash County, North Carolina",
+          "employment": 22094
+        },
+        {
+          "County": "New Hanover County, North Carolina",
+          "employment": 58790
+        },
+        {
+          "County": "Northampton County, North Carolina",
+          "employment": 3174
+        },
+        {
+          "County": "Onslow County, North Carolina",
+          "employment": 34570
+        },
+        {
+          "County": "Orange County, North Carolina",
+          "employment": 35985
+        },
+        {
+          "County": "Pamlico County, North Carolina",
+          "employment": 2211
+        },
+        {
+          "County": "Pasquotank County, North Carolina",
+          "employment": 9238
+        },
+        {
+          "County": "Pender County, North Carolina",
+          "employment": 14630
+        },
+        {
+          "County": "Perquimans County, North Carolina",
+          "employment": 2859
+        },
+        {
+          "County": "Person County, North Carolina",
+          "employment": 9560
+        },
+        {
+          "County": "Pitt County, North Carolina",
+          "employment": 41122
+        },
+        {
+          "County": "Polk County, North Carolina",
+          "employment": 4453
+        },
+        {
+          "County": "Randolph County, North Carolina",
+          "employment": 36255
+        },
+        {
+          "County": "Richmond County, North Carolina",
+          "employment": 9160
+        },
+        {
+          "County": "Robeson County, North Carolina",
+          "employment": 21886
+        },
+        {
+          "County": "Rockingham County, North Carolina",
+          "employment": 20508
+        },
+        {
+          "County": "Rowan County, North Carolina",
+          "employment": 36092
+        },
+        {
+          "County": "Rutherford County, North Carolina",
+          "employment": 14084
+        },
+        {
+          "County": "Sampson County, North Carolina",
+          "employment": 13706
+        },
+        {
+          "County": "Scotland County, North Carolina",
+          "employment": 6542
+        },
+        {
+          "County": "Stanly County, North Carolina",
+          "employment": 15691
+        },
+        {
+          "County": "Stokes County, North Carolina",
+          "employment": 10508
+        },
+        {
+          "County": "Surry County, North Carolina",
+          "employment": 17097
+        },
+        {
+          "County": "Swain County, North Carolina",
+          "employment": 2845
+        },
+        {
+          "County": "Transylvania County, North Carolina",
+          "employment": 7487
+        },
+        {
+          "County": "Tyrrell County, North Carolina",
+          "employment": 553
+        },
+        {
+          "County": "Union County, North Carolina",
+          "employment": 66001
+        },
+        {
+          "County": "Vance County, North Carolina",
+          "employment": 8437
+        },
+        {
+          "County": "Wake County, North Carolina",
+          "employment": 318509
+        },
+        {
+          "County": "Warren County, North Carolina",
+          "employment": 3610
+        },
+        {
+          "County": "Washington County, North Carolina",
+          "employment": 1814
+        },
+        {
+          "County": "Watauga County, North Carolina",
+          "employment": 14109
+        },
+        {
+          "County": "Wayne County, North Carolina",
+          "employment": 26142
+        },
+        {
+          "County": "Wilkes County, North Carolina",
+          "employment": 15671
+        },
+        {
+          "County": "Wilson County, North Carolina",
+          "employment": 17188
+        },
+        {
+          "County": "Yadkin County, North Carolina",
+          "employment": 9301
+        },
+        {
+          "County": "Yancey County, North Carolina",
+          "employment": 3814
+        }
+      ]
+    },
+    {
+      "title": "Production, Transportation & Material Moving",
+      "employment_count": 2371605,
+      "employment_percentage": 45.3,
+      "counties": [
+        {
+          "County": "Alamance County, North Carolina",
+          "employment": 39858
+        },
+        {
+          "County": "Alexander County, North Carolina",
+          "employment": 7541
+        },
+        {
+          "County": "Alleghany County, North Carolina",
+          "employment": 2104
+        },
+        {
+          "County": "Anson County, North Carolina",
+          "employment": 4137
+        },
+        {
+          "County": "Ashe County, North Carolina",
+          "employment": 5461
+        },
+        {
+          "County": "Avery County, North Carolina",
+          "employment": 3136
+        },
+        {
+          "County": "Beaufort County, North Carolina",
+          "employment": 9170
+        },
+        {
+          "County": "Bertie County, North Carolina",
+          "employment": 3308
+        },
+        {
+          "County": "Bladen County, North Carolina",
+          "employment": 5188
+        },
+        {
+          "County": "Brunswick County, North Carolina",
+          "employment": 27303
+        },
+        {
+          "County": "Buncombe County, North Carolina",
+          "employment": 64275
+        },
+        {
+          "County": "Burke County, North Carolina",
+          "employment": 18314
+        },
+        {
+          "County": "Cabarrus County, North Carolina",
+          "employment": 53484
+        },
+        {
+          "County": "Caldwell County, North Carolina",
+          "employment": 17237
+        },
+        {
+          "County": "Camden County, North Carolina",
+          "employment": 2419
+        },
+        {
+          "County": "Carteret County, North Carolina",
+          "employment": 14528
+        },
+        {
+          "County": "Caswell County, North Carolina",
+          "employment": 4461
+        },
+        {
+          "County": "Catawba County, North Carolina",
+          "employment": 34582
+        },
+        {
+          "County": "Chatham County, North Carolina",
+          "employment": 16872
+        },
+        {
+          "County": "Cherokee County, North Carolina",
+          "employment": 5493
+        },
+        {
+          "County": "Chowan County, North Carolina",
+          "employment": 2826
+        },
+        {
+          "County": "Clay County, North Carolina",
+          "employment": 2057
+        },
+        {
+          "County": "Cleveland County, North Carolina",
+          "employment": 20888
+        },
+        {
+          "County": "Columbus County, North Carolina",
+          "employment": 9455
+        },
+        {
+          "County": "Craven County, North Carolina",
+          "employment": 19942
+        },
+        {
+          "County": "Cumberland County, North Carolina",
+          "employment": 66625
+        },
+        {
+          "County": "Currituck County, North Carolina",
+          "employment": 6533
+        },
+        {
+          "County": "Dare County, North Carolina",
+          "employment": 9392
+        },
+        {
+          "County": "Davidson County, North Carolina",
+          "employment": 35187
+        },
+        {
+          "County": "Davie County, North Carolina",
+          "employment": 9430
+        },
+        {
+          "County": "Duplin County, North Carolina",
+          "employment": 9641
+        },
+        {
+          "County": "Durham County, North Carolina",
+          "employment": 88327
+        },
+        {
+          "County": "Edgecombe County, North Carolina",
+          "employment": 10901
+        },
+        {
+          "County": "Forsyth County, North Carolina",
+          "employment": 87800
+        },
+        {
+          "County": "Franklin County, North Carolina",
+          "employment": 15076
+        },
+        {
+          "County": "Gaston County, North Carolina",
+          "employment": 52200
+        },
+        {
+          "County": "Gates County, North Carolina",
+          "employment": 2356
+        },
+        {
+          "County": "Graham County, North Carolina",
+          "employment": 1471
+        },
+        {
+          "County": "Granville County, North Carolina",
+          "employment": 13435
+        },
+        {
+          "County": "Greene County, North Carolina",
+          "employment": 3525
+        },
+        {
+          "County": "Guilford County, North Carolina",
+          "employment": 130970
+        },
+        {
+          "County": "Halifax County, North Carolina",
+          "employment": 8839
+        },
+        {
+          "County": "Harnett County, North Carolina",
+          "employment": 25785
+        },
+        {
+          "County": "Haywood County, North Carolina",
+          "employment": 13813
+        },
+        {
+          "County": "Henderson County, North Carolina",
+          "employment": 26197
+        },
+        {
+          "County": "Hertford County, North Carolina",
+          "employment": 4249
+        },
+        {
+          "County": "Hoke County, North Carolina",
+          "employment": 10122
+        },
+        {
+          "County": "Hyde County, North Carolina",
+          "employment": 680
+        },
+        {
+          "County": "Iredell County, North Carolina",
+          "employment": 42555
+        },
+        {
+          "County": "Jackson County, North Carolina",
+          "employment": 9390
+        },
+        {
+          "County": "Johnston County, North Carolina",
+          "employment": 50447
+        },
+        {
+          "County": "Jones County, North Carolina",
+          "employment": 1852
+        },
+        {
+          "County": "Lee County, North Carolina",
+          "employment": 13222
+        },
+        {
+          "County": "Lenoir County, North Carolina",
+          "employment": 11058
+        },
+        {
+          "County": "Lincoln County, North Carolina",
+          "employment": 19333
+        },
+        {
+          "County": "McDowell County, North Carolina",
+          "employment": 9079
+        },
+        {
+          "County": "Macon County, North Carolina",
+          "employment": 7194
+        },
+        {
+          "County": "Madison County, North Carolina",
+          "employment": 4435
+        },
+        {
+          "County": "Martin County, North Carolina",
+          "employment": 4752
+        },
+        {
+          "County": "Mecklenburg County, North Carolina",
+          "employment": 291625
+        },
+        {
+          "County": "Mitchell County, North Carolina",
+          "employment": 3094
+        },
+        {
+          "County": "Montgomery County, North Carolina",
+          "employment": 5575
+        },
+        {
+          "County": "Moore County, North Carolina",
+          "employment": 20451
+        },
+        {
+          "County": "Nash County, North Carolina",
+          "employment": 21079
+        },
+        {
+          "County": "New Hanover County, North Carolina",
+          "employment": 58221
+        },
+        {
+          "County": "Northampton County, North Carolina",
+          "employment": 3678
+        },
+        {
+          "County": "Onslow County, North Carolina",
+          "employment": 33381
+        },
+        {
+          "County": "Orange County, North Carolina",
+          "employment": 36318
+        },
+        {
+          "County": "Pamlico County, North Carolina",
+          "employment": 2283
+        },
+        {
+          "County": "Pasquotank County, North Carolina",
+          "employment": 8579
+        },
+        {
+          "County": "Pender County, North Carolina",
+          "employment": 13107
+        },
+        {
+          "County": "Perquimans County, North Carolina",
+          "employment": 2261
+        },
+        {
+          "County": "Person County, North Carolina",
+          "employment": 9175
+        },
+        {
+          "County": "Pitt County, North Carolina",
+          "employment": 39731
+        },
+        {
+          "County": "Polk County, North Carolina",
+          "employment": 4100
+        },
+        {
+          "County": "Randolph County, North Carolina",
+          "employment": 30962
+        },
+        {
+          "County": "Richmond County, North Carolina",
+          "employment": 8702
+        },
+        {
+          "County": "Robeson County, North Carolina",
+          "employment": 21732
+        },
+        {
+          "County": "Rockingham County, North Carolina",
+          "employment": 18910
+        },
+        {
+          "County": "Rowan County, North Carolina",
+          "employment": 30650
+        },
+        {
+          "County": "Rutherford County, North Carolina",
+          "employment": 12624
+        },
+        {
+          "County": "Sampson County, North Carolina",
+          "employment": 11093
+        },
+        {
+          "County": "Scotland County, North Carolina",
+          "employment": 6131
+        },
+        {
+          "County": "Stanly County, North Carolina",
+          "employment": 13048
+        },
+        {
+          "County": "Stokes County, North Carolina",
+          "employment": 9154
+        },
+        {
+          "County": "Surry County, North Carolina",
+          "employment": 14671
+        },
+        {
+          "County": "Swain County, North Carolina",
+          "employment": 2909
+        },
+        {
+          "County": "Transylvania County, North Carolina",
+          "employment": 6709
+        },
+        {
+          "County": "Tyrrell County, North Carolina",
+          "employment": 627
+        },
+        {
+          "County": "Union County, North Carolina",
+          "employment": 54937
+        },
+        {
+          "County": "Vance County, North Carolina",
+          "employment": 9740
+        },
+        {
+          "County": "Wake County, North Carolina",
+          "employment": 282780
+        },
+        {
+          "County": "Warren County, North Carolina",
+          "employment": 3474
+        },
+        {
+          "County": "Washington County, North Carolina",
+          "employment": 2079
+        },
+        {
+          "County": "Watauga County, North Carolina",
+          "employment": 12295
+        },
+        {
+          "County": "Wayne County, North Carolina",
+          "employment": 24286
+        },
+        {
+          "County": "Wilkes County, North Carolina",
+          "employment": 12897
+        },
+        {
+          "County": "Wilson County, North Carolina",
+          "employment": 17146
+        },
+        {
+          "County": "Yadkin County, North Carolina",
+          "employment": 7599
+        },
+        {
+          "County": "Yancey County, North Carolina",
+          "employment": 3882
+        }
+      ]
+    },
+    {
+      "title": "Service",
+      "employment_count": 168591,
+      "employment_percentage": 3.2,
+      "counties": [
+        {
+          "County": "Alamance County, North Carolina",
+          "employment": 2559
+        },
+        {
+          "County": "Alexander County, North Carolina",
+          "employment": 480
+        },
+        {
+          "County": "Alleghany County, North Carolina",
+          "employment": 194
+        },
+        {
+          "County": "Anson County, North Carolina",
+          "employment": 198
+        },
+        {
+          "County": "Ashe County, North Carolina",
+          "employment": 506
+        },
+        {
+          "County": "Avery County, North Carolina",
+          "employment": 214
+        },
+        {
+          "County": "Beaufort County, North Carolina",
+          "employment": 631
+        },
+        {
+          "County": "Bertie County, North Carolina",
+          "employment": 73
+        },
+        {
+          "County": "Bladen County, North Carolina",
+          "employment": 202
+        },
+        {
+          "County": "Brunswick County, North Carolina",
+          "employment": 1533
+        },
+        {
+          "County": "Buncombe County, North Carolina",
+          "employment": 5756
+        },
+        {
+          "County": "Burke County, North Carolina",
+          "employment": 919
+        },
+        {
+          "County": "Cabarrus County, North Carolina",
+          "employment": 3703
+        },
+        {
+          "County": "Caldwell County, North Carolina",
+          "employment": 906
+        },
+        {
+          "County": "Camden County, North Carolina",
+          "employment": 43
+        },
+        {
+          "County": "Carteret County, North Carolina",
+          "employment": 1073
+        },
+        {
+          "County": "Caswell County, North Carolina",
+          "employment": 282
+        },
+        {
+          "County": "Catawba County, North Carolina",
+          "employment": 2405
+        },
+        {
+          "County": "Chatham County, North Carolina",
+          "employment": 1595
+        },
+        {
+          "County": "Cherokee County, North Carolina",
+          "employment": 273
+        },
+        {
+          "County": "Chowan County, North Carolina",
+          "employment": 258
+        },
+        {
+          "County": "Clay County, North Carolina",
+          "employment": 182
+        },
+        {
+          "County": "Cleveland County, North Carolina",
+          "employment": 1431
+        },
+        {
+          "County": "Columbus County, North Carolina",
+          "employment": 536
+        },
+        {
+          "County": "Craven County, North Carolina",
+          "employment": 1038
+        },
+        {
+          "County": "Cumberland County, North Carolina",
+          "employment": 4251
+        },
+        {
+          "County": "Currituck County, North Carolina",
+          "employment": 474
+        },
+        {
+          "County": "Dare County, North Carolina",
+          "employment": 627
+        },
+        {
+          "County": "Davidson County, North Carolina",
+          "employment": 2137
+        },
+        {
+          "County": "Davie County, North Carolina",
+          "employment": 538
+        },
+        {
+          "County": "Duplin County, North Carolina",
+          "employment": 374
+        },
+        {
+          "County": "Durham County, North Carolina",
+          "employment": 8636
+        },
+        {
+          "County": "Edgecombe County, North Carolina",
+          "employment": 427
+        },
+        {
+          "County": "Forsyth County, North Carolina",
+          "employment": 7016
+        },
+        {
+          "County": "Franklin County, North Carolina",
+          "employment": 917
+        },
+        {
+          "County": "Gaston County, North Carolina",
+          "employment": 2177
+        },
+        {
+          "County": "Gates County, North Carolina",
+          "employment": 19
+        },
+        {
+          "County": "Graham County, North Carolina",
+          "employment": 182
+        },
+        {
+          "County": "Granville County, North Carolina",
+          "employment": 561
+        },
+        {
+          "County": "Greene County, North Carolina",
+          "employment": 176
+        },
+        {
+          "County": "Guilford County, North Carolina",
+          "employment": 9276
+        },
+        {
+          "County": "Halifax County, North Carolina",
+          "employment": 650
+        },
+        {
+          "County": "Harnett County, North Carolina",
+          "employment": 1847
+        },
+        {
+          "County": "Haywood County, North Carolina",
+          "employment": 713
+        },
+        {
+          "County": "Henderson County, North Carolina",
+          "employment": 1731
+        },
+        {
+          "County": "Hertford County, North Carolina",
+          "employment": 367
+        },
+        {
+          "County": "Hoke County, North Carolina",
+          "employment": 544
+        },
+        {
+          "County": "Hyde County, North Carolina",
+          "employment": 2
+        },
+        {
+          "County": "Iredell County, North Carolina",
+          "employment": 2085
+        },
+        {
+          "County": "Jackson County, North Carolina",
+          "employment": 902
+        },
+        {
+          "County": "Johnston County, North Carolina",
+          "employment": 2832
+        },
+        {
+          "County": "Jones County, North Carolina",
+          "employment": 126
+        },
+        {
+          "County": "Lee County, North Carolina",
+          "employment": 551
+        },
+        {
+          "County": "Lenoir County, North Carolina",
+          "employment": 360
+        },
+        {
+          "County": "Lincoln County, North Carolina",
+          "employment": 964
+        },
+        {
+          "County": "McDowell County, North Carolina",
+          "employment": 207
+        },
+        {
+          "County": "Macon County, North Carolina",
+          "employment": 570
+        },
+        {
+          "County": "Madison County, North Carolina",
+          "employment": 281
+        },
+        {
+          "County": "Martin County, North Carolina",
+          "employment": 122
+        },
+        {
+          "County": "Mecklenburg County, North Carolina",
+          "employment": 21290
+        },
+        {
+          "County": "Mitchell County, North Carolina",
+          "employment": 191
+        },
+        {
+          "County": "Montgomery County, North Carolina",
+          "employment": 391
+        },
+        {
+          "County": "Moore County, North Carolina",
+          "employment": 1832
+        },
+        {
+          "County": "Nash County, North Carolina",
+          "employment": 1114
+        },
+        {
+          "County": "New Hanover County, North Carolina",
+          "employment": 4314
+        },
+        {
+          "County": "Northampton County, North Carolina",
+          "employment": 130
+        },
+        {
+          "County": "Onslow County, North Carolina",
+          "employment": 2759
+        },
+        {
+          "County": "Orange County, North Carolina",
+          "employment": 6280
+        },
+        {
+          "County": "Pamlico County, North Carolina",
+          "employment": 48
+        },
+        {
+          "County": "Pasquotank County, North Carolina",
+          "employment": 542
+        },
+        {
+          "County": "Pender County, North Carolina",
+          "employment": 661
+        },
+        {
+          "County": "Perquimans County, North Carolina",
+          "employment": 131
+        },
+        {
+          "County": "Person County, North Carolina",
+          "employment": 435
+        },
+        {
+          "County": "Pitt County, North Carolina",
+          "employment": 3360
+        },
+        {
+          "County": "Polk County, North Carolina",
+          "employment": 210
+        },
+        {
+          "County": "Randolph County, North Carolina",
+          "employment": 1609
+        },
+        {
+          "County": "Richmond County, North Carolina",
+          "employment": 729
+        },
+        {
+          "County": "Robeson County, North Carolina",
+          "employment": 776
+        },
+        {
+          "County": "Rockingham County, North Carolina",
+          "employment": 854
+        },
+        {
+          "County": "Rowan County, North Carolina",
+          "employment": 1784
+        },
+        {
+          "County": "Rutherford County, North Carolina",
+          "employment": 854
+        },
+        {
+          "County": "Sampson County, North Carolina",
+          "employment": 429
+        },
+        {
+          "County": "Scotland County, North Carolina",
+          "employment": 280
+        },
+        {
+          "County": "Stanly County, North Carolina",
+          "employment": 609
+        },
+        {
+          "County": "Stokes County, North Carolina",
+          "employment": 476
+        },
+        {
+          "County": "Surry County, North Carolina",
+          "employment": 808
+        },
+        {
+          "County": "Swain County, North Carolina",
+          "employment": 118
+        },
+        {
+          "County": "Transylvania County, North Carolina",
+          "employment": 541
+        },
+        {
+          "County": "Tyrrell County, North Carolina",
+          "employment": 66
+        },
+        {
+          "County": "Union County, North Carolina",
+          "employment": 3778
+        },
+        {
+          "County": "Vance County, North Carolina",
+          "employment": 624
+        },
+        {
+          "County": "Wake County, North Carolina",
+          "employment": 25488
+        },
+        {
+          "County": "Warren County, North Carolina",
+          "employment": 164
+        },
+        {
+          "County": "Washington County, North Carolina",
+          "employment": 83
+        },
+        {
+          "County": "Watauga County, North Carolina",
+          "employment": 1586
+        },
+        {
+          "County": "Wayne County, North Carolina",
+          "employment": 1367
+        },
+        {
+          "County": "Wilkes County, North Carolina",
+          "employment": 1131
+        },
+        {
+          "County": "Wilson County, North Carolina",
+          "employment": 709
+        },
+        {
+          "County": "Yadkin County, North Carolina",
+          "employment": 220
+        },
+        {
+          "County": "Yancey County, North Carolina",
+          "employment": 188
+        }
+      ]
+    },
+    {
+      "title": "Natural Resources, Construction & Maintenance",
+      "employment_count": 126717,
+      "employment_percentage": 2.4,
+      "counties": [
+        {
+          "County": "Alamance County, North Carolina",
+          "employment": 2468
+        },
+        {
+          "County": "Alexander County, North Carolina",
+          "employment": 238
+        },
+        {
+          "County": "Alleghany County, North Carolina",
+          "employment": 50
+        },
+        {
+          "County": "Anson County, North Carolina",
+          "employment": 225
+        },
+        {
+          "County": "Ashe County, North Carolina",
+          "employment": 241
+        },
+        {
+          "County": "Avery County, North Carolina",
+          "employment": 243
+        },
+        {
+          "County": "Beaufort County, North Carolina",
+          "employment": 370
+        },
+        {
+          "County": "Bertie County, North Carolina",
+          "employment": 243
+        },
+        {
+          "County": "Bladen County, North Carolina",
+          "employment": 198
+        },
+        {
+          "County": "Brunswick County, North Carolina",
+          "employment": 1258
+        },
+        {
+          "County": "Buncombe County, North Carolina",
+          "employment": 2906
+        },
+        {
+          "County": "Burke County, North Carolina",
+          "employment": 827
+        },
+        {
+          "County": "Cabarrus County, North Carolina",
+          "employment": 3451
+        },
+        {
+          "County": "Caldwell County, North Carolina",
+          "employment": 811
+        },
+        {
+          "County": "Camden County, North Carolina",
+          "employment": 66
+        },
+        {
+          "County": "Carteret County, North Carolina",
+          "employment": 492
+        },
+        {
+          "County": "Caswell County, North Carolina",
+          "employment": 159
+        },
+        {
+          "County": "Catawba County, North Carolina",
+          "employment": 2452
+        },
+        {
+          "County": "Chatham County, North Carolina",
+          "employment": 1047
+        },
+        {
+          "County": "Cherokee County, North Carolina",
+          "employment": 289
+        },
+        {
+          "County": "Chowan County, North Carolina",
+          "employment": 110
+        },
+        {
+          "County": "Clay County, North Carolina",
+          "employment": 80
+        },
+        {
+          "County": "Cleveland County, North Carolina",
+          "employment": 697
+        },
+        {
+          "County": "Columbus County, North Carolina",
+          "employment": 220
+        },
+        {
+          "County": "Craven County, North Carolina",
+          "employment": 999
+        },
+        {
+          "County": "Cumberland County, North Carolina",
+          "employment": 3032
+        },
+        {
+          "County": "Currituck County, North Carolina",
+          "employment": 258
+        },
+        {
+          "County": "Dare County, North Carolina",
+          "employment": 353
+        },
+        {
+          "County": "Davidson County, North Carolina",
+          "employment": 1844
+        },
+        {
+          "County": "Davie County, North Carolina",
+          "employment": 473
+        },
+        {
+          "County": "Duplin County, North Carolina",
+          "employment": 224
+        },
+        {
+          "County": "Durham County, North Carolina",
+          "employment": 4224
+        },
+        {
+          "County": "Edgecombe County, North Carolina",
+          "employment": 628
+        },
+        {
+          "County": "Forsyth County, North Carolina",
+          "employment": 5808
+        },
+        {
+          "County": "Franklin County, North Carolina",
+          "employment": 768
+        },
+        {
+          "County": "Gaston County, North Carolina",
+          "employment": 2711
+        },
+        {
+          "County": "Gates County, North Carolina",
+          "employment": 75
+        },
+        {
+          "County": "Graham County, North Carolina",
+          "employment": 45
+        },
+        {
+          "County": "Granville County, North Carolina",
+          "employment": 579
+        },
+        {
+          "County": "Greene County, North Carolina",
+          "employment": 136
+        },
+        {
+          "County": "Guilford County, North Carolina",
+          "employment": 8600
+        },
+        {
+          "County": "Halifax County, North Carolina",
+          "employment": 440
+        },
+        {
+          "County": "Harnett County, North Carolina",
+          "employment": 1275
+        },
+        {
+          "County": "Haywood County, North Carolina",
+          "employment": 779
+        },
+        {
+          "County": "Henderson County, North Carolina",
+          "employment": 1371
+        },
+        {
+          "County": "Hertford County, North Carolina",
+          "employment": 175
+        },
+        {
+          "County": "Hoke County, North Carolina",
+          "employment": 570
+        },
+        {
+          "County": "Hyde County, North Carolina",
+          "employment": 2
+        },
+        {
+          "County": "Iredell County, North Carolina",
+          "employment": 2530
+        },
+        {
+          "County": "Jackson County, North Carolina",
+          "employment": 462
+        },
+        {
+          "County": "Johnston County, North Carolina",
+          "employment": 2038
+        },
+        {
+          "County": "Jones County, North Carolina",
+          "employment": 82
+        },
+        {
+          "County": "Lee County, North Carolina",
+          "employment": 657
+        },
+        {
+          "County": "Lenoir County, North Carolina",
+          "employment": 347
+        },
+        {
+          "County": "Lincoln County, North Carolina",
+          "employment": 1417
+        },
+        {
+          "County": "McDowell County, North Carolina",
+          "employment": 423
+        },
+        {
+          "County": "Macon County, North Carolina",
+          "employment": 254
+        },
+        {
+          "County": "Madison County, North Carolina",
+          "employment": 92
+        },
+        {
+          "County": "Martin County, North Carolina",
+          "employment": 127
+        },
+        {
+          "County": "Mecklenburg County, North Carolina",
+          "employment": 18042
+        },
+        {
+          "County": "Mitchell County, North Carolina",
+          "employment": 97
+        },
+        {
+          "County": "Montgomery County, North Carolina",
+          "employment": 92
+        },
+        {
+          "County": "Moore County, North Carolina",
+          "employment": 1059
+        },
+        {
+          "County": "Nash County, North Carolina",
+          "employment": 1196
+        },
+        {
+          "County": "New Hanover County, North Carolina",
+          "employment": 2323
+        },
+        {
+          "County": "Northampton County, North Carolina",
+          "employment": 134
+        },
+        {
+          "County": "Onslow County, North Carolina",
+          "employment": 1727
+        },
+        {
+          "County": "Orange County, North Carolina",
+          "employment": 1601
+        },
+        {
+          "County": "Pamlico County, North Carolina",
+          "employment": 38
+        },
+        {
+          "County": "Pasquotank County, North Carolina",
+          "employment": 649
+        },
+        {
+          "County": "Pender County, North Carolina",
+          "employment": 626
+        },
+        {
+          "County": "Perquimans County, North Carolina",
+          "employment": 137
+        },
+        {
+          "County": "Person County, North Carolina",
+          "employment": 406
+        },
+        {
+          "County": "Pitt County, North Carolina",
+          "employment": 2195
+        },
+        {
+          "County": "Polk County, North Carolina",
+          "employment": 324
+        },
+        {
+          "County": "Randolph County, North Carolina",
+          "employment": 1889
+        },
+        {
+          "County": "Richmond County, North Carolina",
+          "employment": 483
+        },
+        {
+          "County": "Robeson County, North Carolina",
+          "employment": 934
+        },
+        {
+          "County": "Rockingham County, North Carolina",
+          "employment": 511
+        },
+        {
+          "County": "Rowan County, North Carolina",
+          "employment": 1205
+        },
+        {
+          "County": "Rutherford County, North Carolina",
+          "employment": 761
+        },
+        {
+          "County": "Sampson County, North Carolina",
+          "employment": 426
+        },
+        {
+          "County": "Scotland County, North Carolina",
+          "employment": 168
+        },
+        {
+          "County": "Stanly County, North Carolina",
+          "employment": 644
+        },
+        {
+          "County": "Stokes County, North Carolina",
+          "employment": 324
+        },
+        {
+          "County": "Surry County, North Carolina",
+          "employment": 883
+        },
+        {
+          "County": "Swain County, North Carolina",
+          "employment": 59
+        },
+        {
+          "County": "Transylvania County, North Carolina",
+          "employment": 445
+        },
+        {
+          "County": "Tyrrell County, North Carolina",
+          "employment": 5
+        },
+        {
+          "County": "Union County, North Carolina",
+          "employment": 3078
+        },
+        {
+          "County": "Vance County, North Carolina",
+          "employment": 372
+        },
+        {
+          "County": "Wake County, North Carolina",
+          "employment": 17049
+        },
+        {
+          "County": "Warren County, North Carolina",
+          "employment": 221
+        },
+        {
+          "County": "Washington County, North Carolina",
+          "employment": 85
+        },
+        {
+          "County": "Watauga County, North Carolina",
+          "employment": 550
+        },
+        {
+          "County": "Wayne County, North Carolina",
+          "employment": 990
+        },
+        {
+          "County": "Wilkes County, North Carolina",
+          "employment": 861
+        },
+        {
+          "County": "Wilson County, North Carolina",
+          "employment": 728
+        },
+        {
+          "County": "Yadkin County, North Carolina",
+          "employment": 302
+        },
+        {
+          "County": "Yancey County, North Carolina",
+          "employment": 159
+        }
+      ]
+    },
+    {
+      "title": "Sales & Office",
+      "employment_count": 16413,
+      "employment_percentage": 0.3,
+      "counties": [
+        {
+          "County": "Alamance County, North Carolina",
+          "employment": 155
+        },
+        {
+          "County": "Alexander County, North Carolina",
+          "employment": 27
+        },
+        {
+          "County": "Alleghany County, North Carolina",
+          "employment": 17
+        },
+        {
+          "County": "Anson County, North Carolina",
+          "employment": 11
+        },
+        {
+          "County": "Ashe County, North Carolina",
+          "employment": 39
+        },
+        {
+          "County": "Avery County, North Carolina",
+          "employment": 0
+        },
+        {
+          "County": "Beaufort County, North Carolina",
+          "employment": 56
+        },
+        {
+          "County": "Bertie County, North Carolina",
+          "employment": 9
+        },
+        {
+          "County": "Bladen County, North Carolina",
+          "employment": 22
+        },
+        {
+          "County": "Brunswick County, North Carolina",
+          "employment": 222
+        },
+        {
+          "County": "Buncombe County, North Carolina",
+          "employment": 532
+        },
+        {
+          "County": "Burke County, North Carolina",
+          "employment": 250
+        },
+        {
+          "County": "Cabarrus County, North Carolina",
+          "employment": 238
+        },
+        {
+          "County": "Caldwell County, North Carolina",
+          "employment": 77
+        },
+        {
+          "County": "Camden County, North Carolina",
+          "employment": 0
+        },
+        {
+          "County": "Carteret County, North Carolina",
+          "employment": 49
+        },
+        {
+          "County": "Caswell County, North Carolina",
+          "employment": 51
+        },
+        {
+          "County": "Catawba County, North Carolina",
+          "employment": 149
+        },
+        {
+          "County": "Chatham County, North Carolina",
+          "employment": 37
+        },
+        {
+          "County": "Cherokee County, North Carolina",
+          "employment": 29
+        },
+        {
+          "County": "Chowan County, North Carolina",
+          "employment": 0
+        },
+        {
+          "County": "Clay County, North Carolina",
+          "employment": 0
+        },
+        {
+          "County": "Cleveland County, North Carolina",
+          "employment": 132
+        },
+        {
+          "County": "Columbus County, North Carolina",
+          "employment": 176
+        },
+        {
+          "County": "Craven County, North Carolina",
+          "employment": 83
+        },
+        {
+          "County": "Cumberland County, North Carolina",
+          "employment": 351
+        },
+        {
+          "County": "Currituck County, North Carolina",
+          "employment": 0
+        },
+        {
+          "County": "Dare County, North Carolina",
+          "employment": 13
+        },
+        {
+          "County": "Davidson County, North Carolina",
+          "employment": 330
+        },
+        {
+          "County": "Davie County, North Carolina",
+          "employment": 12
+        },
+        {
+          "County": "Duplin County, North Carolina",
+          "employment": 43
+        },
+        {
+          "County": "Durham County, North Carolina",
+          "employment": 775
+        },
+        {
+          "County": "Edgecombe County, North Carolina",
+          "employment": 251
+        },
+        {
+          "County": "Forsyth County, North Carolina",
+          "employment": 629
+        },
+        {
+          "County": "Franklin County, North Carolina",
+          "employment": 132
+        },
+        {
+          "County": "Gaston County, North Carolina",
+          "employment": 354
+        },
+        {
+          "County": "Gates County, North Carolina",
+          "employment": 8
+        },
+        {
+          "County": "Graham County, North Carolina",
+          "employment": 22
+        },
+        {
+          "County": "Granville County, North Carolina",
+          "employment": 119
+        },
+        {
+          "County": "Greene County, North Carolina",
+          "employment": 25
+        },
+        {
+          "County": "Guilford County, North Carolina",
+          "employment": 502
+        },
+        {
+          "County": "Halifax County, North Carolina",
+          "employment": 0
+        },
+        {
+          "County": "Harnett County, North Carolina",
+          "employment": 116
+        },
+        {
+          "County": "Haywood County, North Carolina",
+          "employment": 207
+        },
+        {
+          "County": "Henderson County, North Carolina",
+          "employment": 192
+        },
+        {
+          "County": "Hertford County, North Carolina",
+          "employment": 6
+        },
+        {
+          "County": "Hoke County, North Carolina",
+          "employment": 7
+        },
+        {
+          "County": "Hyde County, North Carolina",
+          "employment": 0
+        },
+        {
+          "County": "Iredell County, North Carolina",
+          "employment": 263
+        },
+        {
+          "County": "Jackson County, North Carolina",
+          "employment": 124
+        },
+        {
+          "County": "Johnston County, North Carolina",
+          "employment": 620
+        },
+        {
+          "County": "Jones County, North Carolina",
+          "employment": 6
+        },
+        {
+          "County": "Lee County, North Carolina",
+          "employment": 71
+        },
+        {
+          "County": "Lenoir County, North Carolina",
+          "employment": 147
+        },
+        {
+          "County": "Lincoln County, North Carolina",
+          "employment": 97
+        },
+        {
+          "County": "McDowell County, North Carolina",
+          "employment": 133
+        },
+        {
+          "County": "Macon County, North Carolina",
+          "employment": 44
+        },
+        {
+          "County": "Madison County, North Carolina",
+          "employment": 35
+        },
+        {
+          "County": "Martin County, North Carolina",
+          "employment": 66
+        },
+        {
+          "County": "Mecklenburg County, North Carolina",
+          "employment": 1610
+        },
+        {
+          "County": "Mitchell County, North Carolina",
+          "employment": 176
+        },
+        {
+          "County": "Montgomery County, North Carolina",
+          "employment": 9
+        },
+        {
+          "County": "Moore County, North Carolina",
+          "employment": 116
+        },
+        {
+          "County": "Nash County, North Carolina",
+          "employment": 128
+        },
+        {
+          "County": "New Hanover County, North Carolina",
+          "employment": 338
+        },
+        {
+          "County": "Northampton County, North Carolina",
+          "employment": 8
+        },
+        {
+          "County": "Onslow County, North Carolina",
+          "employment": 207
+        },
+        {
+          "County": "Orange County, North Carolina",
+          "employment": 280
+        },
+        {
+          "County": "Pamlico County, North Carolina",
+          "employment": 21
+        },
+        {
+          "County": "Pasquotank County, North Carolina",
+          "employment": 63
+        },
+        {
+          "County": "Pender County, North Carolina",
+          "employment": 81
+        },
+        {
+          "County": "Perquimans County, North Carolina",
+          "employment": 43
+        },
+        {
+          "County": "Person County, North Carolina",
+          "employment": 31
+        },
+        {
+          "County": "Pitt County, North Carolina",
+          "employment": 374
+        },
+        {
+          "County": "Polk County, North Carolina",
+          "employment": 46
+        },
+        {
+          "County": "Randolph County, North Carolina",
+          "employment": 129
+        },
+        {
+          "County": "Richmond County, North Carolina",
+          "employment": 158
+        },
+        {
+          "County": "Robeson County, North Carolina",
+          "employment": 294
+        },
+        {
+          "County": "Rockingham County, North Carolina",
+          "employment": 122
+        },
+        {
+          "County": "Rowan County, North Carolina",
+          "employment": 410
+        },
+        {
+          "County": "Rutherford County, North Carolina",
+          "employment": 107
+        },
+        {
+          "County": "Sampson County, North Carolina",
+          "employment": 89
+        },
+        {
+          "County": "Scotland County, North Carolina",
+          "employment": 100
+        },
+        {
+          "County": "Stanly County, North Carolina",
+          "employment": 141
+        },
+        {
+          "County": "Stokes County, North Carolina",
+          "employment": 30
+        },
+        {
+          "County": "Surry County, North Carolina",
+          "employment": 200
+        },
+        {
+          "County": "Swain County, North Carolina",
+          "employment": 14
+        },
+        {
+          "County": "Transylvania County, North Carolina",
+          "employment": 121
+        },
+        {
+          "County": "Tyrrell County, North Carolina",
+          "employment": 0
+        },
+        {
+          "County": "Union County, North Carolina",
+          "employment": 164
+        },
+        {
+          "County": "Vance County, North Carolina",
+          "employment": 48
+        },
+        {
+          "County": "Wake County, North Carolina",
+          "employment": 2031
+        },
+        {
+          "County": "Warren County, North Carolina",
+          "employment": 0
+        },
+        {
+          "County": "Washington County, North Carolina",
+          "employment": 32
+        },
+        {
+          "County": "Watauga County, North Carolina",
+          "employment": 97
+        },
+        {
+          "County": "Wayne County, North Carolina",
+          "employment": 185
+        },
+        {
+          "County": "Wilkes County, North Carolina",
+          "employment": 138
+        },
+        {
+          "County": "Wilson County, North Carolina",
+          "employment": 71
+        },
+        {
+          "County": "Yadkin County, North Carolina",
+          "employment": 65
+        },
+        {
+          "County": "Yancey County, North Carolina",
+          "employment": 75
+        }
+      ]
+    }
+  ]
+}
