@@ -30,6 +30,29 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_REGION: ${{ secrets.AWS_REGION }}
 
+      - name: Create clean URLs
+        run: |
+          # Copy each page's .html file to a clean URL (no extension) so
+          # CloudFront serves /projects instead of requiring /projects.html.
+          # Content-Type is set explicitly so browsers render as HTML.
+          find out -name "*.html" \
+            ! -name "index.html" \
+            ! -name "404.html" \
+            ! -name "_not-found.html" \
+            | while read f; do
+                key="${f#out/}"
+                clean="${key%.html}"
+                aws s3 cp "s3://${{ secrets.AWS_S3_BUCKET }}/$key" \
+                          "s3://${{ secrets.AWS_S3_BUCKET }}/$clean" \
+                  --content-type "text/html; charset=utf-8" \
+                  --cache-control "public,max-age=0,must-revalidate" \
+                  --metadata-directive REPLACE
+              done
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: ${{ secrets.AWS_REGION }}
+
       - name: Invalidate CloudFront cache
         run: |
           aws cloudfront create-invalidation \
