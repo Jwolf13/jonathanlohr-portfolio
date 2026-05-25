@@ -12,6 +12,10 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Channel Stream is a separate app with its own lint pipeline
+    "Channel_Stream/**",
+    // CloudFront Functions use handler as an external entry point
+    ".github/**/*.js",
   ]),
 ]);
 
