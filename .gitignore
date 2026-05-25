@@ -65,3 +65,9 @@ yarn-error.log*
 # Misc
 **/.vercel
 **/.cache/
+
+# Venvs not covered by generic patterns
+pipeline-tuneup-v3/
+
+# Nested repo copy (accidentally placed inside working tree)
+jonathanlohr-portfolio/

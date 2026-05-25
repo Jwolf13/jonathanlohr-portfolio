@@ -1,10 +1,9 @@
 import Link from "next/link";
 
 const links = [
-  { href: "/", label: "Home" },
+  { href: "/sales-tools", label: "Sales Tools" },
   { href: "/projects", label: "Projects" },
-  { href: "/gtm-calculator", label: "GTM Calculator" },
-  { href: "/about", label: "About" },
+  { href: "/blog", label: "Blog" },
 ];
 
 export default function SiteNav() {
