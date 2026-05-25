@@ -22,8 +22,11 @@ export default function AuthCallbackPage() {
       .then((tokens) => {
         if (!tokens) { setError(true); return }
         storeTokens(tokens)
-        // Full reload so AuthProvider re-initialises from sessionStorage
-        window.location.href = "/"
+        // Full reload so AuthProvider re-initialises from sessionStorage.
+        // Must redirect to the app root (basePath), not "/" which is the
+        // portfolio homepage in production.
+        const base = process.env.NEXT_PUBLIC_BASE_PATH ?? ""
+        window.location.href = base + "/"
       })
       .catch(() => setError(true))
   }, [router])
@@ -33,7 +36,7 @@ export default function AuthCallbackPage() {
       <div className="flex flex-col items-center justify-center py-32 text-center">
         <p className="text-2xl font-semibold mb-2">Sign-in failed</p>
         <p className="text-gray-400 mb-6 text-sm">Something went wrong during authentication.</p>
-        <a href="/" className="text-blue-400 hover:text-blue-300 text-sm transition-colors">
+        <a href={process.env.NEXT_PUBLIC_BASE_PATH ?? "/"} className="text-blue-400 hover:text-blue-300 text-sm transition-colors">
           ← Back to home
         </a>
       </div>

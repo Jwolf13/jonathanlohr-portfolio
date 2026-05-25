@@ -118,6 +118,9 @@ func StartSportsWorker(ctx context.Context) {
 	}
 
 	// Fetch immediately so the API serves real data from the first request.
+	// Include yesterday (-1) so overnight games are marked final before the
+	// query window (today minus 3 hours) picks them up as still-live.
+	fetchAll(ctx, -1)
 	fetchAll(ctx, 0)
 	fetchAll(ctx, 1)
 	fetchAll(ctx, 2)
@@ -133,7 +136,8 @@ func StartSportsWorker(ctx context.Context) {
 			log.Println("Sports ingestion worker stopped")
 			return
 		case <-liveTicker.C:
-			fetchAll(ctx, 0) // today — keep live scores fresh
+			fetchAll(ctx, -1) // yesterday — mark late-night games final
+			fetchAll(ctx, 0)  // today — keep live scores fresh
 		case <-scheduleTicker.C:
 			fetchAll(ctx, 1) // tomorrow
 			fetchAll(ctx, 2) // day after

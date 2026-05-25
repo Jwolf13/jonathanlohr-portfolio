@@ -31,6 +31,7 @@ export const projects: Project[] = [
     category: "fullstack",
     stack: ["Go", "Next.js", "Supabase", "Redis", "AWS ECS", "Playwright"],
     github: "https://github.com/jwolf13/channel-stream",
+    demo: "/channel-stream",
     status: "wip",
     featured: true,
   },
