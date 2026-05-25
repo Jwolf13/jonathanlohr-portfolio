@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% block title %}ApexBench{% endblock %}</title>
+
+  <!-- Tailwind CSS (Play CDN — swap for a build step in production) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Alpine.js — defer keeps it from blocking the parse -->
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+
+<body class="min-h-screen bg-zinc-100 text-zinc-900 dark:bg-zinc-900 dark:text-zinc-100">
+
+  <!-- ── Site header ──────────────────────────────────────────────────── -->
+  <header class="border-b border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800">
+    <div class="mx-auto max-w-4xl px-6 py-4 flex items-center justify-between">
+      <a href="/" class="text-xl font-bold tracking-tight text-blue-600">ApexBench</a>
+
+      <!-- TODO: add nav links here as pages are built out -->
+      <nav aria-label="Primary">
+        <ul class="flex gap-6 text-sm font-medium">
+          <li><a href="/" class="hover:text-blue-600 transition-colors">Dashboard</a></li>
+          <!-- TODO: <li><a href="/history">History</a></li> -->
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ── Page content injection point ───────────────────────────────── -->
+  <main class="mx-auto max-w-4xl px-6 py-10">
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- ── Site footer ──────────────────────────────────────────────────── -->
+  <footer class="mt-auto border-t border-zinc-200 dark:border-zinc-700 py-6 text-center text-xs text-zinc-400">
+    ApexBench &copy; {{ now.year if now is defined else "2026" }}
+  </footer>
+
+</body>
+</html>

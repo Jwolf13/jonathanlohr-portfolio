@@ -1,0 +1,25 @@
+{
+  "status": "REQUEST_SUCCEEDED",
+  "responseTime": 111,
+  "message": [
+    "Series does not exist for Series OEUS370000000000001",
+    "Series does not exist for Series OEUS370000000000003",
+    "Series does not exist for Series OEUS370000000000005"
+  ],
+  "Results": {
+    "series": [
+      {
+        "seriesID": "OEUS370000000000001",
+        "data": []
+      },
+      {
+        "seriesID": "OEUS370000000000003",
+        "data": []
+      },
+      {
+        "seriesID": "OEUS370000000000005",
+        "data": []
+      }
+    ]
+  }
+}

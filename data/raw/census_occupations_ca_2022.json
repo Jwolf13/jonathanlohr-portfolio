@@ -1,0 +1,1012 @@
+[
+  [
+    "C24010_002E",
+    "C24010_011E",
+    "C24010_020E",
+    "C24010_029E",
+    "C24010_038E",
+    "NAME",
+    "state",
+    "county"
+  ],
+  [
+    "42440",
+    "2559",
+    "155",
+    "2468",
+    "39858",
+    "Alamance County, North Carolina",
+    "37",
+    "001"
+  ],
+  [
+    "9066",
+    "480",
+    "27",
+    "238",
+    "7541",
+    "Alexander County, North Carolina",
+    "37",
+    "003"
+  ],
+  [
+    "2292",
+    "194",
+    "17",
+    "50",
+    "2104",
+    "Alleghany County, North Carolina",
+    "37",
+    "005"
+  ],
+  [
+    "4594",
+    "198",
+    "11",
+    "225",
+    "4137",
+    "Anson County, North Carolina",
+    "37",
+    "007"
+  ],
+  [
+    "6249",
+    "506",
+    "39",
+    "241",
+    "5461",
+    "Ashe County, North Carolina",
+    "37",
+    "009"
+  ],
+  [
+    "3562",
+    "214",
+    "0",
+    "243",
+    "3136",
+    "Avery County, North Carolina",
+    "37",
+    "011"
+  ],
+  [
+    "10149",
+    "631",
+    "56",
+    "370",
+    "9170",
+    "Beaufort County, North Carolina",
+    "37",
+    "013"
+  ],
+  [
+    "3000",
+    "73",
+    "9",
+    "243",
+    "3308",
+    "Bertie County, North Carolina",
+    "37",
+    "015"
+  ],
+  [
+    "5761",
+    "202",
+    "22",
+    "198",
+    "5188",
+    "Bladen County, North Carolina",
+    "37",
+    "017"
+  ],
+  [
+    "29160",
+    "1533",
+    "222",
+    "1258",
+    "27303",
+    "Brunswick County, North Carolina",
+    "37",
+    "019"
+  ],
+  [
+    "67608",
+    "5756",
+    "532",
+    "2906",
+    "64275",
+    "Buncombe County, North Carolina",
+    "37",
+    "021"
+  ],
+  [
+    "21225",
+    "919",
+    "250",
+    "827",
+    "18314",
+    "Burke County, North Carolina",
+    "37",
+    "023"
+  ],
+  [
+    "60095",
+    "3703",
+    "238",
+    "3451",
+    "53484",
+    "Cabarrus County, North Carolina",
+    "37",
+    "025"
+  ],
+  [
+    "19198",
+    "906",
+    "77",
+    "811",
+    "17237",
+    "Caldwell County, North Carolina",
+    "37",
+    "027"
+  ],
+  [
+    "2374",
+    "43",
+    "0",
+    "66",
+    "2419",
+    "Camden County, North Carolina",
+    "37",
+    "029"
+  ],
+  [
+    "15501",
+    "1073",
+    "49",
+    "492",
+    "14528",
+    "Carteret County, North Carolina",
+    "37",
+    "031"
+  ],
+  [
+    "5095",
+    "282",
+    "51",
+    "159",
+    "4461",
+    "Caswell County, North Carolina",
+    "37",
+    "033"
+  ],
+  [
+    "41313",
+    "2405",
+    "149",
+    "2452",
+    "34582",
+    "Catawba County, North Carolina",
+    "37",
+    "035"
+  ],
+  [
+    "18586",
+    "1595",
+    "37",
+    "1047",
+    "16872",
+    "Chatham County, North Carolina",
+    "37",
+    "037"
+  ],
+  [
+    "5898",
+    "273",
+    "29",
+    "289",
+    "5493",
+    "Cherokee County, North Carolina",
+    "37",
+    "039"
+  ],
+  [
+    "3096",
+    "258",
+    "0",
+    "110",
+    "2826",
+    "Chowan County, North Carolina",
+    "37",
+    "041"
+  ],
+  [
+    "2329",
+    "182",
+    "0",
+    "80",
+    "2057",
+    "Clay County, North Carolina",
+    "37",
+    "043"
+  ],
+  [
+    "22406",
+    "1431",
+    "132",
+    "697",
+    "20888",
+    "Cleveland County, North Carolina",
+    "37",
+    "045"
+  ],
+  [
+    "9417",
+    "536",
+    "176",
+    "220",
+    "9455",
+    "Columbus County, North Carolina",
+    "37",
+    "047"
+  ],
+  [
+    "20216",
+    "1038",
+    "83",
+    "999",
+    "19942",
+    "Craven County, North Carolina",
+    "37",
+    "049"
+  ],
+  [
+    "58549",
+    "4251",
+    "351",
+    "3032",
+    "66625",
+    "Cumberland County, North Carolina",
+    "37",
+    "051"
+  ],
+  [
+    "7590",
+    "474",
+    "0",
+    "258",
+    "6533",
+    "Currituck County, North Carolina",
+    "37",
+    "053"
+  ],
+  [
+    "9649",
+    "627",
+    "13",
+    "353",
+    "9392",
+    "Dare County, North Carolina",
+    "37",
+    "055"
+  ],
+  [
+    "41919",
+    "2137",
+    "330",
+    "1844",
+    "35187",
+    "Davidson County, North Carolina",
+    "37",
+    "057"
+  ],
+  [
+    "10370",
+    "538",
+    "12",
+    "473",
+    "9430",
+    "Davie County, North Carolina",
+    "37",
+    "059"
+  ],
+  [
+    "12038",
+    "374",
+    "43",
+    "224",
+    "9641",
+    "Duplin County, North Carolina",
+    "37",
+    "061"
+  ],
+  [
+    "83332",
+    "8636",
+    "775",
+    "4224",
+    "88327",
+    "Durham County, North Carolina",
+    "37",
+    "063"
+  ],
+  [
+    "9465",
+    "427",
+    "251",
+    "628",
+    "10901",
+    "Edgecombe County, North Carolina",
+    "37",
+    "065"
+  ],
+  [
+    "90460",
+    "7016",
+    "629",
+    "5808",
+    "87800",
+    "Forsyth County, North Carolina",
+    "37",
+    "067"
+  ],
+  [
+    "17649",
+    "917",
+    "132",
+    "768",
+    "15076",
+    "Franklin County, North Carolina",
+    "37",
+    "069"
+  ],
+  [
+    "56933",
+    "2177",
+    "354",
+    "2711",
+    "52200",
+    "Gaston County, North Carolina",
+    "37",
+    "071"
+  ],
+  [
+    "2204",
+    "19",
+    "8",
+    "75",
+    "2356",
+    "Gates County, North Carolina",
+    "37",
+    "073"
+  ],
+  [
+    "1700",
+    "182",
+    "22",
+    "45",
+    "1471",
+    "Graham County, North Carolina",
+    "37",
+    "075"
+  ],
+  [
+    "13479",
+    "561",
+    "119",
+    "579",
+    "13435",
+    "Granville County, North Carolina",
+    "37",
+    "077"
+  ],
+  [
+    "4564",
+    "176",
+    "25",
+    "136",
+    "3525",
+    "Greene County, North Carolina",
+    "37",
+    "079"
+  ],
+  [
+    "132614",
+    "9276",
+    "502",
+    "8600",
+    "130970",
+    "Guilford County, North Carolina",
+    "37",
+    "081"
+  ],
+  [
+    "9457",
+    "650",
+    "0",
+    "440",
+    "8839",
+    "Halifax County, North Carolina",
+    "37",
+    "083"
+  ],
+  [
+    "28372",
+    "1847",
+    "116",
+    "1275",
+    "25785",
+    "Harnett County, North Carolina",
+    "37",
+    "085"
+  ],
+  [
+    "14197",
+    "713",
+    "207",
+    "779",
+    "13813",
+    "Haywood County, North Carolina",
+    "37",
+    "087"
+  ],
+  [
+    "28357",
+    "1731",
+    "192",
+    "1371",
+    "26197",
+    "Henderson County, North Carolina",
+    "37",
+    "089"
+  ],
+  [
+    "4394",
+    "367",
+    "6",
+    "175",
+    "4249",
+    "Hertford County, North Carolina",
+    "37",
+    "091"
+  ],
+  [
+    "9066",
+    "544",
+    "7",
+    "570",
+    "10122",
+    "Hoke County, North Carolina",
+    "37",
+    "093"
+  ],
+  [
+    "730",
+    "2",
+    "0",
+    "2",
+    "680",
+    "Hyde County, North Carolina",
+    "37",
+    "095"
+  ],
+  [
+    "50728",
+    "2085",
+    "263",
+    "2530",
+    "42555",
+    "Iredell County, North Carolina",
+    "37",
+    "097"
+  ],
+  [
+    "9745",
+    "902",
+    "124",
+    "462",
+    "9390",
+    "Jackson County, North Carolina",
+    "37",
+    "099"
+  ],
+  [
+    "57731",
+    "2832",
+    "620",
+    "2038",
+    "50447",
+    "Johnston County, North Carolina",
+    "37",
+    "101"
+  ],
+  [
+    "2006",
+    "126",
+    "6",
+    "82",
+    "1852",
+    "Jones County, North Carolina",
+    "37",
+    "103"
+  ],
+  [
+    "15348",
+    "551",
+    "71",
+    "657",
+    "13222",
+    "Lee County, North Carolina",
+    "37",
+    "105"
+  ],
+  [
+    "11643",
+    "360",
+    "147",
+    "347",
+    "11058",
+    "Lenoir County, North Carolina",
+    "37",
+    "107"
+  ],
+  [
+    "23377",
+    "964",
+    "97",
+    "1417",
+    "19333",
+    "Lincoln County, North Carolina",
+    "37",
+    "109"
+  ],
+  [
+    "9714",
+    "207",
+    "133",
+    "423",
+    "9079",
+    "McDowell County, North Carolina",
+    "37",
+    "111"
+  ],
+  [
+    "8522",
+    "570",
+    "44",
+    "254",
+    "7194",
+    "Macon County, North Carolina",
+    "37",
+    "113"
+  ],
+  [
+    "5280",
+    "281",
+    "35",
+    "92",
+    "4435",
+    "Madison County, North Carolina",
+    "37",
+    "115"
+  ],
+  [
+    "4332",
+    "122",
+    "66",
+    "127",
+    "4752",
+    "Martin County, North Carolina",
+    "37",
+    "117"
+  ],
+  [
+    "312161",
+    "21290",
+    "1610",
+    "18042",
+    "291625",
+    "Mecklenburg County, North Carolina",
+    "37",
+    "119"
+  ],
+  [
+    "3444",
+    "191",
+    "176",
+    "97",
+    "3094",
+    "Mitchell County, North Carolina",
+    "37",
+    "121"
+  ],
+  [
+    "5372",
+    "391",
+    "9",
+    "92",
+    "5575",
+    "Montgomery County, North Carolina",
+    "37",
+    "123"
+  ],
+  [
+    "21078",
+    "1832",
+    "116",
+    "1059",
+    "20451",
+    "Moore County, North Carolina",
+    "37",
+    "125"
+  ],
+  [
+    "22094",
+    "1114",
+    "128",
+    "1196",
+    "21079",
+    "Nash County, North Carolina",
+    "37",
+    "127"
+  ],
+  [
+    "58790",
+    "4314",
+    "338",
+    "2323",
+    "58221",
+    "New Hanover County, North Carolina",
+    "37",
+    "129"
+  ],
+  [
+    "3174",
+    "130",
+    "8",
+    "134",
+    "3678",
+    "Northampton County, North Carolina",
+    "37",
+    "131"
+  ],
+  [
+    "34570",
+    "2759",
+    "207",
+    "1727",
+    "33381",
+    "Onslow County, North Carolina",
+    "37",
+    "133"
+  ],
+  [
+    "35985",
+    "6280",
+    "280",
+    "1601",
+    "36318",
+    "Orange County, North Carolina",
+    "37",
+    "135"
+  ],
+  [
+    "2211",
+    "48",
+    "21",
+    "38",
+    "2283",
+    "Pamlico County, North Carolina",
+    "37",
+    "137"
+  ],
+  [
+    "9238",
+    "542",
+    "63",
+    "649",
+    "8579",
+    "Pasquotank County, North Carolina",
+    "37",
+    "139"
+  ],
+  [
+    "14630",
+    "661",
+    "81",
+    "626",
+    "13107",
+    "Pender County, North Carolina",
+    "37",
+    "141"
+  ],
+  [
+    "2859",
+    "131",
+    "43",
+    "137",
+    "2261",
+    "Perquimans County, North Carolina",
+    "37",
+    "143"
+  ],
+  [
+    "9560",
+    "435",
+    "31",
+    "406",
+    "9175",
+    "Person County, North Carolina",
+    "37",
+    "145"
+  ],
+  [
+    "41122",
+    "3360",
+    "374",
+    "2195",
+    "39731",
+    "Pitt County, North Carolina",
+    "37",
+    "147"
+  ],
+  [
+    "4453",
+    "210",
+    "46",
+    "324",
+    "4100",
+    "Polk County, North Carolina",
+    "37",
+    "149"
+  ],
+  [
+    "36255",
+    "1609",
+    "129",
+    "1889",
+    "30962",
+    "Randolph County, North Carolina",
+    "37",
+    "151"
+  ],
+  [
+    "9160",
+    "729",
+    "158",
+    "483",
+    "8702",
+    "Richmond County, North Carolina",
+    "37",
+    "153"
+  ],
+  [
+    "21886",
+    "776",
+    "294",
+    "934",
+    "21732",
+    "Robeson County, North Carolina",
+    "37",
+    "155"
+  ],
+  [
+    "20508",
+    "854",
+    "122",
+    "511",
+    "18910",
+    "Rockingham County, North Carolina",
+    "37",
+    "157"
+  ],
+  [
+    "36092",
+    "1784",
+    "410",
+    "1205",
+    "30650",
+    "Rowan County, North Carolina",
+    "37",
+    "159"
+  ],
+  [
+    "14084",
+    "854",
+    "107",
+    "761",
+    "12624",
+    "Rutherford County, North Carolina",
+    "37",
+    "161"
+  ],
+  [
+    "13706",
+    "429",
+    "89",
+    "426",
+    "11093",
+    "Sampson County, North Carolina",
+    "37",
+    "163"
+  ],
+  [
+    "6542",
+    "280",
+    "100",
+    "168",
+    "6131",
+    "Scotland County, North Carolina",
+    "37",
+    "165"
+  ],
+  [
+    "15691",
+    "609",
+    "141",
+    "644",
+    "13048",
+    "Stanly County, North Carolina",
+    "37",
+    "167"
+  ],
+  [
+    "10508",
+    "476",
+    "30",
+    "324",
+    "9154",
+    "Stokes County, North Carolina",
+    "37",
+    "169"
+  ],
+  [
+    "17097",
+    "808",
+    "200",
+    "883",
+    "14671",
+    "Surry County, North Carolina",
+    "37",
+    "171"
+  ],
+  [
+    "2845",
+    "118",
+    "14",
+    "59",
+    "2909",
+    "Swain County, North Carolina",
+    "37",
+    "173"
+  ],
+  [
+    "7487",
+    "541",
+    "121",
+    "445",
+    "6709",
+    "Transylvania County, North Carolina",
+    "37",
+    "175"
+  ],
+  [
+    "553",
+    "66",
+    "0",
+    "5",
+    "627",
+    "Tyrrell County, North Carolina",
+    "37",
+    "177"
+  ],
+  [
+    "66001",
+    "3778",
+    "164",
+    "3078",
+    "54937",
+    "Union County, North Carolina",
+    "37",
+    "179"
+  ],
+  [
+    "8437",
+    "624",
+    "48",
+    "372",
+    "9740",
+    "Vance County, North Carolina",
+    "37",
+    "181"
+  ],
+  [
+    "318509",
+    "25488",
+    "2031",
+    "17049",
+    "282780",
+    "Wake County, North Carolina",
+    "37",
+    "183"
+  ],
+  [
+    "3610",
+    "164",
+    "0",
+    "221",
+    "3474",
+    "Warren County, North Carolina",
+    "37",
+    "185"
+  ],
+  [
+    "1814",
+    "83",
+    "32",
+    "85",
+    "2079",
+    "Washington County, North Carolina",
+    "37",
+    "187"
+  ],
+  [
+    "14109",
+    "1586",
+    "97",
+    "550",
+    "12295",
+    "Watauga County, North Carolina",
+    "37",
+    "189"
+  ],
+  [
+    "26142",
+    "1367",
+    "185",
+    "990",
+    "24286",
+    "Wayne County, North Carolina",
+    "37",
+    "191"
+  ],
+  [
+    "15671",
+    "1131",
+    "138",
+    "861",
+    "12897",
+    "Wilkes County, North Carolina",
+    "37",
+    "193"
+  ],
+  [
+    "17188",
+    "709",
+    "71",
+    "728",
+    "17146",
+    "Wilson County, North Carolina",
+    "37",
+    "195"
+  ],
+  [
+    "9301",
+    "220",
+    "65",
+    "302",
+    "7599",
+    "Yadkin County, North Carolina",
+    "37",
+    "197"
+  ],
+  [
+    "3814",
+    "188",
+    "75",
+    "159",
+    "3882",
+    "Yancey County, North Carolina",
+    "37",
+    "199"
+  ]
+]

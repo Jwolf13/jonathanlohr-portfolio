@@ -1,0 +1,4 @@
+Basics of probability theory
+computing-probabilities of single overservations
+computing-probabilities across a range of obervations
+

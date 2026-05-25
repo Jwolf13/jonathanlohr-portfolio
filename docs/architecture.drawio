@@ -1,0 +1,132 @@
+<mxfile host="app.diagrams.net" agent="Jonathan Lohr portfolio" version="24.0.0">
+  <diagram id="portfolio-architecture" name="Portfolio Architecture">
+    <mxGraphModel dx="1422" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1400" pageHeight="900" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="Jonathan Lohr Portfolio — How everything is wired" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=20;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="20" y="10" width="1360" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="lane-deploy" value="Deploy pipeline (you push code, GitHub ships it)" style="swimlane;fontSize=13;fontStyle=1;startSize=28;fillColor=#e8f4fd;strokeColor=#1976d2" vertex="1" parent="1">
+          <mxGeometry x="20" y="60" width="1360" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="dev" value="You (local dev)&#10;&#10;npm run dev" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12" vertex="1" parent="lane-deploy">
+          <mxGeometry x="30" y="40" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="github" value="GitHub repo&#10;jwolf13/jonathanlohr-portfolio&#10;&#10;main branch" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12" vertex="1" parent="lane-deploy">
+          <mxGeometry x="220" y="40" width="160" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="ci" value=".github/workflows/ci.yml&#10;&#10;On PR: lint + typecheck + build" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=12" vertex="1" parent="lane-deploy">
+          <mxGeometry x="450" y="40" width="180" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="deploy" value=".github/workflows/deploy.yml&#10;&#10;On push to main:&#10;1. npm run build:static&#10;2. aws s3 sync out/&#10;3. cloudfront invalidate" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=12" vertex="1" parent="lane-deploy">
+          <mxGeometry x="690" y="30" width="200" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="s3" value="S3 bucket&#10;(static files)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=12;fontStyle=1" vertex="1" parent="lane-deploy">
+          <mxGeometry x="940" y="40" width="100" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="cf" value="CloudFront&#10;(CDN)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=12;fontStyle=1" vertex="1" parent="lane-deploy">
+          <mxGeometry x="1080" y="40" width="100" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="browser" value="Visitor's browser" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12" vertex="1" parent="lane-deploy">
+          <mxGeometry x="1220" y="40" width="110" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1976d2;endArrow=classic" edge="1" parent="lane-deploy" source="dev" target="github"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e2" value="PR" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#d6b656;endArrow=classic" edge="1" parent="lane-deploy" source="github" target="ci"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e3" value="merge" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#d6b656;endArrow=classic" edge="1" parent="lane-deploy" source="ci" target="deploy"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=classic" edge="1" parent="lane-deploy" source="deploy" target="s3"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=classic" edge="1" parent="lane-deploy" source="s3" target="cf"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=classic" edge="1" parent="lane-deploy" source="cf" target="browser"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="lane-app" value="The Next.js app — what gets built into out/" style="swimlane;fontSize=13;fontStyle=1;startSize=28;fillColor=#f5f5f5;strokeColor=#666666" vertex="1" parent="1">
+          <mxGeometry x="20" y="220" width="1360" height="440" as="geometry" />
+        </mxCell>
+        <mxCell id="routes-header" value="Routes (app/)" style="text;html=1;fontSize=14;fontStyle=1;fontColor=#444;align=center" vertex="1" parent="lane-app">
+          <mxGeometry x="30" y="20" width="320" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="r-layout" value="app/layout.tsx&#10;Wraps every page. Mounts SiteNav + footer." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11" vertex="1" parent="lane-app">
+          <mxGeometry x="30" y="60" width="320" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="r-home" value="app/page.tsx -- path: /&#10;Hero + 2 cards (Sales Tools, Projects)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11" vertex="1" parent="lane-app">
+          <mxGeometry x="30" y="130" width="320" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="r-sales" value="app/sales-tools/page.tsx -- path: /sales-tools&#10;Reads content/sales-tools.ts" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11" vertex="1" parent="lane-app">
+          <mxGeometry x="30" y="195" width="320" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="r-projects" value="app/projects/page.tsx -- path: /projects&#10;Reads content/projects.ts" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11" vertex="1" parent="lane-app">
+          <mxGeometry x="30" y="260" width="320" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="r-slug" value="app/projects/[slug]/page.tsx&#10;Path: /projects/&lt;slug&gt; (one per project)&#10;&#10;Dynamic route. generateStaticParams() reads&#10;projects.ts to pre-render every slug at build time." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11" vertex="1" parent="lane-app">
+          <mxGeometry x="30" y="325" width="320" height="85" as="geometry" />
+        </mxCell>
+        <mxCell id="comp-header" value="Reusable components (components/)" style="text;html=1;fontSize=14;fontStyle=1;fontColor=#444;align=center" vertex="1" parent="lane-app">
+          <mxGeometry x="400" y="20" width="320" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="c-nav" value="SiteNav.tsx&#10;Top navigation (sticky header)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11" vertex="1" parent="lane-app">
+          <mxGeometry x="400" y="60" width="320" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="c-card" value="ProjectCard.tsx&#10;Clickable card shown on / and /projects" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11" vertex="1" parent="lane-app">
+          <mxGeometry x="400" y="120" width="320" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="c-layout" value="CaseStudyLayout.tsx&#10;Hero, tech tags, GitHub/demo links.&#10;Wraps every case-study body." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11" vertex="1" parent="lane-app">
+          <mxGeometry x="400" y="180" width="320" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="c-dash" value="NcLaborDashboard.tsx&#10;Client component (use client). Imports JSON from&#10;data/processed/. Used in the NC labor case study." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11" vertex="1" parent="lane-app">
+          <mxGeometry x="400" y="255" width="320" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="c-misc" value="SalesMotionPlaybook.tsx, PipelineTuneUp.tsx&#10;Specific interactive tools used by /gtm-calculator." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11" vertex="1" parent="lane-app">
+          <mxGeometry x="400" y="335" width="320" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="content-header" value="Content registries (content/) -- the source of truth" style="text;html=1;fontSize=14;fontStyle=1;fontColor=#444;align=center" vertex="1" parent="lane-app">
+          <mxGeometry x="770" y="20" width="560" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="reg-projects" value="content/projects.ts&#10;&#10;Typed array of every project.&#10;{ slug, title, hook, category, stack, github, demo, status, featured }&#10;&#10;Add an entry here -- it appears on /, /projects, and gets a&#10;static page at /projects/&lt;slug&gt;." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=11" vertex="1" parent="lane-app">
+          <mxGeometry x="770" y="60" width="560" height="115" as="geometry" />
+        </mxCell>
+        <mxCell id="reg-sales" value="content/sales-tools.ts&#10;&#10;Typed array of every sales tool.&#10;{ slug, title, description, href, status, featured }&#10;&#10;Add an entry here -- it appears on /sales-tools." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=11" vertex="1" parent="lane-app">
+          <mxGeometry x="770" y="185" width="560" height="105" as="geometry" />
+        </mxCell>
+        <mxCell id="reg-cs" value="content/case-studies/&#10;&#10;index.ts -- slug -&gt; component map.&#10;&lt;slug&gt;.tsx -- the actual write-up (problem, architecture, decisions).&#10;&#10;One file per project. Imported by /projects/[slug]/page.tsx." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=11" vertex="1" parent="lane-app">
+          <mxGeometry x="770" y="300" width="560" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="ea1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=classic;strokeColor=#82b366" edge="1" parent="lane-app" source="r-home" target="c-card"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="ea2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=classic;strokeColor=#82b366" edge="1" parent="lane-app" source="r-projects" target="c-card"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="ea3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=classic;strokeColor=#82b366" edge="1" parent="lane-app" source="r-slug" target="c-layout"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="ea4" value="reads" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=classic;strokeColor=#d79b00;fontSize=10" edge="1" parent="lane-app" source="r-projects" target="reg-projects"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="ea5" value="reads" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=classic;strokeColor=#d79b00;fontSize=10" edge="1" parent="lane-app" source="r-slug" target="reg-projects"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="ea6" value="reads" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=classic;strokeColor=#d79b00;fontSize=10" edge="1" parent="lane-app" source="r-sales" target="reg-sales"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="ea7" value="renders" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=classic;strokeColor=#d79b00;fontSize=10" edge="1" parent="lane-app" source="r-slug" target="reg-cs"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="ea8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=classic;strokeColor=#6c8ebf" edge="1" parent="lane-app" source="r-layout" target="c-nav"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="lane-data" value="Data pipeline -- public APIs to dashboards (refreshes monthly at most)" style="swimlane;fontSize=13;fontStyle=1;startSize=28;fillColor=#f5e6f5;strokeColor=#9673a6" vertex="1" parent="1">
+          <mxGeometry x="20" y="680" width="1360" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="api-bls" value="BLS API&#10;(employment, wages)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11" vertex="1" parent="lane-data">
+          <mxGeometry x="30" y="40" width="160" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="api-census" value="Census ACS API&#10;(geography, occupations)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11" vertex="1" parent="lane-data">
+          <mxGeometry x="30" y="100" width="160" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="scripts" value="scripts/*.py -- Python ETL&#10;&#10;ingest_*.py: pull from APIs&#10;build_*.py: transform + join" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11" vertex="1" parent="lane-data">
+          <mxGeometry x="250" y="60" width="200" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="raw" value="data/raw/&#10;Untouched API responses (cache)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11" vertex="1" parent="lane-data">
+          <mxGeometry x="510" y="40" width="220" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="processed" value="data/processed/&#10;occupation_dashboard.json -- the shipped artifact" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;fontStyle=1" vertex="1" parent="lane-data">
+          <mxGeometry x="510" y="100" width="220" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="import-note" value="Imported at BUILD TIME&#10;via import dashboardData from&#10;@/data/processed/...&#10;-- no fetch on the client" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11" vertex="1" parent="lane-data">
+          <mxGeometry x="790" y="60" width="220" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="dash-back" value="NcLaborDashboard.tsx&#10;(component in /components)&#10;Rendered inside the&#10;NC labor case study" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11" vertex="1" parent="lane-data">
+          <mxGeometry x="1080" y="60" width="240" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="ed1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=classic;strokeColor=#9673a6" edge="1" parent="lane-data" source="api-bls" target="scripts"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="ed2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=classic;strokeColor=#9673a6" edge="1" parent="lane-data" source="api-census" target="scripts"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="ed3" value="dumps" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=classic;strokeColor=#9673a6;fontSize=10" edge="1" parent="lane-data" source="scripts" target="raw"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="ed4" value="transforms" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=classic;strokeColor=#9673a6;fontSize=10" edge="1" parent="lane-data" source="scripts" target="processed"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="ed5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=classic;strokeColor=#d6b656" edge="1" parent="lane-data" source="processed" target="import-note"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="ed6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=classic;strokeColor=#6c8ebf" edge="1" parent="lane-data" source="import-note" target="dash-back"><mxGeometry relative="1" as="geometry" /></mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

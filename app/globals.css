@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@variant dark (&:is(.dark *));
+
 /* Design tokens from layout.tsx fonts */
 :root {
   --background: #f4f4f5; /* light gray page bg */
@@ -13,27 +15,31 @@
   --font-mono: var(--font-geist-mono);
 }
 
-/* Dark mode base */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #020617;
-    --foreground: #e5e7eb;
-  }
-}
-
 /* Base element styles */
-html,
-body {
+html{ 
   min-height: 100%;
+  scroll-behavior: smooth;
 }
-
 body {
-  margin: 0;
-  background-color: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-geist-sans), system-ui, -apple-system, BlinkMacSystemFont,
-    "Segoe UI", sans-serif;
-}
+    margin: 0;
+    min-height: 100%;
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-geist-sans), system-ui, -apple-system, BlinkMacSystemFont,
+      "Segoe UI", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    line-height: 1.6;
+  }
+::selection {
+    background-color: #2563eb;
+    color: #ffffff;
+  }
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #a1a1aa; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #71717a; }
 
 /* Optional: nicer link defaults */
 a {

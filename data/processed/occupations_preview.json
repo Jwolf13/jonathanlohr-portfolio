@@ -1,0 +1,1002 @@
+[
+  {
+    "Management\/Business\/Science\/Arts":"42440",
+    "Service Occupations":"2559",
+    "Sales and Office":"155",
+    "Natural Resources\/Construction\/Maintenance":"2468",
+    "Production\/Transportation\/Material Moving":"39858",
+    "County":"Alamance County, North Carolina",
+    "state":"37",
+    "county":"001"
+  },
+  {
+    "Management\/Business\/Science\/Arts":"9066",
+    "Service Occupations":"480",
+    "Sales and Office":"27",
+    "Natural Resources\/Construction\/Maintenance":"238",
+    "Production\/Transportation\/Material Moving":"7541",
+    "County":"Alexander County, North Carolina",
+    "state":"37",
+    "county":"003"
+  },
+  {
+    "Management\/Business\/Science\/Arts":"2292",
+    "Service Occupations":"194",
+    "Sales and Office":"17",
+    "Natural Resources\/Construction\/Maintenance":"50",
+    "Production\/Transportation\/Material Moving":"2104",
+    "County":"Alleghany County, North Carolina",
+    "state":"37",
+    "county":"005"
+  },
+  {
+    "Management\/Business\/Science\/Arts":"4594",
+    "Service Occupations":"198",
+    "Sales and Office":"11",
+    "Natural Resources\/Construction\/Maintenance":"225",
+    "Production\/Transportation\/Material Moving":"4137",
+    "County":"Anson County, North Carolina",
+    "state":"37",
+    "county":"007"
+  },
+  {
+    "Management\/Business\/Science\/Arts":"6249",
+    "Service Occupations":"506",
+    "Sales and Office":"39",
+    "Natural Resources\/Construction\/Maintenance":"241",
+    "Production\/Transportation\/Material Moving":"5461",
+    "County":"Ashe County, North Carolina",
+    "state":"37",
+    "county":"009"
+  },
+  {
+    "Management\/Business\/Science\/Arts":"3562",
+    "Service Occupations":"214",
+    "Sales and Office":"0",
+    "Natural Resources\/Construction\/Maintenance":"243",
+    "Production\/Transportation\/Material Moving":"3136",
+    "County":"Avery County, North Carolina",
+    "state":"37",
+    "county":"011"
+  },
+  {
+    "Management\/Business\/Science\/Arts":"10149",
+    "Service Occupations":"631",
+    "Sales and Office":"56",
+    "Natural Resources\/Construction\/Maintenance":"370",
+    "Production\/Transportation\/Material Moving":"9170",
+    "County":"Beaufort County, North Carolina",
+    "state":"37",
+    "county":"013"
+  },
+  {
+    "Management\/Business\/Science\/Arts":"3000",
+    "Service Occupations":"73",
+    "Sales and Office":"9",
+    "Natural Resources\/Construction\/Maintenance":"243",
+    "Production\/Transportation\/Material Moving":"3308",
+    "County":"Bertie County, North Carolina",
+    "state":"37",
+    "county":"015"
+  },
+  {
+    "Management\/Business\/Science\/Arts":"5761",
+    "Service Occupations":"202",
+    "Sales and Office":"22",
+    "Natural Resources\/Construction\/Maintenance":"198",
+    "Production\/Transportation\/Material Moving":"5188",
+    "County":"Bladen County, North Carolina",
+    "state":"37",
+    "county":"017"
+  },
+  {
+    "Management\/Business\/Science\/Arts":"29160",
+    "Service Occupations":"1533",
+    "Sales and Office":"222",
+    "Natural Resources\/Construction\/Maintenance":"1258",
+    "Production\/Transportation\/Material Moving":"27303",
+    "County":"Brunswick County, North Carolina",
+    "state":"37",
+    "county":"019"
+  },
+  {
+    "Management\/Business\/Science\/Arts":"67608",
+    "Service Occupations":"5756",
+    "Sales and Office":"532",
+    "Natural Resources\/Construction\/Maintenance":"2906",
+    "Production\/Transportation\/Material Moving":"64275",
+    "County":"Buncombe County, North Carolina",
+    "state":"37",
+    "county":"021"
+  },
+  {
+    "Management\/Business\/Science\/Arts":"21225",
+    "Service Occupations":"919",
+    "Sales and Office":"250",
+    "Natural Resources\/Construction\/Maintenance":"827",
+    "Production\/Transportation\/Material Moving":"18314",
+    "County":"Burke County, North Carolina",
+    "state":"37",
+    "county":"023"
+  },
+  {
+    "Management\/Business\/Science\/Arts":"60095",
+    "Service Occupations":"3703",
+    "Sales and Office":"238",
+    "Natural Resources\/Construction\/Maintenance":"3451",
+    "Production\/Transportation\/Material Moving":"53484",
+    "County":"Cabarrus County, North Carolina",
+    "state":"37",
+    "county":"025"
+  },
+  {
+    "Management\/Business\/Science\/Arts":"19198",
+    "Service Occupations":"906",
+    "Sales and Office":"77",
+    "Natural Resources\/Construction\/Maintenance":"811",
+    "Production\/Transportation\/Material Moving":"17237",
+    "County":"Caldwell County, North Carolina",
+    "state":"37",
+    "county":"027"
+  },
+  {
+    "Management\/Business\/Science\/Arts":"2374",
+    "Service Occupations":"43",
+    "Sales and Office":"0",
+    "Natural Resources\/Construction\/Maintenance":"66",
+    "Production\/Transportation\/Material Moving":"2419",
+    "County":"Camden County, North Carolina",
+    "state":"37",
+    "county":"029"
+  },
+  {
+    "Management\/Business\/Science\/Arts":"15501",
+    "Service Occupations":"1073",
+    "Sales and Office":"49",
+    "Natural Resources\/Construction\/Maintenance":"492",
+    "Production\/Transportation\/Material Moving":"14528",
+    "County":"Carteret County, North Carolina",
+    "state":"37",
+    "county":"031"
+  },
+  {
+    "Management\/Business\/Science\/Arts":"5095",
+    "Service Occupations":"282",
+    "Sales and Office":"51",
+    "Natural Resources\/Construction\/Maintenance":"159",
+    "Production\/Transportation\/Material Moving":"4461",
+    "County":"Caswell County, North Carolina",
+    "state":"37",
+    "county":"033"
+  },
+  {
+    "Management\/Business\/Science\/Arts":"41313",
+    "Service Occupations":"2405",
+    "Sales and Office":"149",
+    "Natural Resources\/Construction\/Maintenance":"2452",
+    "Production\/Transportation\/Material Moving":"34582",
+    "County":"Catawba County, North Carolina",
+    "state":"37",
+    "county":"035"
+  },
+  {
+    "Management\/Business\/Science\/Arts":"18586",
+    "Service Occupations":"1595",
+    "Sales and Office":"37",
+    "Natural Resources\/Construction\/Maintenance":"1047",
+    "Production\/Transportation\/Material Moving":"16872",
+    "County":"Chatham County, North Carolina",
+    "state":"37",
+    "county":"037"
+  },
+  {
+    "Management\/Business\/Science\/Arts":"5898",
+    "Service Occupations":"273",
+    "Sales and Office":"29",
+    "Natural Resources\/Construction\/Maintenance":"289",
+    "Production\/Transportation\/Material Moving":"5493",
+    "County":"Cherokee County, North Carolina",
+    "state":"37",
+    "county":"039"
+  },
+  {
+    "Management\/Business\/Science\/Arts":"3096",
+    "Service Occupations":"258",
+    "Sales and Office":"0",
+    "Natural Resources\/Construction\/Maintenance":"110",
+    "Production\/Transportation\/Material Moving":"2826",
+    "County":"Chowan County, North Carolina",
+    "state":"37",
+    "county":"041"
+  },
+  {
+    "Management\/Business\/Science\/Arts":"2329",
+    "Service Occupations":"182",
+    "Sales and Office":"0",
+    "Natural Resources\/Construction\/Maintenance":"80",
+    "Production\/Transportation\/Material Moving":"2057",
+    "County":"Clay County, North Carolina",
+    "state":"37",
+    "county":"043"
+  },
+  {
+    "Management\/Business\/Science\/Arts":"22406",
+    "Service Occupations":"1431",
+    "Sales and Office":"132",
+    "Natural Resources\/Construction\/Maintenance":"697",
+    "Production\/Transportation\/Material Moving":"20888",
+    "County":"Cleveland County, North Carolina",
+    "state":"37",
+    "county":"045"
+  },
+  {
+    "Management\/Business\/Science\/Arts":"9417",
+    "Service Occupations":"536",
+    "Sales and Office":"176",
+    "Natural Resources\/Construction\/Maintenance":"220",
+    "Production\/Transportation\/Material Moving":"9455",
+    "County":"Columbus County, North Carolina",
+    "state":"37",
+    "county":"047"
+  },
+  {
+    "Management\/Business\/Science\/Arts":"20216",
+    "Service Occupations":"1038",
+    "Sales and Office":"83",
+    "Natural Resources\/Construction\/Maintenance":"999",
+    "Production\/Transportation\/Material Moving":"19942",
+    "County":"Craven County, North Carolina",
+    "state":"37",
+    "county":"049"
+  },
+  {
+    "Management\/Business\/Science\/Arts":"58549",
+    "Service Occupations":"4251",
+    "Sales and Office":"351",
+    "Natural Resources\/Construction\/Maintenance":"3032",
+    "Production\/Transportation\/Material Moving":"66625",
+    "County":"Cumberland County, North Carolina",
+    "state":"37",
+    "county":"051"
+  },
+  {
+    "Management\/Business\/Science\/Arts":"7590",
+    "Service Occupations":"474",
+    "Sales and Office":"0",
+    "Natural Resources\/Construction\/Maintenance":"258",
+    "Production\/Transportation\/Material Moving":"6533",
+    "County":"Currituck County, North Carolina",
+    "state":"37",
+    "county":"053"
+  },
+  {
+    "Management\/Business\/Science\/Arts":"9649",
+    "Service Occupations":"627",
+    "Sales and Office":"13",
+    "Natural Resources\/Construction\/Maintenance":"353",
+    "Production\/Transportation\/Material Moving":"9392",
+    "County":"Dare County, North Carolina",
+    "state":"37",
+    "county":"055"
+  },
+  {
+    "Management\/Business\/Science\/Arts":"41919",
+    "Service Occupations":"2137",
+    "Sales and Office":"330",
+    "Natural Resources\/Construction\/Maintenance":"1844",
+    "Production\/Transportation\/Material Moving":"35187",
+    "County":"Davidson County, North Carolina",
+    "state":"37",
+    "county":"057"
+  },
+  {
+    "Management\/Business\/Science\/Arts":"10370",
+    "Service Occupations":"538",
+    "Sales and Office":"12",
+    "Natural Resources\/Construction\/Maintenance":"473",
+    "Production\/Transportation\/Material Moving":"9430",
+    "County":"Davie County, North Carolina",
+    "state":"37",
+    "county":"059"
+  },
+  {
+    "Management\/Business\/Science\/Arts":"12038",
+    "Service Occupations":"374",
+    "Sales and Office":"43",
+    "Natural Resources\/Construction\/Maintenance":"224",
+    "Production\/Transportation\/Material Moving":"9641",
+    "County":"Duplin County, North Carolina",
+    "state":"37",
+    "county":"061"
+  },
+  {
+    "Management\/Business\/Science\/Arts":"83332",
+    "Service Occupations":"8636",
+    "Sales and Office":"775",
+    "Natural Resources\/Construction\/Maintenance":"4224",
+    "Production\/Transportation\/Material Moving":"88327",
+    "County":"Durham County, North Carolina",
+    "state":"37",
+    "county":"063"
+  },
+  {
+    "Management\/Business\/Science\/Arts":"9465",
+    "Service Occupations":"427",
+    "Sales and Office":"251",
+    "Natural Resources\/Construction\/Maintenance":"628",
+    "Production\/Transportation\/Material Moving":"10901",
+    "County":"Edgecombe County, North Carolina",
+    "state":"37",
+    "county":"065"
+  },
+  {
+    "Management\/Business\/Science\/Arts":"90460",
+    "Service Occupations":"7016",
+    "Sales and Office":"629",
+    "Natural Resources\/Construction\/Maintenance":"5808",
+    "Production\/Transportation\/Material Moving":"87800",
+    "County":"Forsyth County, North Carolina",
+    "state":"37",
+    "county":"067"
+  },
+  {
+    "Management\/Business\/Science\/Arts":"17649",
+    "Service Occupations":"917",
+    "Sales and Office":"132",
+    "Natural Resources\/Construction\/Maintenance":"768",
+    "Production\/Transportation\/Material Moving":"15076",
+    "County":"Franklin County, North Carolina",
+    "state":"37",
+    "county":"069"
+  },
+  {
+    "Management\/Business\/Science\/Arts":"56933",
+    "Service Occupations":"2177",
+    "Sales and Office":"354",
+    "Natural Resources\/Construction\/Maintenance":"2711",
+    "Production\/Transportation\/Material Moving":"52200",
+    "County":"Gaston County, North Carolina",
+    "state":"37",
+    "county":"071"
+  },
+  {
+    "Management\/Business\/Science\/Arts":"2204",
+    "Service Occupations":"19",
+    "Sales and Office":"8",
+    "Natural Resources\/Construction\/Maintenance":"75",
+    "Production\/Transportation\/Material Moving":"2356",
+    "County":"Gates County, North Carolina",
+    "state":"37",
+    "county":"073"
+  },
+  {
+    "Management\/Business\/Science\/Arts":"1700",
+    "Service Occupations":"182",
+    "Sales and Office":"22",
+    "Natural Resources\/Construction\/Maintenance":"45",
+    "Production\/Transportation\/Material Moving":"1471",
+    "County":"Graham County, North Carolina",
+    "state":"37",
+    "county":"075"
+  },
+  {
+    "Management\/Business\/Science\/Arts":"13479",
+    "Service Occupations":"561",
+    "Sales and Office":"119",
+    "Natural Resources\/Construction\/Maintenance":"579",
+    "Production\/Transportation\/Material Moving":"13435",
+    "County":"Granville County, North Carolina",
+    "state":"37",
+    "county":"077"
+  },
+  {
+    "Management\/Business\/Science\/Arts":"4564",
+    "Service Occupations":"176",
+    "Sales and Office":"25",
+    "Natural Resources\/Construction\/Maintenance":"136",
+    "Production\/Transportation\/Material Moving":"3525",
+    "County":"Greene County, North Carolina",
+    "state":"37",
+    "county":"079"
+  },
+  {
+    "Management\/Business\/Science\/Arts":"132614",
+    "Service Occupations":"9276",
+    "Sales and Office":"502",
+    "Natural Resources\/Construction\/Maintenance":"8600",
+    "Production\/Transportation\/Material Moving":"130970",
+    "County":"Guilford County, North Carolina",
+    "state":"37",
+    "county":"081"
+  },
+  {
+    "Management\/Business\/Science\/Arts":"9457",
+    "Service Occupations":"650",
+    "Sales and Office":"0",
+    "Natural Resources\/Construction\/Maintenance":"440",
+    "Production\/Transportation\/Material Moving":"8839",
+    "County":"Halifax County, North Carolina",
+    "state":"37",
+    "county":"083"
+  },
+  {
+    "Management\/Business\/Science\/Arts":"28372",
+    "Service Occupations":"1847",
+    "Sales and Office":"116",
+    "Natural Resources\/Construction\/Maintenance":"1275",
+    "Production\/Transportation\/Material Moving":"25785",
+    "County":"Harnett County, North Carolina",
+    "state":"37",
+    "county":"085"
+  },
+  {
+    "Management\/Business\/Science\/Arts":"14197",
+    "Service Occupations":"713",
+    "Sales and Office":"207",
+    "Natural Resources\/Construction\/Maintenance":"779",
+    "Production\/Transportation\/Material Moving":"13813",
+    "County":"Haywood County, North Carolina",
+    "state":"37",
+    "county":"087"
+  },
+  {
+    "Management\/Business\/Science\/Arts":"28357",
+    "Service Occupations":"1731",
+    "Sales and Office":"192",
+    "Natural Resources\/Construction\/Maintenance":"1371",
+    "Production\/Transportation\/Material Moving":"26197",
+    "County":"Henderson County, North Carolina",
+    "state":"37",
+    "county":"089"
+  },
+  {
+    "Management\/Business\/Science\/Arts":"4394",
+    "Service Occupations":"367",
+    "Sales and Office":"6",
+    "Natural Resources\/Construction\/Maintenance":"175",
+    "Production\/Transportation\/Material Moving":"4249",
+    "County":"Hertford County, North Carolina",
+    "state":"37",
+    "county":"091"
+  },
+  {
+    "Management\/Business\/Science\/Arts":"9066",
+    "Service Occupations":"544",
+    "Sales and Office":"7",
+    "Natural Resources\/Construction\/Maintenance":"570",
+    "Production\/Transportation\/Material Moving":"10122",
+    "County":"Hoke County, North Carolina",
+    "state":"37",
+    "county":"093"
+  },
+  {
+    "Management\/Business\/Science\/Arts":"730",
+    "Service Occupations":"2",
+    "Sales and Office":"0",
+    "Natural Resources\/Construction\/Maintenance":"2",
+    "Production\/Transportation\/Material Moving":"680",
+    "County":"Hyde County, North Carolina",
+    "state":"37",
+    "county":"095"
+  },
+  {
+    "Management\/Business\/Science\/Arts":"50728",
+    "Service Occupations":"2085",
+    "Sales and Office":"263",
+    "Natural Resources\/Construction\/Maintenance":"2530",
+    "Production\/Transportation\/Material Moving":"42555",
+    "County":"Iredell County, North Carolina",
+    "state":"37",
+    "county":"097"
+  },
+  {
+    "Management\/Business\/Science\/Arts":"9745",
+    "Service Occupations":"902",
+    "Sales and Office":"124",
+    "Natural Resources\/Construction\/Maintenance":"462",
+    "Production\/Transportation\/Material Moving":"9390",
+    "County":"Jackson County, North Carolina",
+    "state":"37",
+    "county":"099"
+  },
+  {
+    "Management\/Business\/Science\/Arts":"57731",
+    "Service Occupations":"2832",
+    "Sales and Office":"620",
+    "Natural Resources\/Construction\/Maintenance":"2038",
+    "Production\/Transportation\/Material Moving":"50447",
+    "County":"Johnston County, North Carolina",
+    "state":"37",
+    "county":"101"
+  },
+  {
+    "Management\/Business\/Science\/Arts":"2006",
+    "Service Occupations":"126",
+    "Sales and Office":"6",
+    "Natural Resources\/Construction\/Maintenance":"82",
+    "Production\/Transportation\/Material Moving":"1852",
+    "County":"Jones County, North Carolina",
+    "state":"37",
+    "county":"103"
+  },
+  {
+    "Management\/Business\/Science\/Arts":"15348",
+    "Service Occupations":"551",
+    "Sales and Office":"71",
+    "Natural Resources\/Construction\/Maintenance":"657",
+    "Production\/Transportation\/Material Moving":"13222",
+    "County":"Lee County, North Carolina",
+    "state":"37",
+    "county":"105"
+  },
+  {
+    "Management\/Business\/Science\/Arts":"11643",
+    "Service Occupations":"360",
+    "Sales and Office":"147",
+    "Natural Resources\/Construction\/Maintenance":"347",
+    "Production\/Transportation\/Material Moving":"11058",
+    "County":"Lenoir County, North Carolina",
+    "state":"37",
+    "county":"107"
+  },
+  {
+    "Management\/Business\/Science\/Arts":"23377",
+    "Service Occupations":"964",
+    "Sales and Office":"97",
+    "Natural Resources\/Construction\/Maintenance":"1417",
+    "Production\/Transportation\/Material Moving":"19333",
+    "County":"Lincoln County, North Carolina",
+    "state":"37",
+    "county":"109"
+  },
+  {
+    "Management\/Business\/Science\/Arts":"9714",
+    "Service Occupations":"207",
+    "Sales and Office":"133",
+    "Natural Resources\/Construction\/Maintenance":"423",
+    "Production\/Transportation\/Material Moving":"9079",
+    "County":"McDowell County, North Carolina",
+    "state":"37",
+    "county":"111"
+  },
+  {
+    "Management\/Business\/Science\/Arts":"8522",
+    "Service Occupations":"570",
+    "Sales and Office":"44",
+    "Natural Resources\/Construction\/Maintenance":"254",
+    "Production\/Transportation\/Material Moving":"7194",
+    "County":"Macon County, North Carolina",
+    "state":"37",
+    "county":"113"
+  },
+  {
+    "Management\/Business\/Science\/Arts":"5280",
+    "Service Occupations":"281",
+    "Sales and Office":"35",
+    "Natural Resources\/Construction\/Maintenance":"92",
+    "Production\/Transportation\/Material Moving":"4435",
+    "County":"Madison County, North Carolina",
+    "state":"37",
+    "county":"115"
+  },
+  {
+    "Management\/Business\/Science\/Arts":"4332",
+    "Service Occupations":"122",
+    "Sales and Office":"66",
+    "Natural Resources\/Construction\/Maintenance":"127",
+    "Production\/Transportation\/Material Moving":"4752",
+    "County":"Martin County, North Carolina",
+    "state":"37",
+    "county":"117"
+  },
+  {
+    "Management\/Business\/Science\/Arts":"312161",
+    "Service Occupations":"21290",
+    "Sales and Office":"1610",
+    "Natural Resources\/Construction\/Maintenance":"18042",
+    "Production\/Transportation\/Material Moving":"291625",
+    "County":"Mecklenburg County, North Carolina",
+    "state":"37",
+    "county":"119"
+  },
+  {
+    "Management\/Business\/Science\/Arts":"3444",
+    "Service Occupations":"191",
+    "Sales and Office":"176",
+    "Natural Resources\/Construction\/Maintenance":"97",
+    "Production\/Transportation\/Material Moving":"3094",
+    "County":"Mitchell County, North Carolina",
+    "state":"37",
+    "county":"121"
+  },
+  {
+    "Management\/Business\/Science\/Arts":"5372",
+    "Service Occupations":"391",
+    "Sales and Office":"9",
+    "Natural Resources\/Construction\/Maintenance":"92",
+    "Production\/Transportation\/Material Moving":"5575",
+    "County":"Montgomery County, North Carolina",
+    "state":"37",
+    "county":"123"
+  },
+  {
+    "Management\/Business\/Science\/Arts":"21078",
+    "Service Occupations":"1832",
+    "Sales and Office":"116",
+    "Natural Resources\/Construction\/Maintenance":"1059",
+    "Production\/Transportation\/Material Moving":"20451",
+    "County":"Moore County, North Carolina",
+    "state":"37",
+    "county":"125"
+  },
+  {
+    "Management\/Business\/Science\/Arts":"22094",
+    "Service Occupations":"1114",
+    "Sales and Office":"128",
+    "Natural Resources\/Construction\/Maintenance":"1196",
+    "Production\/Transportation\/Material Moving":"21079",
+    "County":"Nash County, North Carolina",
+    "state":"37",
+    "county":"127"
+  },
+  {
+    "Management\/Business\/Science\/Arts":"58790",
+    "Service Occupations":"4314",
+    "Sales and Office":"338",
+    "Natural Resources\/Construction\/Maintenance":"2323",
+    "Production\/Transportation\/Material Moving":"58221",
+    "County":"New Hanover County, North Carolina",
+    "state":"37",
+    "county":"129"
+  },
+  {
+    "Management\/Business\/Science\/Arts":"3174",
+    "Service Occupations":"130",
+    "Sales and Office":"8",
+    "Natural Resources\/Construction\/Maintenance":"134",
+    "Production\/Transportation\/Material Moving":"3678",
+    "County":"Northampton County, North Carolina",
+    "state":"37",
+    "county":"131"
+  },
+  {
+    "Management\/Business\/Science\/Arts":"34570",
+    "Service Occupations":"2759",
+    "Sales and Office":"207",
+    "Natural Resources\/Construction\/Maintenance":"1727",
+    "Production\/Transportation\/Material Moving":"33381",
+    "County":"Onslow County, North Carolina",
+    "state":"37",
+    "county":"133"
+  },
+  {
+    "Management\/Business\/Science\/Arts":"35985",
+    "Service Occupations":"6280",
+    "Sales and Office":"280",
+    "Natural Resources\/Construction\/Maintenance":"1601",
+    "Production\/Transportation\/Material Moving":"36318",
+    "County":"Orange County, North Carolina",
+    "state":"37",
+    "county":"135"
+  },
+  {
+    "Management\/Business\/Science\/Arts":"2211",
+    "Service Occupations":"48",
+    "Sales and Office":"21",
+    "Natural Resources\/Construction\/Maintenance":"38",
+    "Production\/Transportation\/Material Moving":"2283",
+    "County":"Pamlico County, North Carolina",
+    "state":"37",
+    "county":"137"
+  },
+  {
+    "Management\/Business\/Science\/Arts":"9238",
+    "Service Occupations":"542",
+    "Sales and Office":"63",
+    "Natural Resources\/Construction\/Maintenance":"649",
+    "Production\/Transportation\/Material Moving":"8579",
+    "County":"Pasquotank County, North Carolina",
+    "state":"37",
+    "county":"139"
+  },
+  {
+    "Management\/Business\/Science\/Arts":"14630",
+    "Service Occupations":"661",
+    "Sales and Office":"81",
+    "Natural Resources\/Construction\/Maintenance":"626",
+    "Production\/Transportation\/Material Moving":"13107",
+    "County":"Pender County, North Carolina",
+    "state":"37",
+    "county":"141"
+  },
+  {
+    "Management\/Business\/Science\/Arts":"2859",
+    "Service Occupations":"131",
+    "Sales and Office":"43",
+    "Natural Resources\/Construction\/Maintenance":"137",
+    "Production\/Transportation\/Material Moving":"2261",
+    "County":"Perquimans County, North Carolina",
+    "state":"37",
+    "county":"143"
+  },
+  {
+    "Management\/Business\/Science\/Arts":"9560",
+    "Service Occupations":"435",
+    "Sales and Office":"31",
+    "Natural Resources\/Construction\/Maintenance":"406",
+    "Production\/Transportation\/Material Moving":"9175",
+    "County":"Person County, North Carolina",
+    "state":"37",
+    "county":"145"
+  },
+  {
+    "Management\/Business\/Science\/Arts":"41122",
+    "Service Occupations":"3360",
+    "Sales and Office":"374",
+    "Natural Resources\/Construction\/Maintenance":"2195",
+    "Production\/Transportation\/Material Moving":"39731",
+    "County":"Pitt County, North Carolina",
+    "state":"37",
+    "county":"147"
+  },
+  {
+    "Management\/Business\/Science\/Arts":"4453",
+    "Service Occupations":"210",
+    "Sales and Office":"46",
+    "Natural Resources\/Construction\/Maintenance":"324",
+    "Production\/Transportation\/Material Moving":"4100",
+    "County":"Polk County, North Carolina",
+    "state":"37",
+    "county":"149"
+  },
+  {
+    "Management\/Business\/Science\/Arts":"36255",
+    "Service Occupations":"1609",
+    "Sales and Office":"129",
+    "Natural Resources\/Construction\/Maintenance":"1889",
+    "Production\/Transportation\/Material Moving":"30962",
+    "County":"Randolph County, North Carolina",
+    "state":"37",
+    "county":"151"
+  },
+  {
+    "Management\/Business\/Science\/Arts":"9160",
+    "Service Occupations":"729",
+    "Sales and Office":"158",
+    "Natural Resources\/Construction\/Maintenance":"483",
+    "Production\/Transportation\/Material Moving":"8702",
+    "County":"Richmond County, North Carolina",
+    "state":"37",
+    "county":"153"
+  },
+  {
+    "Management\/Business\/Science\/Arts":"21886",
+    "Service Occupations":"776",
+    "Sales and Office":"294",
+    "Natural Resources\/Construction\/Maintenance":"934",
+    "Production\/Transportation\/Material Moving":"21732",
+    "County":"Robeson County, North Carolina",
+    "state":"37",
+    "county":"155"
+  },
+  {
+    "Management\/Business\/Science\/Arts":"20508",
+    "Service Occupations":"854",
+    "Sales and Office":"122",
+    "Natural Resources\/Construction\/Maintenance":"511",
+    "Production\/Transportation\/Material Moving":"18910",
+    "County":"Rockingham County, North Carolina",
+    "state":"37",
+    "county":"157"
+  },
+  {
+    "Management\/Business\/Science\/Arts":"36092",
+    "Service Occupations":"1784",
+    "Sales and Office":"410",
+    "Natural Resources\/Construction\/Maintenance":"1205",
+    "Production\/Transportation\/Material Moving":"30650",
+    "County":"Rowan County, North Carolina",
+    "state":"37",
+    "county":"159"
+  },
+  {
+    "Management\/Business\/Science\/Arts":"14084",
+    "Service Occupations":"854",
+    "Sales and Office":"107",
+    "Natural Resources\/Construction\/Maintenance":"761",
+    "Production\/Transportation\/Material Moving":"12624",
+    "County":"Rutherford County, North Carolina",
+    "state":"37",
+    "county":"161"
+  },
+  {
+    "Management\/Business\/Science\/Arts":"13706",
+    "Service Occupations":"429",
+    "Sales and Office":"89",
+    "Natural Resources\/Construction\/Maintenance":"426",
+    "Production\/Transportation\/Material Moving":"11093",
+    "County":"Sampson County, North Carolina",
+    "state":"37",
+    "county":"163"
+  },
+  {
+    "Management\/Business\/Science\/Arts":"6542",
+    "Service Occupations":"280",
+    "Sales and Office":"100",
+    "Natural Resources\/Construction\/Maintenance":"168",
+    "Production\/Transportation\/Material Moving":"6131",
+    "County":"Scotland County, North Carolina",
+    "state":"37",
+    "county":"165"
+  },
+  {
+    "Management\/Business\/Science\/Arts":"15691",
+    "Service Occupations":"609",
+    "Sales and Office":"141",
+    "Natural Resources\/Construction\/Maintenance":"644",
+    "Production\/Transportation\/Material Moving":"13048",
+    "County":"Stanly County, North Carolina",
+    "state":"37",
+    "county":"167"
+  },
+  {
+    "Management\/Business\/Science\/Arts":"10508",
+    "Service Occupations":"476",
+    "Sales and Office":"30",
+    "Natural Resources\/Construction\/Maintenance":"324",
+    "Production\/Transportation\/Material Moving":"9154",
+    "County":"Stokes County, North Carolina",
+    "state":"37",
+    "county":"169"
+  },
+  {
+    "Management\/Business\/Science\/Arts":"17097",
+    "Service Occupations":"808",
+    "Sales and Office":"200",
+    "Natural Resources\/Construction\/Maintenance":"883",
+    "Production\/Transportation\/Material Moving":"14671",
+    "County":"Surry County, North Carolina",
+    "state":"37",
+    "county":"171"
+  },
+  {
+    "Management\/Business\/Science\/Arts":"2845",
+    "Service Occupations":"118",
+    "Sales and Office":"14",
+    "Natural Resources\/Construction\/Maintenance":"59",
+    "Production\/Transportation\/Material Moving":"2909",
+    "County":"Swain County, North Carolina",
+    "state":"37",
+    "county":"173"
+  },
+  {
+    "Management\/Business\/Science\/Arts":"7487",
+    "Service Occupations":"541",
+    "Sales and Office":"121",
+    "Natural Resources\/Construction\/Maintenance":"445",
+    "Production\/Transportation\/Material Moving":"6709",
+    "County":"Transylvania County, North Carolina",
+    "state":"37",
+    "county":"175"
+  },
+  {
+    "Management\/Business\/Science\/Arts":"553",
+    "Service Occupations":"66",
+    "Sales and Office":"0",
+    "Natural Resources\/Construction\/Maintenance":"5",
+    "Production\/Transportation\/Material Moving":"627",
+    "County":"Tyrrell County, North Carolina",
+    "state":"37",
+    "county":"177"
+  },
+  {
+    "Management\/Business\/Science\/Arts":"66001",
+    "Service Occupations":"3778",
+    "Sales and Office":"164",
+    "Natural Resources\/Construction\/Maintenance":"3078",
+    "Production\/Transportation\/Material Moving":"54937",
+    "County":"Union County, North Carolina",
+    "state":"37",
+    "county":"179"
+  },
+  {
+    "Management\/Business\/Science\/Arts":"8437",
+    "Service Occupations":"624",
+    "Sales and Office":"48",
+    "Natural Resources\/Construction\/Maintenance":"372",
+    "Production\/Transportation\/Material Moving":"9740",
+    "County":"Vance County, North Carolina",
+    "state":"37",
+    "county":"181"
+  },
+  {
+    "Management\/Business\/Science\/Arts":"318509",
+    "Service Occupations":"25488",
+    "Sales and Office":"2031",
+    "Natural Resources\/Construction\/Maintenance":"17049",
+    "Production\/Transportation\/Material Moving":"282780",
+    "County":"Wake County, North Carolina",
+    "state":"37",
+    "county":"183"
+  },
+  {
+    "Management\/Business\/Science\/Arts":"3610",
+    "Service Occupations":"164",
+    "Sales and Office":"0",
+    "Natural Resources\/Construction\/Maintenance":"221",
+    "Production\/Transportation\/Material Moving":"3474",
+    "County":"Warren County, North Carolina",
+    "state":"37",
+    "county":"185"
+  },
+  {
+    "Management\/Business\/Science\/Arts":"1814",
+    "Service Occupations":"83",
+    "Sales and Office":"32",
+    "Natural Resources\/Construction\/Maintenance":"85",
+    "Production\/Transportation\/Material Moving":"2079",
+    "County":"Washington County, North Carolina",
+    "state":"37",
+    "county":"187"
+  },
+  {
+    "Management\/Business\/Science\/Arts":"14109",
+    "Service Occupations":"1586",
+    "Sales and Office":"97",
+    "Natural Resources\/Construction\/Maintenance":"550",
+    "Production\/Transportation\/Material Moving":"12295",
+    "County":"Watauga County, North Carolina",
+    "state":"37",
+    "county":"189"
+  },
+  {
+    "Management\/Business\/Science\/Arts":"26142",
+    "Service Occupations":"1367",
+    "Sales and Office":"185",
+    "Natural Resources\/Construction\/Maintenance":"990",
+    "Production\/Transportation\/Material Moving":"24286",
+    "County":"Wayne County, North Carolina",
+    "state":"37",
+    "county":"191"
+  },
+  {
+    "Management\/Business\/Science\/Arts":"15671",
+    "Service Occupations":"1131",
+    "Sales and Office":"138",
+    "Natural Resources\/Construction\/Maintenance":"861",
+    "Production\/Transportation\/Material Moving":"12897",
+    "County":"Wilkes County, North Carolina",
+    "state":"37",
+    "county":"193"
+  },
+  {
+    "Management\/Business\/Science\/Arts":"17188",
+    "Service Occupations":"709",
+    "Sales and Office":"71",
+    "Natural Resources\/Construction\/Maintenance":"728",
+    "Production\/Transportation\/Material Moving":"17146",
+    "County":"Wilson County, North Carolina",
+    "state":"37",
+    "county":"195"
+  },
+  {
+    "Management\/Business\/Science\/Arts":"9301",
+    "Service Occupations":"220",
+    "Sales and Office":"65",
+    "Natural Resources\/Construction\/Maintenance":"302",
+    "Production\/Transportation\/Material Moving":"7599",
+    "County":"Yadkin County, North Carolina",
+    "state":"37",
+    "county":"197"
+  },
+  {
+    "Management\/Business\/Science\/Arts":"3814",
+    "Service Occupations":"188",
+    "Sales and Office":"75",
+    "Natural Resources\/Construction\/Maintenance":"159",
+    "Production\/Transportation\/Material Moving":"3882",
+    "County":"Yancey County, North Carolina",
+    "state":"37",
+    "county":"199"
+  }
+]

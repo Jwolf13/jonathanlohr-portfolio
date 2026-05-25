@@ -1,0 +1,38 @@
+# DVA-C02: Example Terraform variables for development environment
+# Copy this file to terraform.tfvars and customize for your environment
+
+# AWS configuration
+aws_region = "us-east-1"
+environment = "dev"
+account_id = "123456789012"  # Replace with your AWS account ID
+
+# Cognito OAuth configuration
+cognito_callback_urls = [
+  "http://localhost:3000/callback",
+  "http://localhost:8080/callback"
+]
+
+cognito_logout_urls = [
+  "http://localhost:3000",
+  "http://localhost:8080"
+]
+
+# CloudWatch alarm notifications
+alarm_email = "compliance-team@example.com"
+
+# EventBridge scheduling
+compliance_scan_schedule = "rate(6 hours)"
+
+# Lambda configuration
+lambda_function_zip_path = "./src/dist/compliance-collector.zip"
+
+# Lambda layers (optional for shared dependencies)
+lambda_layer_arns = []
+
+# Common tags
+common_tags = {
+  Project   = "compliance-collector"
+  Team      = "platform-engineering"
+  CostCenter = "engineering"
+  CreatedBy = "terraform"
+}

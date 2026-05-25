@@ -1,0 +1,35 @@
+{
+  "status": "REQUEST_SUCCEEDED",
+  "responseTime": 114,
+  "message": [
+    "Series does not exist for Series CEUNC370000000000001",
+    "Series does not exist for Series LAUCN370081000000005",
+    "Series does not exist for Series LAUCN370119000000005",
+    "Series does not exist for Series LAUCN370183000000005",
+    "Series does not exist for Series LAUSS370000000000005"
+  ],
+  "Results": {
+    "series": [
+      {
+        "seriesID": "LAUSS370000000000005",
+        "data": []
+      },
+      {
+        "seriesID": "LAUCN370183000000005",
+        "data": []
+      },
+      {
+        "seriesID": "LAUCN370119000000005",
+        "data": []
+      },
+      {
+        "seriesID": "LAUCN370081000000005",
+        "data": []
+      },
+      {
+        "seriesID": "CEUNC370000000000001",
+        "data": []
+      }
+    ]
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "status": "REQUEST_SUCCEEDED",
+  "responseTime": 80,
+  "message": [
+    "Series does not exist for Series SMU370000000000001",
+    "Series does not exist for Series SMU370000000100001",
+    "Series does not exist for Series SMU370600000000001"
+  ],
+  "Results": {
+    "series": [
+      {
+        "seriesID": "SMU370000000000001",
+        "data": []
+      },
+      {
+        "seriesID": "SMU370600000000001",
+        "data": []
+      },
+      {
+        "seriesID": "SMU370000000100001",
+        "data": []
+      }
+    ]
+  }
+}

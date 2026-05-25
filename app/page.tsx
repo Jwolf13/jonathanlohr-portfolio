@@ -15,8 +15,7 @@ export default function Home() {
           </h1>
           <p className="text-lg text-zinc-600 dark:text-zinc-400 mb-10 leading-relaxed">
             I&apos;ve spent my career inside revenue orgs at cybersecurity and SaaS
-            companies — close enough to know what breaks, and close enough to
-            engineering to ship the fix.
+            companies — briding critcal gaps for organizations. Know what breaks, and ship the fix.
           </p>
           <div className="flex gap-4 flex-wrap">
             <Link
@@ -35,6 +34,22 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Featured Project */}
+      <section className="max-w-5xl mx-auto px-4 pt-12">
+        <div className="rounded-xl border border-blue-200 dark:border-blue-900 bg-blue-50 dark:bg-blue-950/40 p-6 flex items-center justify-between gap-4">
+          <div>
+            <p className="text-xs font-semibold text-blue-600 dark:text-blue-400 uppercase tracking-wide mb-1">Featured Project</p>
+            <h2 className="text-lg font-bold text-zinc-900 dark:text-zinc-50">Channel Stream</h2>
+            <p className="text-sm text-zinc-600 dark:text-zinc-400 mt-1">Discovery layer that tells sports fans where to watch any live game.</p>
+          </div>
+          <Link
+            href="/channel-stream"
+            className="shrink-0 bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors"
+          >
+            Try it live →
+          </Link>
+        </div>
+      </section>
       {/* Two-up cards */}
       <section className="max-w-5xl mx-auto px-4 py-20">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">

@@ -1,0 +1,383 @@
+================================================================================
+                TERRAFORM CONFIGURATION - FILE INDEX
+================================================================================
+
+This file serves as a quick reference to all Terraform files in this directory.
+
+DIRECTORY STRUCTURE
+═══════════════════════════════════════════════════════════════════════════════
+
+terraform/                                Root directory
+├── .terraform-index.txt                  ← YOU ARE HERE
+├── README.md                             Complete documentation (1,800+ lines)
+├── DEPLOYMENT_GUIDE.md                   Quick start & operations (500+ lines)
+├── MANIFEST.md                           Inventory & alignment (600+ lines)
+├── COMPLETION_SUMMARY.txt                Project completion summary
+│
+├── modules/                              Reusable infrastructure modules
+│   ├── dynamodb/                         DynamoDB single-table design
+│   │   ├── main.tf                       Table, KMS, streams, PITR
+│   │   ├── variables.tf                  Input configuration
+│   │   └── outputs.tf                    Export values
+│   │
+│   ├── storage/                          S3 with versioning & lifecycle
+│   │   ├── main.tf                       Buckets, encryption, lifecycle
+│   │   ├── variables.tf                  Input configuration
+│   │   └── outputs.tf                    Export bucket details
+│   │
+│   ├── lambda/                           Reusable Lambda module
+│   │   ├── main.tf                       Function, role, logs, X-Ray
+│   │   ├── variables.tf                  Handler, runtime, memory, policy
+│   │   └── outputs.tf                    Export function details
+│   │
+│   ├── eventbridge/                      Scheduled & event-driven rules
+│   │   ├── main.tf                       Scheduled scan + Config change
+│   │   ├── variables.tf                  Lambda ARN, schedule, DLQ
+│   │   └── outputs.tf                    Export rule ARNs
+│   │
+│   ├── cognito/                          User authentication & authorization
+│   │   ├── main.tf                       User Pool, Client, domain, scopes
+│   │   ├── variables.tf                  Callback URLs, domain
+│   │   └── outputs.tf                    Export pool & client IDs
+│   │
+│   ├── api_gateway/                      REST API with OAuth2
+│   │   ├── main.tf                       API, authorizer, 5 resources
+│   │   ├── variables.tf                  Lambda, Cognito, environment
+│   │   └── outputs.tf                    Export API endpoint & URLs
+│   │
+│   └── monitoring/                       CloudWatch & alarms
+│       ├── main.tf                       Dashboard, alarms, SNS, KMS
+│       ├── variables.tf                  Region, email, resource names
+│       └── outputs.tf                    Export dashboard & alarm ARNs
+│
+└── environments/                         Environment-specific configs
+    └── dev/                              Development environment
+        ├── main.tf                       Orchestration & module composition
+        ├── variables.tf                  Region, account, email, tags
+        ├── outputs.tf                    All deployment endpoints
+        └── terraform.tfvars.example      Configuration template
+
+TOTAL: 24 Terraform files + 4 documentation files + 1 index file
+
+================================================================================
+QUICK NAVIGATION
+================================================================================
+
+For Setup:
+→ START HERE: DEPLOYMENT_GUIDE.md
+
+For Overview:
+→ COMPLETE ARCHITECTURE: README.md
+
+For Implementation Details:
+→ FILE INVENTORY: MANIFEST.md
+
+For Module Details:
+→ modules/*/main.tf (search for "DVA-C02:" comments)
+
+For Environment Config:
+→ environments/dev/
+
+For Project Status:
+→ COMPLETION_SUMMARY.txt
+
+================================================================================
+MODULE QUICK REFERENCE
+================================================================================
+
+1. DynamoDB (modules/dynamodb/)
+   Purpose: Single-table compliance data storage
+   Key Features:
+   - Partition Key (PK) + Sort Key (SK) design
+   - Two GSIs: ByFamily, BySeverity
+   - DynamoDB Streams for drift detection
+   - Point-in-time recovery
+   - TTL for auto-cleanup
+   - KMS encryption at rest
+   - On-demand billing
+
+2. Storage (modules/storage/)
+   Purpose: S3 evidence artifact storage
+   Key Features:
+   - Versioning enabled
+   - KMS encryption
+   - 7-year intelligent tiering lifecycle
+   - Bucket logging
+   - SSL/TLS enforcement
+   - Public access blocked
+
+3. Lambda (modules/lambda/)
+   Purpose: Reusable Lambda function module
+   Key Features:
+   - Least-privilege IAM role
+   - CloudWatch logs (14-day retention)
+   - X-Ray tracing
+   - VPC support
+   - Layer support
+   - Dead letter queue
+   - ARM64 (Graviton) architecture
+
+4. EventBridge (modules/eventbridge/)
+   Purpose: Event-driven compliance collection
+   Key Features:
+   - Scheduled rule (every 6 hours)
+   - Config change detection rule
+   - Input transformation
+   - Dead letter queue
+   - Lambda permissions
+
+5. Cognito (modules/cognito/)
+   Purpose: User authentication & authorization
+   Key Features:
+   - User Pool with security policies
+   - OAuth2/OIDC support
+   - MFA optional (TOTP)
+   - Email verification required
+   - Resource scopes (read, write, admin)
+   - Hosted UI for login
+
+6. API Gateway (modules/api_gateway/)
+   Purpose: REST API with Cognito authorization
+   Key Features:
+   - Cognito OAuth2 authorizer
+   - 5 resources: /controls, /posture, /reports, /scans, /drift
+   - Lambda proxy integration
+   - CORS configuration
+   - CloudWatch logging
+   - Throttling (5000 burst, 2000 req/sec)
+   - v1 stage deployment
+
+7. Monitoring (modules/monitoring/)
+   Purpose: CloudWatch monitoring & alarms
+   Key Features:
+   - Multi-metric dashboard
+   - 4 operational alarms
+   - SNS email notifications
+   - KMS encryption for SNS
+   - Access logging
+
+================================================================================
+ENVIRONMENT VARIABLES
+================================================================================
+
+Required for Deployment:
+→ aws_region                 (default: us-east-1)
+→ environment               (default: dev)
+→ account_id               (REQUIRED - your AWS account ID)
+→ alarm_email              (REQUIRED - for notifications)
+
+Optional:
+→ cognito_callback_urls    (default: localhost:3000/callback)
+→ cognito_logout_urls      (default: localhost:3000)
+→ compliance_scan_schedule (default: rate(6 hours))
+→ lambda_function_zip_path (default: null)
+→ lambda_layer_arns        (default: [])
+→ common_tags              (default: {Project: compliance-collector})
+
+================================================================================
+DEPLOYMENT WORKFLOW
+================================================================================
+
+1. Prepare Backend
+   $ aws s3 mb s3://compliance-collector-terraform-state-{ACCOUNT}
+   $ aws dynamodb create-table --table-name terraform-state-lock ...
+
+2. Initialize
+   $ cd environments/dev
+   $ terraform init
+
+3. Validate
+   $ terraform validate
+   $ terraform plan
+
+4. Apply
+   $ terraform apply -var-file=terraform.tfvars
+
+5. Capture Outputs
+   $ terraform output
+   $ export API_ENDPOINT=$(terraform output -raw api_endpoint_url)
+
+6. Deploy Lambda
+   $ zip -r src/dist/compliance-collector.zip src/handlers/*
+   $ (update terraform.tfvars with ZIP path and re-apply)
+
+7. Test
+   $ curl -H "Authorization: Bearer $TOKEN" $API_ENDPOINT/posture
+
+================================================================================
+KEY OUTPUTS AFTER DEPLOYMENT
+================================================================================
+
+Endpoints:
+→ api_endpoint_url              API Gateway base URL
+→ cognito_hosted_ui_domain      Login page URL
+→ cloudwatch_dashboard_url      Monitoring dashboard
+
+Resources:
+→ dynamodb_table_name           DynamoDB table identifier
+→ s3_bucket_name                Evidence storage bucket
+→ lambda_function_name          Lambda function identifier
+
+Identifiers:
+→ cognito_user_pool_id          User Pool ID
+→ cognito_client_id             SPA Client ID
+→ api_id                        API Gateway REST API ID
+
+Monitoring:
+→ sns_topic_arn                 SNS notifications
+→ eventbridge_scan_schedule_arn Scheduled scan rule
+
+================================================================================
+TROUBLESHOOTING CHECKLIST
+================================================================================
+
+ ☐ terraform validate          Check syntax errors
+ ☐ terraform plan              Preview all changes
+ ☐ terraform output            View current outputs
+ ☐ terraform state list        List all resources
+ ☐ terraform fmt               Fix formatting
+ ☐ terraform destroy           Clean up (use with care)
+
+For specific modules:
+ ☐ terraform apply -target=module.dynamodb
+ ☐ terraform apply -target=module.lambda
+ ☐ terraform apply -target=module.api_gateway
+
+AWS CLI checks:
+ ☐ aws dynamodb describe-table --table-name ComplianceData
+ ☐ aws s3 ls | grep compliance
+ ☐ aws lambda list-functions | grep compliance
+ ☐ aws apigateway get-rest-apis
+ ☐ aws cognito-idp list-user-pools --max-results 10
+
+================================================================================
+COMMON COMMANDS
+================================================================================
+
+View current infrastructure:
+$ terraform show
+
+Update specific module:
+$ terraform apply -target=module.monitoring
+
+Destroy everything:
+$ terraform destroy -var-file=terraform.tfvars
+
+Format code:
+$ terraform fmt -recursive
+
+Check for issues:
+$ terraform validate
+
+Get specific output:
+$ terraform output api_endpoint_url
+
+Taint resource (force update):
+$ terraform taint module.lambda.aws_lambda_function.compliance_function
+
+State management:
+$ terraform state list
+$ terraform state show 'module.dynamodb.aws_dynamodb_table.compliance_data'
+
+================================================================================
+DVA-C02 ALIGNMENT HIGHLIGHTS
+================================================================================
+
+✓ KMS Encryption
+  - DynamoDB with customer-managed keys
+  - S3 with customer-managed keys
+  - SNS with customer-managed keys
+  - Automatic key rotation enabled
+
+✓ Least-Privilege IAM
+  - Lambda execution role with specific permissions
+  - Service-specific policies
+  - Resource-level restrictions
+  - No wildcard permissions
+
+✓ Event-Driven Architecture
+  - EventBridge for scheduling
+  - DynamoDB Streams for changes
+  - Lambda for processing
+  - SNS for notifications
+
+✓ Data Security
+  - Encryption at rest (KMS)
+  - Encryption in transit (HTTPS)
+  - Versioning enabled
+  - Point-in-time recovery
+
+✓ Authentication & Authorization
+  - Cognito User Pool with OAuth2/OIDC
+  - API Gateway Cognito authorizer
+  - MFA support
+  - Strong password policies
+
+✓ Monitoring & Logging
+  - CloudWatch dashboard
+  - Alarms and notifications
+  - X-Ray distributed tracing
+  - Access logging (S3, API Gateway)
+
+✓ Serverless Best Practices
+  - No EC2 instances
+  - Managed services only
+  - Auto-scaling (DynamoDB on-demand)
+  - Lambda with X-Ray
+
+================================================================================
+ADDITIONAL RESOURCES
+================================================================================
+
+Documentation in this directory:
+→ README.md                     Architecture & setup guide
+→ DEPLOYMENT_GUIDE.md          Quick start & operations
+→ MANIFEST.md                  Complete inventory
+
+External references:
+→ Terraform AWS Provider        https://registry.terraform.io/providers/hashicorp/aws
+→ AWS Documentation             https://docs.aws.amazon.com/
+→ AWS Well-Architected          https://aws.amazon.com/architecture/well-architected/
+→ DVA-C02 Certification         https://aws.amazon.com/certification/certified-developer-associate/
+
+Project repository:
+→ https://github.com/jonathanlohr/compliance-collector
+
+================================================================================
+VERSION INFORMATION
+================================================================================
+
+Created: 2024
+Terraform Version: >= 1.0
+AWS Provider Version: >= 5.0
+Python Runtime: 3.11
+Status: Production-Ready
+
+================================================================================
+FINAL NOTES
+================================================================================
+
+1. Always use .gitignore to prevent committing:
+   - terraform.tfvars (use .example template)
+   - .terraform/ directory
+   - *.tfstate files
+
+2. Use remote state management (S3 + DynamoDB)
+   for team collaboration and locking
+
+3. Test in dev environment before promoting
+   to staging/production
+
+4. Regular backups of state file
+   (automatic with S3 versioning)
+
+5. Monitor costs with AWS Budgets
+   (DynamoDB on-demand scales with usage)
+
+6. Review security policies quarterly
+
+7. Document any custom modifications
+
+================================================================================
+End of Index
+================================================================================

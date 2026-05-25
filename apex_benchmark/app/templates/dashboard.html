@@ -1,0 +1,157 @@
+{% extends "base.html" %}
+
+{% block title %}Evaluate — ApexBench{% endblock %}
+
+{% block content %}
+
+<section
+  class="space-y-10"
+  x-data="{
+    metrics: [],
+    selectedMetricId: null,
+    userValue: null,
+    gender: 'male',
+    result: null,
+    loading: false,
+  }"
+
+  x-init="fetch('/api/v1/metrics')
+    .then(r => r.json())
+    .then(data => metrics = data)"
+  >
+
+
+  <!-- ── Page heading ─────────────────────────────────────────────────── -->
+  <div>
+    <h1 class="text-3xl font-bold">Athletic Evaluation</h1>
+    <p class="mt-1 text-sm text-zinc-500">
+      Enter your test results below to receive a scaled workout.
+    </p>
+  </div>
+
+
+  <!-- ── Input form ───────────────────────────────────────────────────── -->
+  <form
+    class="rounded-2xl border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 p-8 space-y-6"
+    @submit.prevent="submit()"
+  >
+    <h2 class="text-lg font-semibold">Your Numbers</h2>
+
+    <!-- Metric selector -->
+    <fieldset class="space-y-1">
+      <label class="block text-sm font-medium">Metric</label>
+      <select
+        x-model="selectedMetricId"
+        class="w-full rounded-lg border border-zinc-300 dark:border-zinc-600 bg-zinc-50 dark:bg-zinc-700 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+      >
+        <option value="">Select a metric…</option>
+        <template x-for="metric in metrics" :key="metric.id">
+          <option :value="metric.id" x-text="metric.name + ' (' + metric.unit + ')'"></option>
+        </template>
+      </select>
+    </fieldset>
+
+    <!-- Score input -->
+    <fieldset class="space-y-1">
+      <label class="block text-sm font-medium">Your Score</label>
+      <input
+        type="number"
+        step="0.01"
+        min="0"
+        placeholder="Enter your result"
+        x-model="userValue"
+        class="w-full rounded-lg border border-zinc-300 dark:border-zinc-600 bg-zinc-50 dark:bg-zinc-700 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+      />
+    </fieldset>
+
+    <!-- Gender selector -->
+    <fieldset class="space-y-1">
+      <label class="block text-sm font-medium">Gender</label>
+      <select
+        x-model="gender"
+        class="w-full rounded-lg border border-zinc-300 dark:border-zinc-600 bg-zinc-50 dark:bg-zinc-700 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+      >
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+      </select>
+    </fieldset>
+
+    <!-- Submit -->
+    <div class="pt-2">
+      <button
+        type="submit"
+        :disabled="loading"
+        x-text="loading ? 'Evaluating…' : 'Get My Workout'"
+        class="w-full rounded-xl bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white font-semibold py-3 px-6 transition-colors"
+      ></button>
+    </div>
+
+  </form>
+
+
+  <!-- ── Results wrapper ──────────────────────────────────────────────── -->
+  <!-- ALPINE SHOW POINT
+       This entire block should be hidden until the POST /evaluate
+       response comes back. Once Alpine state is wired:
+
+         x-show="results !== null"
+         x-transition
+
+       Bind individual fields from WorkoutResponse using x-text, e.g.:
+         x-text="results.name"
+         x-text="results.sets + ' sets × ' + results.reps + ' reps'"
+       ─────────────────────────────────────────────────────────────────── -->
+  <div
+    class="rounded-2xl border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 p-8 space-y-4"
+
+    <!-- TODO: add x-show="results !== null" x-transition -->
+    <!-- TODO: add x-cloak to hide before Alpine initialises -->
+  >
+
+    <h2 class="text-lg font-semibold">Your Scaled Workout</h2>
+
+    <!-- Protocol name -->
+    <p class="text-2xl font-bold text-blue-600">
+      <!-- TODO: replace with <span x-text="results?.name"></span> -->
+      Workout Name Placeholder
+    </p>
+
+    <!-- Protocol details grid -->
+    <dl class="grid grid-cols-3 gap-4 text-sm">
+
+      <div class="rounded-lg bg-zinc-50 dark:bg-zinc-700 p-4 text-center">
+        <dt class="text-zinc-400 text-xs mb-1">Sets</dt>
+        <dd class="font-bold text-xl">
+          <!-- TODO: <span x-text="results?.sets ?? '—'"></span> -->
+          —
+        </dd>
+      </div>
+
+      <div class="rounded-lg bg-zinc-50 dark:bg-zinc-700 p-4 text-center">
+        <dt class="text-zinc-400 text-xs mb-1">Reps</dt>
+        <dd class="font-bold text-xl">
+          <!-- TODO: <span x-text="results?.reps ?? '—'"></span> -->
+          —
+        </dd>
+      </div>
+
+      <div class="rounded-lg bg-zinc-50 dark:bg-zinc-700 p-4 text-center">
+        <dt class="text-zinc-400 text-xs mb-1">Rest</dt>
+        <dd class="font-bold text-xl">
+          <!-- TODO: <span x-text="results?.rest_seconds + 's' ?? '—'"></span> -->
+          —
+        </dd>
+      </div>
+
+    </dl>
+
+    <!-- Protocol description -->
+    <p class="text-sm text-zinc-500">
+      <!-- TODO: <span x-text="results?.description"></span> -->
+    </p>
+
+  </div>
+
+</section>
+
+{% endblock %}
