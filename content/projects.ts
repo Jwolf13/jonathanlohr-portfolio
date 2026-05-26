@@ -48,12 +48,13 @@ export const projects: Project[] = [
   {
     slug: "apex-benchmark",
     title: "Apex Benchmark",
-    hook: "FastAPI service for benchmarking LLM evaluation runs with Alembic-managed Postgres.",
+    hook: "Compares personal athletic scores against elite standards (NFL Combine, Olympic lifting) and prescribes scaled training protocols.",
     category: "fullstack",
-    stack: ["Python", "FastAPI", "SQLAlchemy", "Alembic", "Docker"],
+    stack: ["Python", "FastAPI", "SQLAlchemy", "Alembic", "PostgreSQL", "Docker", "Alpine.js", "Tailwind CSS"],
     github: "https://github.com/jwolf13/apex-benchmark",
-    status: "wip",
-    featured: false,
+    demo: "http://apex-benchmark-797003234.us-east-1.elb.amazonaws.com",
+    status: "live",
+    featured: true,
   },
   {
     slug: "nc-labor-market",
