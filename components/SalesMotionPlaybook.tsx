@@ -12,6 +12,7 @@ type Inputs = {
   workWeeks: number;
   dailyTouches: number;
   oppConvRate: number;
+  salesCycleDays: number;
 };
 
 type HealthInputs = {
@@ -33,6 +34,7 @@ const defaultInputs: Inputs = {
   workWeeks: 48,
   dailyTouches: 90,
   oppConvRate: 40,
+  salesCycleDays: 60,
 };
 
 const defaultHealth: HealthInputs = {
@@ -55,6 +57,7 @@ function calcMetrics(inputs: Inputs) {
   const sd = Math.max(1, inputs.sellDays);
   const ww = Math.max(1, inputs.workWeeks);
   const daily = Math.max(0, inputs.dailyTouches);
+  const cycle = Math.max(1, inputs.salesCycleDays);
 
   const winsYear = q / d;
   const oppsNeeds = winsYear / pct(w);
@@ -84,7 +87,23 @@ function calcMetrics(inputs: Inputs) {
   const plannedTouchesPerWeek = daily * sd;
   const touchGap = plannedTouchesPerWeek - touchesPerWeek; // +surplus / −shortfall
 
-  const coverageLabel = "3x";
+  // ── Time dimension: sales cycle / velocity ──
+  // Working days available to sell across the year.
+  const workingDays = ww * sd;
+  // Sales velocity = revenue generated per selling day.
+  // (Opportunities × Win Rate × Deal Size) / Cycle Length.
+  const salesVelocity = (oppsNeeds * pct(w) * d) / cycle;          // $/day
+  const velocityPerMonth = salesVelocity * (workingDays / 12);     // $/month at this pace
+  // Little's Law: work-in-progress = throughput × cycle time.
+  // Opps that must be OPEN at any one moment to sustain the close rate.
+  const concurrentOpps = oppsNeeds * (cycle / workingDays);
+  const livePipelineValue = concurrentOpps * d;
+  // Coverage derived from *your* cycle, not the flat rule of thumb.
+  const derivedCoverage = q > 0 ? livePipelineValue / q : 0;
+  // First closed-won lands ~one cycle after you start sourcing.
+  const rampDays = cycle;
+
+  const coverageLabel = "3x";          // benchmark rule of thumb, kept for comparison
   const pipelineNeeded = q * 3;
 
   return {
@@ -94,6 +113,8 @@ function calcMetrics(inputs: Inputs) {
     touchesPerConv, convsPerMeeting, meetingsPerOpp, oppsPerWin, touchesPerWin,
     touchesPerWeek, touchesPerDay, plannedTouchesPerWeek, touchGap,
     coverageLabel, pipelineNeeded,
+    workingDays, salesVelocity, velocityPerMonth,
+    concurrentOpps, livePipelineValue, derivedCoverage, rampDays,
   };
 }
 
@@ -128,6 +149,7 @@ const inputLabels: Record<keyof Inputs, string> = {
   workWeeks:    "Working weeks / year",
   dailyTouches: "Daily outreach touches",
   oppConvRate:  "Meeting → opportunity (%)",
+  salesCycleDays: "Average sales cycle (days, meeting → close)",
 };
 
 const TABS = [
@@ -174,12 +196,14 @@ export default function SalesMotionPlaybook() {
       ...inputs,
       oppConvRate: Math.max(1, inputs.oppConvRate - 15),
       meetingRate: Math.max(1, inputs.meetingRate - 5),
+      salesCycleDays: inputs.salesCycleDays + 15,
     }),
     baseline: m,
     high: calcMetrics({
       ...inputs,
       oppConvRate: Math.min(100, inputs.oppConvRate + 10),
       meetingRate: Math.min(100, inputs.meetingRate + 10),
+      salesCycleDays: Math.max(1, inputs.salesCycleDays - 10),
     }),
   }), [inputs, m]);
 
@@ -203,12 +227,16 @@ export default function SalesMotionPlaybook() {
       ["Conversation → meeting", `${inputs.meetingRate}%`],
       ["Meeting → opp", `${inputs.oppConvRate}%`],
       ["Daily touches", String(inputs.dailyTouches)],
+      ["Sales cycle (days)", String(inputs.salesCycleDays)],
       ["Wins needed", m.winsYear.toFixed(1)],
       ["Opps needed", m.oppsNeeds.toFixed(1)],
       ["Meetings needed", m.meetingsNeeds.toFixed(1)],
       ["Weekly meetings target", m.weeklyMeetingsNeed.toFixed(1)],
-      ["Pipeline value needed", `$${m.pipelineNeeded.toLocaleString()}`],
-      ["Pipeline coverage", m.coverageLabel],
+      ["Sales velocity ($/selling day)", `$${Math.round(m.salesVelocity).toLocaleString()}`],
+      ["Concurrent open opps needed", m.concurrentOpps.toFixed(1)],
+      ["Live pipeline value needed", `$${Math.round(m.livePipelineValue).toLocaleString()}`],
+      ["Derived coverage", `${m.derivedCoverage.toFixed(1)}x`],
+      ["Benchmark coverage", m.coverageLabel],
     ];
     const blob = new Blob([rows.map((r) => r.join(",")).join("\n")], { type: "text/csv;charset=utf-8;" });
     const url = URL.createObjectURL(blob);
@@ -311,6 +339,35 @@ export default function SalesMotionPlaybook() {
               </p>
             </div>
 
+            {/* Sales velocity — the time dimension */}
+            <div className="rounded-xl border border-violet-200 dark:border-violet-800 bg-violet-50 dark:bg-violet-950 p-4">
+              <div className="flex items-baseline justify-between mb-1">
+                <h3 className="text-lg font-semibold text-violet-900 dark:text-violet-100">Sales velocity</h3>
+                <span className="text-xs text-violet-600 dark:text-violet-400">
+                  {inputs.salesCycleDays}-day cycle
+                </span>
+              </div>
+              <div className="flex gap-6 mb-3">
+                <div>
+                  <p className="text-3xl font-bold text-violet-700 dark:text-violet-300 tabular-nums">
+                    ${Math.round(m.salesVelocity).toLocaleString()}
+                  </p>
+                  <p className="text-xs text-violet-600 dark:text-violet-400">per selling day</p>
+                </div>
+                <div>
+                  <p className="text-3xl font-bold text-violet-700 dark:text-violet-300 tabular-nums">
+                    ${(m.velocityPerMonth / 1000).toFixed(0)}K
+                  </p>
+                  <p className="text-xs text-violet-600 dark:text-violet-400">per month at this pace</p>
+                </div>
+              </div>
+              <p className="text-xs text-violet-700 dark:text-violet-300">
+                (opps × win rate × deal size) ÷ cycle length. First closed-won lands ~{Math.round(m.rampDays)} days
+                after you start sourcing, so the {inputs.workWeeks}-week plan really has ~{Math.max(0, Math.round(m.workingDays - m.rampDays))} selling
+                days of closing runway. Shortening the cycle lifts every number above without adding a single touch.
+              </p>
+            </div>
+
             {/* Funnel math — top of funnel down to closed */}
             <div className="rounded-xl border border-zinc-200 dark:border-zinc-700 p-4">
               <h3 className="text-lg font-semibold text-zinc-900 dark:text-zinc-50 mb-1">How the funnel compounds</h3>
@@ -383,26 +440,35 @@ export default function SalesMotionPlaybook() {
               </ol>
             </div>
 
-            {/* Pipeline coverage callout */}
+            {/* Pipeline coverage callout — derived from your cycle, vs. the rule of thumb */}
             <div className="rounded-xl border border-indigo-200 dark:border-indigo-800 bg-indigo-50 dark:bg-indigo-950 p-4">
               <h3 className="text-lg font-semibold text-indigo-900 dark:text-indigo-100 mb-3">Pipeline Coverage</h3>
               <div className="flex gap-6 mb-4">
                 <div>
-                  <p className="text-xs text-indigo-600 dark:text-indigo-400">Target multiple</p>
-                  <p className="text-3xl font-bold text-indigo-700 dark:text-indigo-300">{m.coverageLabel}</p>
-                  <p className="text-xs text-indigo-500 dark:text-indigo-400">industry standard</p>
+                  <p className="text-xs text-indigo-600 dark:text-indigo-400">Your coverage</p>
+                  <p className="text-3xl font-bold text-indigo-700 dark:text-indigo-300 tabular-nums">{m.derivedCoverage.toFixed(1)}×</p>
+                  <p className="text-xs text-indigo-500 dark:text-indigo-400">derived from your {inputs.salesCycleDays}-day cycle</p>
                 </div>
                 <div>
-                  <p className="text-xs text-indigo-600 dark:text-indigo-400">Pipeline target</p>
-                  <p className="text-3xl font-bold text-indigo-700 dark:text-indigo-300">
-                    ${(m.pipelineNeeded / 1_000_000).toFixed(2)}M
+                  <p className="text-xs text-indigo-600 dark:text-indigo-400">Benchmark</p>
+                  <p className="text-3xl font-bold text-indigo-400 dark:text-indigo-500 tabular-nums">{m.coverageLabel}</p>
+                  <p className="text-xs text-indigo-500 dark:text-indigo-400">industry rule of thumb</p>
+                </div>
+                <div>
+                  <p className="text-xs text-indigo-600 dark:text-indigo-400">Live pipeline needed</p>
+                  <p className="text-3xl font-bold text-indigo-700 dark:text-indigo-300 tabular-nums">
+                    ${(m.livePipelineValue / 1_000_000).toFixed(2)}M
                   </p>
-                  <p className="text-xs text-indigo-500 dark:text-indigo-400">3× your ${inputs.annualQuota.toLocaleString()} quota</p>
+                  <p className="text-xs text-indigo-500 dark:text-indigo-400">~{Math.round(m.concurrentOpps)} opps open at once</p>
                 </div>
               </div>
               <p className="text-xs text-indigo-700 dark:text-indigo-300">
-                At your {inputs.winRate}% win rate you need ~{m.oppsNeeds.toFixed(0)} opportunities to close {m.winsYear.toFixed(0)} deals.
-                Keeping 3× quota in pipeline provides buffer for slippage and timing shifts.
+                By Little&apos;s Law, sustaining {m.winsYear.toFixed(0)} wins/yr at a {inputs.salesCycleDays}-day cycle means
+                keeping ~{Math.round(m.concurrentOpps)} opportunities open at any moment (${(m.livePipelineValue / 1_000_000).toFixed(2)}M),
+                a <strong>{m.derivedCoverage.toFixed(1)}×</strong> coverage ratio.{" "}
+                {m.derivedCoverage > 3
+                  ? "That runs hotter than the 3× rule of thumb — your cycle length, not your win rate, is the binding constraint."
+                  : "That sits at or under the 3× rule of thumb, so the standard buffer is comfortable for you."}
               </p>
             </div>
 
@@ -501,7 +567,7 @@ export default function SalesMotionPlaybook() {
                   </th>
                   <th className="bg-zinc-100 dark:bg-zinc-800 px-4 py-3 text-right font-semibold text-zinc-700 dark:text-zinc-300">
                     <div>Low</div>
-                    <div className="text-xs font-normal text-zinc-500">Opp −15%, Mtg −5%</div>
+                    <div className="text-xs font-normal text-zinc-500">Opp −15%, Mtg −5%, +15 days</div>
                   </th>
                   <th className="bg-indigo-600 px-4 py-3 text-right font-semibold text-white">
                     <div>Baseline</div>
@@ -509,7 +575,7 @@ export default function SalesMotionPlaybook() {
                   </th>
                   <th className="bg-zinc-100 dark:bg-zinc-800 px-4 py-3 text-right font-semibold text-zinc-700 dark:text-zinc-300">
                     <div>High</div>
-                    <div className="text-xs font-normal text-zinc-500">Opp +10%, Mtg +10%</div>
+                    <div className="text-xs font-normal text-zinc-500">Opp +10%, Mtg +10%, −10 days</div>
                   </th>
                 </tr>
               </thead>
@@ -534,10 +600,22 @@ export default function SalesMotionPlaybook() {
                     high:     sensitivity.high.touchesNeeds.toFixed(0),
                   },
                   {
-                    label: "Pipeline target (3× quota)",
-                    low:      `$${(sensitivity.baseline.pipelineNeeded / 1_000_000).toFixed(2)}M`,
-                    baseline: `$${(sensitivity.baseline.pipelineNeeded / 1_000_000).toFixed(2)}M`,
-                    high:     `$${(sensitivity.baseline.pipelineNeeded / 1_000_000).toFixed(2)}M`,
+                    label: "Sales velocity ($/selling day)",
+                    low:      `$${Math.round(sensitivity.low.salesVelocity).toLocaleString()}`,
+                    baseline: `$${Math.round(sensitivity.baseline.salesVelocity).toLocaleString()}`,
+                    high:     `$${Math.round(sensitivity.high.salesVelocity).toLocaleString()}`,
+                  },
+                  {
+                    label: "Live pipeline needed",
+                    low:      `$${(sensitivity.low.livePipelineValue / 1_000_000).toFixed(2)}M`,
+                    baseline: `$${(sensitivity.baseline.livePipelineValue / 1_000_000).toFixed(2)}M`,
+                    high:     `$${(sensitivity.high.livePipelineValue / 1_000_000).toFixed(2)}M`,
+                  },
+                  {
+                    label: "Derived coverage",
+                    low:      `${sensitivity.low.derivedCoverage.toFixed(1)}×`,
+                    baseline: `${sensitivity.baseline.derivedCoverage.toFixed(1)}×`,
+                    high:     `${sensitivity.high.derivedCoverage.toFixed(1)}×`,
                   },
                 ].map(({ label, low, baseline, high }) => (
                   <tr key={label} className="bg-white dark:bg-zinc-900">
