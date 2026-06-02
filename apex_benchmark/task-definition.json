@@ -1,0 +1,41 @@
+{
+  "family": "apex-benchmark",
+  "networkMode": "awsvpc",
+  "requiresCompatibilities": ["FARGATE"],
+  "cpu": "256",
+  "memory": "512",
+  "executionRoleArn": "arn:aws:iam::435204302991:role/ecsTaskExecutionRole",
+  "taskRoleArn": "arn:aws:iam::435204302991:role/ecsTaskRole",
+  "containerDefinitions": [
+    {
+      "name": "apex-benchmark",
+      "image": "435204302991.dkr.ecr.us-east-1.amazonaws.com/apex-benchmark:latest",
+      "essential": true,
+      "portMappings": [
+        {
+          "containerPort": 8000,
+          "protocol": "tcp"
+        }
+      ],
+      "environment": [
+        {
+          "name": "DATABASE_URL",
+          "value": "postgresql://apexadmin:sC~Vu%28_TTL6%5BHioQN11fj%21%3CE8rfg@apex-benchmark.cluster-c2vugkacqzdw.us-east-1.rds.amazonaws.com:5432/apexbenchmark"
+        },
+        {
+          "name": "ENVIRONMENT",
+          "value": "production"
+        }
+      ],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/apex-benchmark",
+          "awslogs-create-group": "true",
+          "awslogs-region": "us-east-1",
+          "awslogs-stream-prefix": "ecs"
+        }
+      }
+    }
+  ]
+}

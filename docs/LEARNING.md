@@ -45,7 +45,7 @@ Think of files in three tiers. Edit confidently at the bottom, carefully in the 
 
 **Rule of thumb:** the deeper a file is in the dependency graph, the more careful you should be. A component imported by 10 pages affects 10 pages.
 
-### How the pieces connect — so you know what you're affecting
+### Ho4at you're affecting
 
 ```
 content/projects.ts          <-  data only, no UI. Safe to edit.

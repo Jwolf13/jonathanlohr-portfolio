@@ -45,16 +45,6 @@ def seed_database(db: Session) -> None:
         metric_id = metric_40.id
     )
     db.add(protocol)
- 
-    # TODO: create a Metric row → name="40-Yard Dash", unit="seconds",
-    #       category="speed"
-    # TODO: create Benchmark rows for this metric:
-    #         label="elite",         value=<elite time>,    gender="male"
-    #         label="average",       value=<average time>,  gender="male"
-    #         label="below average", value=<below time>,    gender="male"
-    #       (repeat set for gender="female" with appropriate values)
-    # TODO: db.add() each object and flush so the metric.id is available
-    #       for the ForeignKey on each Benchmark row
 
     # ── Vertical Jump ─────────────────────────────────────────────────────────
     metric_vertical_jump = Metric(
@@ -85,16 +75,7 @@ def seed_database(db: Session) -> None:
         scaling_factor=1.0,  # This could be used to adjust the workout intensity based on the evaluation score
         metric_id = metric_vertical_jump.id
     )
-    db.add(protocol)    
-
-    # TODO: create a Metric row → name="Vertical Jump", unit="inches",
-    #       category="power"
-    # TODO: create Benchmark rows for this metric:
-    #         label="elite",         value=<elite inches>,   gender="male"
-    #         label="average",       value=<average inches>, gender="male"
-    #         label="below average", value=<below inches>,   gender="male"
-    #       (repeat for gender="female")
-    # TODO: db.add() each object
+    db.add(protocol)
 
     # ── Back Squat ────────────────────────────────────────────────────────────
     metric_back_squat = Metric(
@@ -125,14 +106,7 @@ def seed_database(db: Session) -> None:
         scaling_factor=1.0,  # This could be used to adjust the workout intensity based on the evaluation score
         metric_id = metric_back_squat.id
     )
-    db.add(protocol)    
-    # TODO: create a Metric row → name="Back Squat", unit="lbs",
-    #       category="strength"
-    # NOTE: Back Squat elite standards are typically expressed as a
-    #       bodyweight multiplier — decide whether to store the raw lb value
-    #       or a multiplier and adjust the column type accordingly.
-    # TODO: create Benchmark rows (label, value, gender, age_group)
-    # TODO: db.add() each object
+    db.add(protocol)
 
     # ── VO2 Max ───────────────────────────────────────────────────────────────
     metric_vo2_max = Metric(
@@ -163,33 +137,19 @@ def seed_database(db: Session) -> None:
         scaling_factor=1.0,  # This could be used to adjust the workout intensity based on the evaluation score
         metric_id = metric_vo2_max.id
     )
-    db.add(protocol)    
+    db.add(protocol)
 
-
-
-    # TODO: create a Metric row → name="VO2 Max", unit="ml/kg/min",
-    #       category="endurance"
-    # NOTE: VO2 Max norms vary significantly by age and gender — consider
-    #       populating multiple age_group rows (e.g. "18-24", "25-34", etc.)
-    # TODO: create Benchmark rows with age_group set appropriately
-    # TODO: db.add() each object
-
-    # ── Protocol seeds (optional first pass) ─────────────────────────────────
-     
-    # TODO: insert base Protocol rows for any starter workouts you want
-    #       available before user-generated content is added
-
-    # ── Commit ────────────────────────────────────────────────────────────────
-    db.commit()  # commit all the above changes to the database
-
-    # TODO: db.commit() once all objects have been added
+    db.commit()
 
 
 if __name__ == "__main__":
     db: Session = SessionLocal()
     try:
-        seed_database(db)
-        print("Seed complete.")
+        if db.query(Metric).count() > 0:
+            print("Seed skipped: data already exists.")
+        else:
+            seed_database(db)
+            print("Seed complete.")
     except Exception as exc:
         db.rollback()
         print(f"Seed failed: {exc}")

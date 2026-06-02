@@ -69,14 +69,30 @@ function calcMetrics(inputs: Inputs) {
   const yearlyOppsFromDaily = weeklyMeetingsFromDaily * ww * pct(oc);
   const monthlyMeetingsFromDaily = weeklyMeetingsFromDaily * 4.333;
 
-  const coverageLabel =
-    w <= 20 ? "5x+" : w <= 25 ? "4–5x" : w <= 33 ? "3–4x" : "2–3x";
-  const pipelineNeeded = oppsNeeds * d;
+  // How many of the *upstream* stage it takes to produce one of the
+  // *downstream* stage — the multiplier that makes the funnel intuitive.
+  const perUnit = (rate: number) => (rate > 0 ? 100 / rate : 0);
+  const touchesPerConv   = perUnit(rc);   // outreach → 1 conversation
+  const convsPerMeeting  = perUnit(rm);   // conversations → 1 meeting
+  const meetingsPerOpp   = perUnit(oc);   // meetings → 1 opportunity
+  const oppsPerWin       = perUnit(w);    // opps → 1 win
+  const touchesPerWin    = winsYear > 0 ? touchesNeeds / winsYear : 0;
+
+  // The actionable cadence: outreach the model says you must do.
+  const touchesPerWeek = touchesNeeds / ww;
+  const touchesPerDay  = touchesPerWeek / sd;
+  const plannedTouchesPerWeek = daily * sd;
+  const touchGap = plannedTouchesPerWeek - touchesPerWeek; // +surplus / −shortfall
+
+  const coverageLabel = "3x";
+  const pipelineNeeded = q * 3;
 
   return {
     winsYear, oppsNeeds, meetingsNeeds, convsNeeds, touchesNeeds,
     weeklyMeetingsNeed, dailyConvs, dailyMeetings,
     weeklyMeetingsFromDaily, yearlyOppsFromDaily, monthlyMeetingsFromDaily,
+    touchesPerConv, convsPerMeeting, meetingsPerOpp, oppsPerWin, touchesPerWin,
+    touchesPerWeek, touchesPerDay, plannedTouchesPerWeek, touchGap,
     coverageLabel, pipelineNeeded,
   };
 }
@@ -126,10 +142,24 @@ export default function SalesMotionPlaybook() {
   const [inputs, setInputs] = useState<Inputs>(defaultInputs);
   const [health, setHealth] = useState<HealthInputs>(defaultHealth);
   const [tab, setTab] = useState<Tab>("builder");
+  // Raw text overrides so a field can be cleared/empty while editing
+  // without snapping back to 0. Numeric `inputs` stays the source of truth
+  // for calculations; an empty string is treated as 0 there.
+  const [raw, setRaw] = useState<Partial<Record<keyof Inputs, string>>>({});
 
-  const update = (key: keyof Inputs, raw: string) => {
-    const v = Number(raw);
-    if (!Number.isNaN(v)) setInputs((p) => ({ ...p, [key]: v }));
+  const update = (key: keyof Inputs, rawVal: string) => {
+    setRaw((p) => ({ ...p, [key]: rawVal }));
+    const v = Number(rawVal);
+    if (rawVal !== "" && !Number.isNaN(v)) {
+      setInputs((p) => ({ ...p, [key]: v }));
+    } else if (rawVal === "") {
+      setInputs((p) => ({ ...p, [key]: 0 }));
+    }
+  };
+
+  const resetInputs = () => {
+    setInputs(defaultInputs);
+    setRaw({});
   };
 
   const updateHealth = (key: keyof HealthInputs, raw: string) => {
@@ -225,11 +255,12 @@ export default function SalesMotionPlaybook() {
                   </label>
                   <input
                     type="number"
-                    value={value}
+                    value={raw[key] ?? value}
                     step={isMoney ? 1000 : 0.1}
                     min={isRate ? 0 : 1}
                     max={isRate ? 100 : undefined}
                     onChange={(e) => update(key, e.target.value)}
+                    onFocus={(e) => e.target.select()}
                     className="mt-1 w-full rounded-md border border-zinc-300 dark:border-zinc-600 px-3 py-2 bg-white dark:bg-zinc-800 text-zinc-900 dark:text-zinc-50 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-200"
                   />
                 </div>
@@ -238,7 +269,7 @@ export default function SalesMotionPlaybook() {
             <div className="flex gap-3 flex-wrap pt-2">
               <button
                 type="button"
-                onClick={() => setInputs(defaultInputs)}
+                onClick={resetInputs}
                 className="rounded-md bg-zinc-100 dark:bg-zinc-800 px-4 py-2 text-sm font-medium text-zinc-700 dark:text-zinc-300 hover:bg-zinc-200 dark:hover:bg-zinc-700"
               >
                 Reset defaults
@@ -264,30 +295,92 @@ export default function SalesMotionPlaybook() {
           <div className="space-y-5">
             {/* Summary */}
             <div className="rounded-xl bg-zinc-50 dark:bg-zinc-800 p-4">
-              <h3 className="text-lg font-semibold text-zinc-900 dark:text-zinc-50 mb-2">Live summary</h3>
+              <h3 className="text-lg font-semibold text-zinc-900 dark:text-zinc-50 mb-2">The bottom line</h3>
               <p className="text-sm text-zinc-700 dark:text-zinc-300">
-                To hit <strong>${inputs.annualQuota.toLocaleString()}</strong> with {inputs.dailyTouches} touches/day, you need ~{m.monthlyMeetingsFromDaily.toFixed(0)} meetings/month and ~{m.yearlyOppsFromDaily.toFixed(0)} opps/year at current funnel rates.
+                One closed deal takes <strong>~{Math.round(m.oppsPerWin)} opportunities</strong>, which take{" "}
+                <strong>~{Math.round(m.meetingsPerOpp * m.oppsPerWin)} meetings</strong>, which take{" "}
+                <strong>~{Math.round(m.touchesPerWin).toLocaleString()} outreach touches</strong>. To clear{" "}
+                <strong>${inputs.annualQuota.toLocaleString()}</strong> ({Math.round(m.winsYear)} wins) you therefore need{" "}
+                <strong>~{Math.round(m.touchesNeeds).toLocaleString()} touches/year</strong> —{" "}
+                about <strong>{Math.round(m.touchesPerDay)}</strong>/day.
+              </p>
+              <p className={`mt-2 text-sm font-medium ${m.touchGap >= 0 ? "text-green-700 dark:text-green-400" : "text-red-700 dark:text-red-400"}`}>
+                {m.touchGap >= 0
+                  ? `Your ${inputs.dailyTouches}/day plan covers it with ~${Math.round(m.touchGap)} touches/week to spare.`
+                  : `Your ${inputs.dailyTouches}/day plan falls ~${Math.round(Math.abs(m.touchGap))} touches/week short — raise daily touches or improve a conversion rate.`}
               </p>
             </div>
 
-            {/* Key targets */}
+            {/* Funnel math — top of funnel down to closed */}
             <div className="rounded-xl border border-zinc-200 dark:border-zinc-700 p-4">
-              <h3 className="text-lg font-semibold text-zinc-900 dark:text-zinc-50 mb-3">Key annual targets</h3>
-              <div className="grid gap-2 sm:grid-cols-2">
+              <h3 className="text-lg font-semibold text-zinc-900 dark:text-zinc-50 mb-1">How the funnel compounds</h3>
+              <p className="text-xs text-zinc-500 dark:text-zinc-400 mb-4">
+                Read top to bottom. Each rate sets how much top-of-funnel volume it takes to produce the next stage — that&apos;s what dictates outreach load.
+              </p>
+              <ol className="space-y-0">
                 {[
-                  ["Wins needed",          m.winsYear],
-                  ["Opps needed",          m.oppsNeeds],
-                  ["Meetings needed",      m.meetingsNeeds],
-                  ["Conversations needed", m.convsNeeds],
-                  ["Touches needed",       m.touchesNeeds],
-                  ["Opps from daily plan", m.yearlyOppsFromDaily],
-                ].map(([label, value]) => (
-                  <div key={label as string} className="rounded-lg bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 p-3">
-                    <p className="text-xs text-zinc-500 dark:text-zinc-400">{label as string}</p>
-                    <p className="text-xl font-semibold text-zinc-900 dark:text-zinc-50">{(value as number).toFixed(1)}</p>
-                  </div>
+                  {
+                    stage: "Outreach touches",
+                    count: m.touchesNeeds,
+                    rate: inputs.convRate,
+                    rateLabel: "reply / connect",
+                    per: m.touchesPerConv,
+                    perLabel: "touches per conversation",
+                  },
+                  {
+                    stage: "Conversations",
+                    count: m.convsNeeds,
+                    rate: inputs.meetingRate,
+                    rateLabel: "book a meeting",
+                    per: m.convsPerMeeting,
+                    perLabel: "conversations per meeting",
+                  },
+                  {
+                    stage: "Meetings booked",
+                    count: m.meetingsNeeds,
+                    rate: inputs.oppConvRate,
+                    rateLabel: "become an opp",
+                    per: m.meetingsPerOpp,
+                    perLabel: "meetings per opportunity",
+                  },
+                  {
+                    stage: "Qualified opportunities",
+                    count: m.oppsNeeds,
+                    rate: inputs.winRate,
+                    rateLabel: "win rate",
+                    per: m.oppsPerWin,
+                    perLabel: "opps per win",
+                  },
+                ].map((s) => (
+                  <li key={s.stage}>
+                    <div className="flex items-baseline justify-between py-1.5">
+                      <span className="text-sm font-medium text-zinc-800 dark:text-zinc-200">{s.stage}</span>
+                      <span className="text-lg font-semibold text-zinc-900 dark:text-zinc-50 tabular-nums">
+                        {Math.round(s.count).toLocaleString()}<span className="text-xs font-normal text-zinc-400">/yr</span>
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-2 pl-2 py-1 border-l-2 border-dashed border-zinc-200 dark:border-zinc-700 ml-1">
+                      <span className="text-zinc-400">↓</span>
+                      <span className="text-xs text-zinc-500 dark:text-zinc-400">
+                        <strong className="text-zinc-700 dark:text-zinc-300">{s.rate}%</strong> {s.rateLabel}
+                        {" · "}
+                        <strong className="text-zinc-700 dark:text-zinc-300">{s.per ? s.per.toFixed(1) : "—"}</strong> {s.perLabel}
+                      </span>
+                    </div>
+                  </li>
                 ))}
-              </div>
+                <li>
+                  <div className="flex items-baseline justify-between py-1.5">
+                    <span className="text-sm font-semibold text-indigo-700 dark:text-indigo-300">Closed-won deals</span>
+                    <span className="text-lg font-bold text-indigo-700 dark:text-indigo-300 tabular-nums">
+                      {Math.round(m.winsYear).toLocaleString()}<span className="text-xs font-normal text-indigo-400">/yr</span>
+                    </span>
+                  </div>
+                  <p className="text-xs text-zinc-500 dark:text-zinc-400 pl-3">
+                    = ${inputs.annualQuota.toLocaleString()} at a ${inputs.avgDealSize.toLocaleString()} average deal.
+                  </p>
+                </li>
+              </ol>
             </div>
 
             {/* Pipeline coverage callout */}
@@ -295,48 +388,49 @@ export default function SalesMotionPlaybook() {
               <h3 className="text-lg font-semibold text-indigo-900 dark:text-indigo-100 mb-3">Pipeline Coverage</h3>
               <div className="flex gap-6 mb-4">
                 <div>
-                  <p className="text-xs text-indigo-600 dark:text-indigo-400">Required multiple</p>
+                  <p className="text-xs text-indigo-600 dark:text-indigo-400">Target multiple</p>
                   <p className="text-3xl font-bold text-indigo-700 dark:text-indigo-300">{m.coverageLabel}</p>
-                  <p className="text-xs text-indigo-500 dark:text-indigo-400">at {inputs.winRate}% win rate</p>
+                  <p className="text-xs text-indigo-500 dark:text-indigo-400">industry standard</p>
                 </div>
                 <div>
-                  <p className="text-xs text-indigo-600 dark:text-indigo-400">Pipeline value needed</p>
+                  <p className="text-xs text-indigo-600 dark:text-indigo-400">Pipeline target</p>
                   <p className="text-3xl font-bold text-indigo-700 dark:text-indigo-300">
                     ${(m.pipelineNeeded / 1_000_000).toFixed(2)}M
                   </p>
-                  <p className="text-xs text-indigo-500 dark:text-indigo-400">opps × avg deal</p>
+                  <p className="text-xs text-indigo-500 dark:text-indigo-400">3× your ${inputs.annualQuota.toLocaleString()} quota</p>
                 </div>
               </div>
-              <table className="w-full text-xs">
-                <thead>
-                  <tr className="text-indigo-500 dark:text-indigo-400 border-b border-indigo-200 dark:border-indigo-800">
-                    <th className="text-left pb-1 font-semibold">Win rate</th>
-                    <th className="text-left pb-1 font-semibold">Required coverage</th>
-                  </tr>
-                </thead>
-                <tbody className="text-indigo-800 dark:text-indigo-200">
-                  {[
-                    ["≤ 20%",  "5x+",  inputs.winRate <= 20],
-                    ["21–25%", "4–5x", inputs.winRate > 20 && inputs.winRate <= 25],
-                    ["26–33%", "3–4x", inputs.winRate > 25 && inputs.winRate <= 33],
-                    ["≥ 34%",  "2–3x", inputs.winRate > 33],
-                  ].map(([wr, cov, active]) => (
-                    <tr key={wr as string} className={active ? "font-bold" : "opacity-60"}>
-                      <td className="py-0.5">{wr as string}</td>
-                      <td className="py-0.5">{cov as string}{active ? " ← you are here" : ""}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+              <p className="text-xs text-indigo-700 dark:text-indigo-300">
+                At your {inputs.winRate}% win rate you need ~{m.oppsNeeds.toFixed(0)} opportunities to close {m.winsYear.toFixed(0)} deals.
+                Keeping 3× quota in pipeline provides buffer for slippage and timing shifts.
+              </p>
             </div>
 
-            {/* Funnel ratio */}
+            {/* Outreach load — funnel turned into a cadence */}
             <div className="rounded-xl border border-zinc-200 dark:border-zinc-700 p-4">
-              <h3 className="text-lg font-semibold text-zinc-900 dark:text-zinc-50 mb-2">Funnel Ratio</h3>
+              <h3 className="text-lg font-semibold text-zinc-900 dark:text-zinc-50 mb-1">Required outreach load</h3>
+              <p className="text-xs text-zinc-500 dark:text-zinc-400 mb-3">
+                The same top-of-funnel number, spread across {inputs.workWeeks} weeks and {inputs.sellDays} selling days.
+              </p>
+              <div className="grid grid-cols-3 gap-2 mb-4">
+                {[
+                  ["Per year",  Math.round(m.touchesNeeds)],
+                  ["Per week",  Math.round(m.touchesPerWeek)],
+                  ["Per day",   Math.round(m.touchesPerDay)],
+                ].map(([label, value]) => (
+                  <div key={label as string} className="rounded-lg bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 p-3 text-center">
+                    <p className="text-xs text-zinc-500 dark:text-zinc-400">{label as string}</p>
+                    <p className="text-xl font-semibold text-zinc-900 dark:text-zinc-50 tabular-nums">{(value as number).toLocaleString()}</p>
+                  </div>
+                ))}
+              </div>
+              {/* Funnel proportion bars */}
               {[
                 ["Touches",       m.touchesNeeds,  "bg-indigo-300 dark:bg-indigo-700"],
                 ["Conversations", m.convsNeeds,    "bg-blue-300 dark:bg-blue-700"],
                 ["Meetings",      m.meetingsNeeds, "bg-teal-300 dark:bg-teal-700"],
+                ["Opps",          m.oppsNeeds,     "bg-emerald-300 dark:bg-emerald-700"],
+                ["Wins",          m.winsYear,      "bg-amber-300 dark:bg-amber-700"],
               ].map(([label, value, color]) => {
                 const width = m.touchesNeeds > 0
                   ? Math.min(100, ((value as number) / m.touchesNeeds) * 100)
@@ -345,10 +439,10 @@ export default function SalesMotionPlaybook() {
                   <div key={label as string} className="mb-2">
                     <div className="flex justify-between text-xs text-zinc-500 dark:text-zinc-400">
                       <span>{label as string}</span>
-                      <span>{(value as number).toFixed(0)}</span>
+                      <span className="tabular-nums">{Math.round(value as number).toLocaleString()}</span>
                     </div>
                     <div className="h-3 rounded bg-zinc-100 dark:bg-zinc-800">
-                      <div className={`h-3 rounded ${color as string}`} style={{ width: `${width}%` }} />
+                      <div className={`h-3 rounded ${color as string}`} style={{ width: `${Math.max(width, 0.5)}%` }} />
                     </div>
                   </div>
                 );
@@ -440,16 +534,10 @@ export default function SalesMotionPlaybook() {
                     high:     sensitivity.high.touchesNeeds.toFixed(0),
                   },
                   {
-                    label: "Pipeline coverage",
-                    low:      sensitivity.low.coverageLabel,
-                    baseline: sensitivity.baseline.coverageLabel,
-                    high:     sensitivity.high.coverageLabel,
-                  },
-                  {
-                    label: "Pipeline value needed",
-                    low:      `$${(sensitivity.low.pipelineNeeded / 1_000_000).toFixed(2)}M`,
+                    label: "Pipeline target (3× quota)",
+                    low:      `$${(sensitivity.baseline.pipelineNeeded / 1_000_000).toFixed(2)}M`,
                     baseline: `$${(sensitivity.baseline.pipelineNeeded / 1_000_000).toFixed(2)}M`,
-                    high:     `$${(sensitivity.high.pipelineNeeded / 1_000_000).toFixed(2)}M`,
+                    high:     `$${(sensitivity.baseline.pipelineNeeded / 1_000_000).toFixed(2)}M`,
                   },
                 ].map(({ label, low, baseline, high }) => (
                   <tr key={label} className="bg-white dark:bg-zinc-900">

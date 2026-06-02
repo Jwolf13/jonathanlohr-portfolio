@@ -4,6 +4,8 @@
 
 {% block content %}
 
+<style>[x-cloak] { display: none !important; }</style>
+
 <section
   class="space-y-10"
   x-data="{
@@ -11,8 +13,38 @@
     selectedMetricId: null,
     userValue: null,
     gender: 'male',
+    age: 25,
     result: null,
     loading: false,
+    error: null,
+    async submit() {
+      if (!this.selectedMetricId || !this.userValue) return;
+      this.loading = true;
+      this.result = null;
+      this.error = null;
+      try {
+        const resp = await fetch('/api/v1/evaluate', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            metric_id: parseInt(this.selectedMetricId),
+            user_value: parseFloat(this.userValue),
+            gender: this.gender,
+            age: parseInt(this.age),
+          }),
+        });
+        if (!resp.ok) {
+          const body = await resp.json();
+          this.error = body.detail ?? 'Evaluation failed.';
+          return;
+        }
+        this.result = await resp.json();
+      } catch (e) {
+        this.error = 'Network error — is the server running?';
+      } finally {
+        this.loading = false;
+      }
+    },
   }"
 
   x-init="fetch('/api/v1/metrics')
@@ -76,11 +108,32 @@
       </select>
     </fieldset>
 
+    <!-- Age input -->
+    <fieldset class="space-y-1">
+      <label class="block text-sm font-medium">Age</label>
+      <input
+        type="number"
+        min="13"
+        max="99"
+        placeholder="Your age"
+        x-model="age"
+        class="w-full rounded-lg border border-zinc-300 dark:border-zinc-600 bg-zinc-50 dark:bg-zinc-700 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+      />
+    </fieldset>
+
+    <!-- Error message -->
+    <p
+      x-cloak
+      x-show="error !== null"
+      x-text="error"
+      class="text-sm text-red-600 dark:text-red-400"
+    ></p>
+
     <!-- Submit -->
     <div class="pt-2">
       <button
         type="submit"
-        :disabled="loading"
+        :disabled="loading || !selectedMetricId || !userValue"
         x-text="loading ? 'Evaluating…' : 'Get My Workout'"
         class="w-full rounded-xl bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white font-semibold py-3 px-6 transition-colors"
       ></button>
@@ -90,30 +143,32 @@
 
 
   <!-- ── Results wrapper ──────────────────────────────────────────────── -->
-  <!-- ALPINE SHOW POINT
-       This entire block should be hidden until the POST /evaluate
-       response comes back. Once Alpine state is wired:
-
-         x-show="results !== null"
-         x-transition
-
-       Bind individual fields from WorkoutResponse using x-text, e.g.:
-         x-text="results.name"
-         x-text="results.sets + ' sets × ' + results.reps + ' reps'"
-       ─────────────────────────────────────────────────────────────────── -->
   <div
+    x-cloak
+    x-show="result !== null"
+    x-transition
     class="rounded-2xl border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 p-8 space-y-4"
-
-    <!-- TODO: add x-show="results !== null" x-transition -->
-    <!-- TODO: add x-cloak to hide before Alpine initialises -->
   >
 
     <h2 class="text-lg font-semibold">Your Scaled Workout</h2>
 
-    <!-- Protocol name -->
-    <p class="text-2xl font-bold text-blue-600">
-      <!-- TODO: replace with <span x-text="results?.name"></span> -->
-      Workout Name Placeholder
+    <!-- Protocol name + tier badge -->
+    <div class="flex items-center gap-3">
+      <p class="text-2xl font-bold text-blue-600" x-text="result?.name"></p>
+      <span
+        class="text-xs font-semibold uppercase tracking-wide px-2 py-1 rounded-full"
+        :class="{
+          'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200': result?.performance_tier === 'elite',
+          'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200': result?.performance_tier === 'average',
+          'bg-zinc-100 text-zinc-700 dark:bg-zinc-700 dark:text-zinc-300': result?.performance_tier === 'below average',
+        }"
+        x-text="result?.performance_tier"
+      ></span>
+    </div>
+
+    <!-- Score vs elite -->
+    <p class="text-sm text-zinc-500">
+      Score vs elite: <span class="font-semibold text-zinc-800 dark:text-zinc-200" x-text="result ? Math.round(result.score * 100) + '%' : ''"></span>
     </p>
 
     <!-- Protocol details grid -->
@@ -121,34 +176,23 @@
 
       <div class="rounded-lg bg-zinc-50 dark:bg-zinc-700 p-4 text-center">
         <dt class="text-zinc-400 text-xs mb-1">Sets</dt>
-        <dd class="font-bold text-xl">
-          <!-- TODO: <span x-text="results?.sets ?? '—'"></span> -->
-          —
-        </dd>
+        <dd class="font-bold text-xl" x-text="result?.sets ?? '—'"></dd>
       </div>
 
       <div class="rounded-lg bg-zinc-50 dark:bg-zinc-700 p-4 text-center">
         <dt class="text-zinc-400 text-xs mb-1">Reps</dt>
-        <dd class="font-bold text-xl">
-          <!-- TODO: <span x-text="results?.reps ?? '—'"></span> -->
-          —
-        </dd>
+        <dd class="font-bold text-xl" x-text="result?.reps ?? '—'"></dd>
       </div>
 
       <div class="rounded-lg bg-zinc-50 dark:bg-zinc-700 p-4 text-center">
         <dt class="text-zinc-400 text-xs mb-1">Rest</dt>
-        <dd class="font-bold text-xl">
-          <!-- TODO: <span x-text="results?.rest_seconds + 's' ?? '—'"></span> -->
-          —
-        </dd>
+        <dd class="font-bold text-xl" x-text="result?.rest_seconds ? result.rest_seconds + 's' : '—'"></dd>
       </div>
 
     </dl>
 
     <!-- Protocol description -->
-    <p class="text-sm text-zinc-500">
-      <!-- TODO: <span x-text="results?.description"></span> -->
-    </p>
+    <p class="text-sm text-zinc-500" x-text="result?.description"></p>
 
   </div>
 

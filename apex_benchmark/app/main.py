@@ -1,5 +1,4 @@
 from fastapi import FastAPI
-from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import JSONResponse
 from fastapi import Request
@@ -13,9 +12,6 @@ main = FastAPI(
     description="Athletic metrics and workout scaling API",
     version="0.1.0",
 )
-
-# Static files
-main.mount("/static", StaticFiles(directory="app/static"), name="static")
 
 # Jinja2 templates
 import jinja2

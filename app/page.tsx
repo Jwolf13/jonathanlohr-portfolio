@@ -15,7 +15,7 @@ export default function Home() {
           </h1>
           <p className="text-lg text-zinc-600 dark:text-zinc-400 mb-10 leading-relaxed">
             I&apos;ve spent my career inside revenue orgs at cybersecurity and SaaS
-            companies — briding critcal gaps for organizations. Know what breaks, and ship the fix.
+            companies — bridging critical gaps for organizations. Know what breaks, and ship the fix.
           </p>
           <div className="flex gap-4 flex-wrap">
             <Link
